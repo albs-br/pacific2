@@ -388,3 +388,11 @@ LoadPatternTable_Chars_2ndThird:
     call BIOS_LDIRVM        ; Block transfer to VRAM from memory
 
 	ret
+
+
+ClearNameTables:
+	ld	hl, NamesTable 		; VRAM start address
+    ld  bc, 768             ; number of bytes
+    ld  a, Tile_Black_Number; value
+    call BIOS_FILVRM        ; Fill VRAM
+	ret

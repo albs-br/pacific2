@@ -122,9 +122,8 @@ LevelTitleScreen:
     call WaitSomeSeconds
     call FadeChars
 
-    call BIOS_DISSCR
+    call ClearNameTables
     call LoadPatternTable_Chars_2ndThird                ; restore chars
-    call BIOS_ENASCR
 
     ret
 

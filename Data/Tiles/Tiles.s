@@ -14,6 +14,7 @@ Tile_Sea:                     ; Sea
 	db  00000000 b 		; 
 	db  00000000 b 		; 
 
+Tile_Black_Number:	equ 1
 Tile_Black:                 ; 
 	db  00000000 b 		; 
 	db  00000000 b 		; 
