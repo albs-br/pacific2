@@ -78,8 +78,8 @@ Colors_Land:                ;
     db 0xb4                 ;
     db 0xb4                 ;
     db 0xb4                 ;
-    db 0xa4                 ;
-    db 0xa4                 ;
-    db 0xa4                 ;
-    db 0xa4                 ;
+    db 0xb4                 ;
+    db 0xb4                 ;
+    db 0xb4                 ;
+    db 0xb4                 ;
 

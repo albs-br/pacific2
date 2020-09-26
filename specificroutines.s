@@ -7,8 +7,6 @@
 
 
 InitVariables:
- ; fill all bytes of counter with 0
-    call ResetCounter
 
     ld a, (BIOS_JIFFY)                  ; MSX BIOS time variable
     or 0x80                             ; A value different of zero is granted
@@ -21,6 +19,7 @@ InitVariables:
 
     ld hl, LevelDataStart
     ld (LevelDataLastAddr), hl
+
 
     ld ix, Player_CollisionBox
 
@@ -41,7 +40,8 @@ InitVariables:
     ld (ix + Struct_CollisionBox.height), a
 
 
-    call ResetCounter
+
+
 
     ld a, 0                             ; set all to zero
     ld (BgScrollRegister), a            ;
@@ -96,51 +96,47 @@ InitVariables:
 ; and show it on screen if debug mode = true
 IncrementCounter:
 
-	ld hl, Counter+5            ; LSB (5th byte) + 1 (big endian)
-    ld b, 6                     ; number of bytes of counter + 1
-.loop:
-    dec b
-    jp z, .continue
-
-    dec hl    
-    ld a, (hl)	    			; get value
-    inc a
-    ld (hl), a                  ; save value
-
-    jp z, .loop
-
-.continue:
-
+    ld hl, (Counter)
+    
     IFDEF DEBUG
+        
         ; Show counter on screen (debug mode)
-        ld hl, Counter + 4          ; LSB (5th byte)
-        ld d, 2                     ; size in bytes (for now using only 2 bytes, although 5 bytes were reserved)
-        ld bc, 35                   ; names table offset (0-255), 35 = 2nd line, 4th column
+        ld hl, Counter
+        ld d, 2                     ; size in bytes
+        ld bc, 29                   ; names table offset (0-767)
         call PrintNumber
+        
+        ld hl, (Counter)
     ENDIF
-
-
-    ; do actions based on current counter value
-	ld hl, Counter+4            ; LSB (5th byte)
-    ld a, (hl)
-
-    ld d, a;push af
-    push hl
     
+   
+
+
+    ld a, l
     and 0000 1111 b
-    call z, RotateTile3Thirds   ; background scroll at each 16 cycles
+    ; call z, RotateTile3Thirds   ; background scroll at each 16 cycles
+    ld b, h
+    ld a, l
+    call z, BackgroundAnimation           ; background scroll at each 16 cycles
 
-    pop hl
 
-    dec hl                      ; (4th byte)
-    ld a, (hl)
-    ld b, a
+    ld hl, (Counter)
+    inc hl
+    ld (Counter), hl
+
+    ; dec hl                      ; (4th byte)
+    ; ld a, (hl)
+    ; ld b, a
     
-    ld a,d; pop af
+    ;ld a,d; pop af
+
+    ld a, l
+    ld b, h
 
     ; push af
     ; push bc
-    ; call BackgroundAnimation
+    
+
     ; pop bc
     ; pop af
 
@@ -361,13 +357,6 @@ IncrementCounter:
 
     ld bc, 7
     add hl, bc
-    ; inc hl                      ;TODO: use add hl, bc
-    ; inc hl
-    ; inc hl
-    ; inc hl
-    ; inc hl
-    ; inc hl
-    ; inc hl
     ld a, (hl)                  ; get number of related enemy
     
     cp 0                        ; TODO: optimize
@@ -495,35 +484,24 @@ IncrementCounter:
 
 .continue1:
 
-
-
-
-    ; IFDEF DEBUG
-    ;     ; Show counter on screen (debug mode)
-    ;     ld hl, Counter + 4          ; LSB (5th byte)
-    ;     ld d, 2                     ; size in bytes (for now using only 2 bytes, although 5 bytes were reserved)
-    ;     ld bc, 35                   ; names table offset (0-255), 35 = 2nd line, 4th column
-    ;     call PrintNumber
-    ; ENDIF
-
-
     ret
 
 
 
-;   hl: address of LSB
+; Print Hex number on screen
+;   hl: address of LSB (definde as word - DW - little endian)
 ;   d: size of number in bytes
-;   bc: names table offset (0-255)
+;   bc: names table offset (0-767)
 PrintNumber:
     ld a, (hl)	    			; get value
     push hl
     ld	hl, NamesTable          ; VRAM Address
-    add hl, bc                  ;
+    add hl, bc                  ; adjust to offset
 
 ; .loop:
 	push af
     and 0000 1111 b             ; masking to get the low nibble
-    add a, 48                   ; convert it to ASCII char (0-9)
+    add a, 48                   ; convert it to hex char (0-9/A-Z)
 	call BIOS_WRTVRM		    ; Writes data in VRAM, as VPOKE (HL: address, A: value)
 
     pop af
@@ -533,11 +511,11 @@ PrintNumber:
     srl a
     srl a
     srl a
-    add a, 48                   ; convert it to ASCII char (0-9)
+    add a, 48                   ; convert it to hex char (0-9/A-Z)
 	call BIOS_WRTVRM		    ; Writes data in VRAM, as VPOKE (HL: address, A: value)
 
     pop hl
-    dec hl                      ; go to next byte on value
+    inc hl                      ; go to next byte on value
     
     dec bc                      ; go to previous char position on screen (it's necessary 2x)
     dec bc
@@ -547,9 +525,10 @@ PrintNumber:
 
     ret
 
-;   hl: address of LSB
+; Prints a number on screen
+;   hl: address of LSB (defined as bytes - DB - little endian)
 ;   d: size of number in bytes
-;   bc: names table offset (0-255)
+;   bc: names table offset (0-767)
 PrintNumber_LittleEndian:
     ld a, (hl)	    			; get value
     push hl
@@ -785,17 +764,23 @@ LoadLevelData:
     ldir                                    ; copy BC bytes from HL to DE
     
     call ResetCounter
+
+    ld hl, StartBackgroundData
+    ld (NextBgLineAddr), hl
+
+	; load first background frame
+    ld	bc, 23 * 32                                             ; Block length
+	ld	hl, (NextBgLineAddr)
+    ld  de, VramNamesTableBuffer                                ; Destiny
+    ldir                                                        ; Copy BC number of bytes from HL to DE
+
+
     ret
 
 
 ResetCounter:
-    ;ld a, 0
-    xor a                               ; same as ld a, 0 but faster
-    ld (Counter), a                     ;
-    ld (Counter + 1), a                 ;
-    ld (Counter + 2), a                 ;
-    ld (Counter + 3), a                 ;
-    ld (Counter + 4), a                 ;
+    ld hl, 0
+    ld (Counter), hl                     ;
     ret
 
 ShowDebugInfo:

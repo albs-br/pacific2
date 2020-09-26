@@ -1,8 +1,9 @@
 
-BackgroundDataStart:
-    db  0x02, 0x00          ; counter value (HSB, LSB)
-    db  0x00, 0x00          ; addr of tile strip for top screen
-BackgroundDataEnd:
+; BackgroundData:
+; .start:
+;     db  0x01, 0x00          ; counter value (HSB, LSB)
+;     db  0x00, 0x00          ; addr of tile strip for top screen
+; .end:
 
 
 ; input: AB counter value
@@ -11,10 +12,10 @@ BackgroundDataEnd:
 BackgroundAnimation:
 
 
+
     ; search all names table (except the top strip with lifes and score) looking for tiles 
     ; other than 0 (sea)
 
-    ;ld a, 0
 
 
     ; check if there is background strip to load
@@ -22,42 +23,39 @@ BackgroundAnimation:
     jp nz, .continue
 
     ld a, b
-    cp 0x02                                                     ; check hi byte of counter
+    cp 0x00                                                    ; check hi byte of counter
     jp nz, .continue
 
 
-	;ld	bc, 32              ; Block length
-	;ld	de, NamesTable		; VRAM address
-	;ld	hl, TopStripTiles   ; RAM Address
-    ;call BIOS_LDIRVM        ; Block transfer to VRAM from memory
-
+    ; ld	bc, 32              ; Block length
+	; ld	de, NamesTable		; VRAM address
+	; ld	hl, TopStripTiles   ; RAM Address
+    ; call BIOS_LDIRVM        ; Block transfer to VRAM from memory
 
 
     ; load background strip on top screen
     ;ld h, 0xb0                                                  ; hi byte of address is fixed (table aligned)
     ;ld l, 0x00                                                  ; lo byte of address
-	ld	hl, TableAlignedDataStart        ; test
+	ld	hl, (NextBgLineAddr)
+	; ld	hl, TableAlignedDataStart        ; test
 
 	ld	bc, 32                                                  ; Block length
-	ld	de, NamesTable + ((TOP_SCREEN/8)*32)                    ; VRAM start address
-	;ld  a, (hl)                                                ; RAM start address
-    call BIOS_LDIRVM                                            ; Block transfer to VRAM from memory
+    ;ld  hl, ???                                                ; Origin
+    ld  de, VramNamesTableBuffer                                ; Destiny
+    ldir                                                        ; Copy BC number of bytes from HL to DE
 
 
 .continue:
 
-
-	;ld hl, Counter+4            ; LSB (5th byte)
-    ld a, (Counter+4)
-    and 0000 1111 b
-    ret nz   ; background scroll at each 16 cycles
+    call RotateTile3Thirds
+    call UpdateNamesTable
 
 
-    ; Search all namestable (except the first row) looking for tiles != 0
-    ld hl, NamesTable + ((TOP_SCREEN/8)*32)
-    ld b, 1                                     ; counter for the 3 name tables
+    ; Search all namestable buffer (except for the first row) looking for tiles != 0
+    ld hl, VramNamesTableBuffer
+    ld bc, 768 - 32
 .loop:
-	call BIOS_RDVRM		        ; Reads data from VRAM, as VPEEK (HL: address, output in A)
+	ld a, (hl)
     cp 0
     jp nz, .animate
 
@@ -65,29 +63,65 @@ BackgroundAnimation:
 
 .animate:
 
-    inc a
-	call BIOS_WRTVRM		    ; Writes data in VRAM, as VPOKE (HL: address, A: value)
+    ; inc a
+	; ld (hl), a
+    inc (hl)
+	
 
 .next:
 
-    inc l
-    jp z, .incH
-    jp .loop
-
-.incH:
-    inc h
-    djnz .loop
+    inc hl
+    dec bc
+    
+    ld a, c                     ; if (bc <> 0) .loop
+    or b
+    or a                        ; same as cp 0 but faster
+    jp nz, .loop
 
     
     ld a, (BgScrollRegister)
     inc a
     cp 8
-    call z, .scrollRowTiles
+    call z, ScrollTiles
 
-    and 0000 0111 b
+    ; and 0000 0111 b
     ld (BgScrollRegister), a
 
     ret
 
-.scrollRowTiles:
+ScrollTiles:
+
+    ;call BIOS_BEEP
+
+    ; scroll all tiles
+	ld	bc, 22 * 32                                             ; Block length
+	; ld	hl, TableAlignedDataStart        ; test
+	ld	hl, (NextBgLineAddr)
+    ld  de, VramNamesTableBuffer + 32                           ; Destiny
+    ldir                                                        ; Copy BC number of bytes from HL to DE
+
+
+    ; clear first line
+;     ld hl, VramNamesTableBuffer         ; RAM start address
+; 	ld de, VramNamesTableBuffer + 32                                                  ; Block length
+; .loop:
+;     xor a                   ; same as ld a, 0, but faster
+;     ld (hl), a
+
+;     inc hl
+;     call BIOS_DCOMPR        ; Compare Contents Of HL & DE, Set Z-Flag IF (HL == DE), Set CY-Flag IF (HL < DE)
+;     jp z, .ret
+;     jp .loop
+    
+    ; load next bg line
+    ld	hl, (NextBgLineAddr)
+	ld	bc, 32                                                  ; Block length
+    and a                                                       ; Clear C flag
+    sbc hl, bc
+    ld  de, VramNamesTableBuffer                                ; Destiny
+    ldir                                                        ; Copy BC number of bytes from HL to DE
+
+.ret:
+    xor a                                                       ; same as ld a, 0 but faster
+
     ret

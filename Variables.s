@@ -1,19 +1,23 @@
 ; These will be mapped to RAM, all values that will be modified need to be in RAM
 
 
-    LevelDataStart:             rb LevelDataChunckSize * 100        ; reserve 1600 bytes for lavel data (100 max enemies per level)
+    LevelDataStart:             rb LevelDataChunckSize * 100        ; reserve 1600 bytes for level data (100 max enemies per level)
     LevelDataEnd:               rb 1
     LevelDataLastAddr:          rw 1
 
-    BgScrollRegister:           rb 1            ; 
 
+
+    BgScrollRegister:           rb 1            ; 
+    NextBgLineAddr:             rw 1
 
     Level:                      rb 1            ; number of current level
-    Counter:                    rb 5            ; Global counter; big endian, LSB: 5th byte
+    
+    Counter:                    rw 1            ; Global counter
 
+        
                                                 ; rb n  = reserve n bytes in RAM
                                                 ; rw n  = reserve n words in RAM
-    SEED:                       rb 1            ; Seed for random number generator
+    SEED:                       rw 1            ; Seed for random number generator
 
 
 ; Player plane

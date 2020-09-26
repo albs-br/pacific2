@@ -30,7 +30,7 @@ INCLUDE "include/vram.s"
 RomSize:	equ 0x8000	            ; For 32kB Rom size.
 
 
-; DEBUG:      equ 255                 ; defines debug mode, value is irrelevant (comment out for production version)
+DEBUG:      equ 255                 ; defines debug mode, value is irrelevant (comment out for production version)
 
 ; Compilation address
 	org 0x4000	                    ; 0x8000 can be also used here if Rom size is 16kB or less.
@@ -136,6 +136,7 @@ INCLUDE "Data/sprites.s"
 INCLUDE "Data/strings.s"
 INCLUDE "Data/spritebufferinit.s"
 INCLUDE "Data/leveldata/leveldata.s"
+INCLUDE "Data/BackgroundData.s"
 
 
 
@@ -148,7 +149,6 @@ End:
 
 	org 0xbf00	                    ; table aligned data
 TableAlignedDataStart:
-INCLUDE "Data/BackgroundData.s"
 
 TableAlignedDataEnd:
 
@@ -171,5 +171,6 @@ RamStart:
 
 INCLUDE "Variables.s"
 INCLUDE 'VramSpriteAttrBuffer.s'
+INCLUDE 'VramNamesTableBuffer.s'
 
 RamEnd:

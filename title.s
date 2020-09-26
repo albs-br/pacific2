@@ -120,10 +120,16 @@ LevelTitleScreen:
 
 
     call WaitSomeSeconds
+
+
+
+    ld hl, PatternsTable + (256 * 8) + (Tile_Char_0_Number*8)           ; VRAM Start Address
+    ld de, PatternsTable + (256 * 8) + (Tile_Char_Z_Number*8) + 8 + 1   ; VRAM End Address
     call FadeChars
 
     call ClearNameTables
     call LoadPatternTable_Chars_2ndThird                ; restore chars
+
 
     ret
 

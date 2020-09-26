@@ -180,10 +180,47 @@ UpdateScreen:
 	ld	bc, 4 * 32									; Block length
 	ld	de, SpriteAttrTable							; VRAM address
 	ld	hl, VramSpriteAttrBuffer        			; RAM address
-    call BIOS_LDIRVM        						; Block transfer to VRAM from memory
+    ; call BIOS_LDIRVM        						; Block transfer to VRAM from memory
+	call fast_LDIRVM
+
 
     ret
 
+
+
+UpdateNamesTable:
+;ret
+	; copy from buffer to VRAM
+	ld	bc, 768	- 32								; Block length
+	ld	de, NamesTable + 32							; VRAM address
+	ld	hl, VramNamesTableBuffer        			; RAM address
+    ; call BIOS_LDIRVM        						; Block transfer to VRAM from memory
+	call fast_LDIRVM
+
+; LDIRVM the NAMTBL buffer
+;FAST_LDIRVM_NAMTBL:
+; ; Sets the VRAM pointer
+; 	ld	hl, NamesTable + 32
+; 	call	BIOS_SETWRT
+; ; Initializes the OUTI loop
+; 	ld	hl, VramNamesTableBuffer
+; 	ld	a, [VDP_DW]
+; 	ld	b, 0 ; (ensures 256 bytes for the first bank)
+; 	ld	c, a
+; ; Uses 3x256 = 768 OUTIs to blit the NAMTBL buffer
+; .LOOP0:
+; 	outi
+; 	jp	nz, .LOOP0
+; .LOOP1:
+; 	outi
+; 	jp	nz, .LOOP1
+; .LOOP2:
+; 	outi
+; 	jp	nz, .LOOP2
+; 	ret
+
+
+	ret
 
 ; Adjust EC (early clock) bit, to correct sprites on left border
 ; AdjustECbitOfSpriteAttrTableBuffer:

@@ -42,7 +42,7 @@ GameLogic:
 	ld (Player_Shot_1_Color), a
 	ld (Player_Shot_2_Color), a
 
-	ld a, (Counter+4)	    	                  ;
+	ld a, (Counter)	    	                  ;
    bit 0, a
    jp z, .continue                           ;   alternate colors of shots at each frame
 
@@ -98,10 +98,9 @@ GameLogic:
 
 
 .skipCheckCollPlaneItem:
-	ld a, (Counter+4)	    	      ;
-   ld b, a
+	ld hl, (Counter)	    	      ;
 
-   bit 0, b
+   bit 0, l
    jp z, .skipDecY               ; dec Y only at each two frames
 
 	ld a, (Item_Y)			
@@ -118,7 +117,7 @@ GameLogic:
    ld a, 7						      ;   color 1
 	ld (Item_Color), a
 
-   bit 0, b
+   bit 0, l
    jp z, .enemies                ;   alternate colors of item at each frame
 
    ld a, 8						      ;   color 2

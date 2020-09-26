@@ -315,8 +315,8 @@ planePlayerShot:
 
 
 planeTriggerReleased:
-    ld a, 0                                 ; reset flag of shot fired
-    ld (Player_Trigger_Pressed), a          ; trigger pressed flag
+    ld a, 0                                         ; reset flag of shot fired
+    ld (Player_Trigger_Pressed), a                  ; trigger pressed flag
 
     jp ReadInput.checkTriggerReleasedReturn
 
@@ -329,33 +329,40 @@ Pause:
 	ld	hl, Msg_Pause                                   ;
     call PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
 
+    ; hide all sprites (208 on Y value hides the sprite and all following)
+    ld hl, SpriteAttrTable
+    ld a, 208
+    call BIOS_WRTVRM		                            ; Writes data in VRAM (HL: address, A: value)
+
+    ;call SoundPause
+
     ; wait for ESC to be released
-    ld a, 7                 ; 7th line
-    call BIOS_SNSMAT        ; Read Data Of Specified Line From Keyboard Matrix
-    bit 2, a                ; 6th bit (esc key)
+    ld a, 7                                             ; 7th line
+    call BIOS_SNSMAT                                    ; Read Data Of Specified Line From Keyboard Matrix
+    bit 2, a                                            ; 6th bit (esc key)
     jp z, Pause
 
 .isPaused:
     ; wait for ESC to be pressed again
-    ld a, 7                 ; 7th line
-    call BIOS_SNSMAT        ; Read Data Of Specified Line From Keyboard Matrix
-    bit 2, a                ; 6th bit (esc key)
+    ld a, 7                                             ; 7th line
+    call BIOS_SNSMAT                                    ; Read Data Of Specified Line From Keyboard Matrix
+    bit 2, a                                            ; 6th bit (esc key)
     jp nz, .isPaused
 
 .wait:
     ; wait for ESC to be released to unpause
-    ld a, 7                 ; 7th line
-    call BIOS_SNSMAT        ; Read Data Of Specified Line From Keyboard Matrix
-    bit 2, a                ; 6th bit (esc key)
+    ld a, 7                                             ; 7th line
+    call BIOS_SNSMAT                                    ; Read Data Of Specified Line From Keyboard Matrix
+    bit 2, a                                            ; 6th bit (esc key)
     jp z, .wait
 
 
     ; Unpause
     ; remove 'PAUSE' string from screen
 	ld	hl, NamesTable + 256 + (32 * 4) + 16 - 2 ; VRAM start address
-    ld  bc, 5            ; number of bytes
-    ld  a, Tile_Sea_Number                ; value
-    call BIOS_FILVRM        ; Fill VRAM
+    ld  bc, 5                                           ; number of bytes
+    ld  a, Tile_Sea_Number                              ; value
+    call BIOS_FILVRM                                    ; Fill VRAM
 
     ret
 

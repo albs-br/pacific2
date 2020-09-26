@@ -513,21 +513,24 @@ EnableRomPage2:
     ret
 
 
+; Loop trought all chars (numbers and letters) in pattern table, adding
+; random black points to make them "fade"
+; Inputs:
+;   HL: VRAM Start Address
+;   DE: VRAM End Address
+; Outputs:
+;   none
 FadeChars:
-
-
-{
-	ld	bc, NUMBER_OF_CHARS * 8               ; Block length
-	ld	de, PatternsTable + (256 * 8) + (Tile_Char_0_Number*8) ; VRAM Address
-	ld	hl, Tile_Char_0          ; RAM Address
-}
 
     ld b, 24                                                            ; number of iterations through all the table
 .loopAllChars:
-    ld hl, PatternsTable + (256 * 8) + (Tile_Char_0_Number*8)           ; VRAM Start Address
-    ld de, PatternsTable + (256 * 8) + (Tile_Char_Z_Number*8) + 8 + 1   ; VRAM End Address
+    push hl
+    push de
+    ; ld hl, PatternsTable + (256 * 8) + (Tile_Char_0_Number*8)           ; VRAM Start Address
+    ; ld de, PatternsTable + (256 * 8) + (Tile_Char_Z_Number*8) + 8 + 1   ; VRAM End Address
 .loopLines:
     call RandomNumber
+    ;ld a, 5
     and 0000 0111b              ; mask to get a value between 0 and 7
 
 ; adjust the mask to have the 0 on the bit position specified by A
@@ -546,36 +549,17 @@ FadeChars:
 
     and c                       ; reset only the bit specified by the mask
 
-    ;ld a, 0101 0101b
-    call BIOS_WRTVRM		    ; Writes data in VRAM, as VPOKE (HL: address, A: value)
+    call BIOS_WRTVRM		    ; Writes data to VRAM, as VPOKE (HL: address, A: value)
     inc hl
 
-    ; push de
-    ; ld c, 0x01                  ; inputs
-    ; ld d, 0x04                  
-    ; ld e, 0xff              
-    ; call DelayWithParameters
-    ; pop de
-
-    
     call BIOS_DCOMPR            ; Compare Contents Of HL & DE, Set Z-Flag IF (HL == DE), Set CY-Flag IF (HL < DE)
     jp nz, .loopLines
 
+    pop de
+    pop hl
+
     dec b
     jp nz, .loopAllChars
-
-    
-    ; dec d
-    ; jp nz, .loopChar
-
-
-    ; pop bc
-    ; pop hl
-
-    ; ld de, 8
-    ; add hl, de
-
-    ; djnz .loopAllChars
 
     ret
 
@@ -588,21 +572,21 @@ FadeChars:
 
 }
 
-;random number generator:
-;In: nothing
-;Out: A with a random number
+;Random number generator:
+; In: nothing
+; Out: A with a random number
+; Destroys: nothing
 ;Author: Ricardo Bittencourt aka RicBit (BrMSX, Tetrinet and several other projects)
 ; choose a random number in the set [0,255] with uniform distribution
-
 RandomNumber:
     PUSH HL
-    LD HL,(SEED)
+    LD HL, (SEED)
     ADD HL,HL
     SBC A,A
     AND 83h
     XOR L
     LD L,A
-    LD (SEED),HL
+    LD (SEED), HL
     POP HL
     RET
 
@@ -624,6 +608,38 @@ RandomNumber:
 
 ; -----------------------
 
+
+;-----------------------------------------------
+; hl: source data
+; de: target address in the VDP
+; bc: amount to copy
+fast_LDIRVM:
+    ex de,hl    ; this is wasteful, but it's to maintain the order of parameters of the original LDIRVM...
+                ; For things that require real speed, this function should not be used anyway, and you should use specialized loops
+    push de
+    push bc
+    call BIOS_SETWRT
+    pop bc
+    pop hl
+copy_to_VDP:
+    ld e,b
+    ld a,c
+    or a
+    jr z, copy_to_VDP_lsb_0
+    inc e
+copy_to_VDP_lsb_0:
+    ld b,c
+    ; get the VDP write register:
+    ld a, (0x0007) ;(VDP.DW)
+    ld c,a
+    ld a,e
+copy_to_VDP_loop2:
+copy_to_VDP_loop:
+    outi
+    jp nz,copy_to_VDP_loop
+    dec a
+    jp nz,copy_to_VDP_loop2
+    ret
 
 {
 How to know if is 50 or 60 Hz
