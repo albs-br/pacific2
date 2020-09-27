@@ -1,3 +1,19 @@
+{
+Sprite layers:
+-------------
+
+0-1             Player plane
+2-4             Player shot
+5-9             Enemies 2nd color
+10-12           -
+13-17           Enemies 1st color
+18-22           Enemy shots
+23              Item
+24-25           -
+26-30           Enemy shadows
+31              Player shadow
+}
+
 ; VRAM Sprite attributes table buffer
     VramSpriteAttrBuffer:
 

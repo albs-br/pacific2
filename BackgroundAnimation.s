@@ -118,6 +118,7 @@ ScrollTiles:
 	ld	bc, 32                                                  ; Block length
     and a                                                       ; Clear C flag
     sbc hl, bc
+    ld	(NextBgLineAddr), hl
     ld  de, VramNamesTableBuffer                                ; Destiny
     ldir                                                        ; Copy BC number of bytes from HL to DE
 

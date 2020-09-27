@@ -726,7 +726,7 @@ LoadLevel:
     push bc                          ; save sea color info
     push de
 
-    call LevelTitleScreen
+    ; call LevelTitleScreen [debug]
 
 
     ; ld hl, Level_Test_DataStart

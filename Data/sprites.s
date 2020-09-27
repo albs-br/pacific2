@@ -1,4 +1,3 @@
-
 Sprite_0:           ; Player plane 1st color
 	db  0000 0000 b 		; 
 	db  0000 0001 b 		; 

@@ -250,19 +250,19 @@ NUMBER_OF_CHARS:  equ 37
 
 NUMBER_OF_BG_TILES:  equ 16
 
-; Patterns Table (first third)
+; Patterns Table (top third)
 	ld	bc, NUMBER_OF_BG_TILES * 8               								; Block length
 	ld	de, PatternsTable + (Tile_Land_Bottom_Number*8) 						; VRAM Address
 	ld	hl, Tile_Land_Bottom          											; RAM Address
     call BIOS_LDIRVM        													; Block transfer to VRAM from memory
 
-; Patterns Table (second third)
+; Patterns Table (middle third)
 	ld	bc, NUMBER_OF_BG_TILES * 8               								; Block length
 	ld	de, PatternsTable + (256 * 8) + (Tile_Land_Bottom_Number*8) 			; VRAM Address
 	ld	hl, Tile_Land_Bottom          											; RAM Address
     call BIOS_LDIRVM        													; Block transfer to VRAM from memory
 
-; Patterns Table (third third)
+; Patterns Table (bottom third)
 	ld	bc, NUMBER_OF_BG_TILES * 8               								; Block length
 	ld	de, PatternsTable + (256 * 8) + (256 * 8) + (Tile_Land_Bottom_Number*8) ; VRAM Address
 	ld	hl, Tile_Land_Bottom          											; RAM Address
@@ -270,17 +270,22 @@ NUMBER_OF_BG_TILES:  equ 16
 
 
 
-;Colors table (first third)
+;Colors table (top third)
 	ld	de, ColorsTable + (Tile_Land_Bottom_Number * 8)      					; VRAM color table start address
 	ld	hl, Colors_Land        													; RAM start address of color pattern (8 bytes)
 	ld a, NUMBER_OF_BG_TILES													; number of cells in color table to be filled by the pattern 
 	call FillColorTable
-;Colors table (second third)
+;Colors table (middle third)
 	ld	de, ColorsTable + (256 * 8) + (Tile_Land_Bottom_Number * 8)      		; VRAM color table start address
 	ld	hl, Colors_Land        													; RAM start address of color pattern (8 bytes)
 	ld a, NUMBER_OF_BG_TILES													; number of cells in color table to be filled by the pattern 
 	call FillColorTable
-; TODO: last third
+;Colors table (bottom third)
+	ld	de, ColorsTable + (256 * 8) + (256 * 8) + (Tile_Land_Bottom_Number * 8) ; VRAM color table start address
+	ld	hl, Colors_Land        													; RAM start address of color pattern (8 bytes)
+	ld a, NUMBER_OF_BG_TILES													; number of cells in color table to be filled by the pattern 
+	call FillColorTable
+
 
 
 ;-----------------------------------------

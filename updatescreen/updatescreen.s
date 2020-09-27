@@ -1,5 +1,5 @@
-INCLUDE "updatescreen/showenemy.s"
-INCLUDE "updatescreen/showenemyshot.s"
+INCLUDE "UpdateScreen/ShowEnemy.s"
+INCLUDE "UpdateScreen/ShowEnemyShot.s"
 
 
 UpdateScreen:
