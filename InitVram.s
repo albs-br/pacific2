@@ -2,7 +2,15 @@
 
 
 InitVram:
-	;call BIOS_DISSCR		; 
+
+	call BIOS_DISSCR		; 
+
+
+    ld a, 0
+    ld (ADDR_CLIKSW), a     ; Key Press Click Switch 0:Off 1:On (1B/RW)
+
+    ; call BIOS_INIGRP        ; Screen 2
+
 
 ; Define screen colors and mode
     ld a, 15                ; Foregoung color
@@ -14,33 +22,29 @@ InitVram:
     ld a, 2                 ; Screen mode (0 to 3 for MSX1)
     call BIOS_CHGCLR        ; Change Screen Color
 
-    ld a, 0
-    ld (ADDR_CLIKSW), a     ; Key Press Click Switch 0:Off 1:On (1B/RW)
-
-    call BIOS_INIGRP        ; Screen 2
-
-
-
 
 ; Set screen 2
 	ld	a, 2	               		; Screen Mode (0..3 for MSX 1)
     call BIOS_CHGMOD        		; 
+
+	call BIOS_DISSCR		; 
+
 
 ; Initialize VDP registers
 
 ; Write to VDP register 5 (define the address of the Sprite Attribute Table)
 ; Set it to 6912 (128 x 54)
 ; https://www.msx.org/wiki/VDP_Table_Base_Address_Registers#Control_Registers_5_and_11
-	ld	c, 5	               		; VDP Register Number (0..27, 32..46)
-	ld	b, 54	               		; Data To Write
-    call BIOS_WRTVDP        		; Block transfer to VRAM from memory
+	; ld	c, 5	               		; VDP Register Number (0..27, 32..46)
+	; ld	b, 54	               		; Data To Write
+    ; call BIOS_WRTVDP        		; Block transfer to VRAM from memory
 
 ; Write to VDP register 6 (defines the address of the Sprite Pattern Table.)
 ; Set it to 14336 (2048 x 7)
 ; https://www.msx.org/wiki/VDP_Table_Base_Address_Registers#Control_Registers_5_and_11
-	ld	c, 6	               		; VDP Register Number (0..27, 32..46)
-	ld	b, 7	               		; Data To Write
-    call BIOS_WRTVDP        		; Block transfer to VRAM from memory
+	; ld	c, 6	               		; VDP Register Number (0..27, 32..46)
+	; ld	b, 7	               		; Data To Write
+    ; call BIOS_WRTVDP        		; Block transfer to VRAM from memory
 
 ; Write to VDP register 1 (Set Screen mode, sprites size, Vblank, Display, VRAM mode setting)
 ; Set it to 225 (‭1110 0001‬ b)
@@ -59,9 +63,9 @@ InitVram:
 
 ; Write to VDP register 2 (determines the base address of the Name Table which constitutes the foreground.)
 ; Screen 2: set it to 6144 (1024 x 6)
-	ld	c, 2	               		; VDP Register Number (0..27, 32..46)
-	ld	b, 6	               		; Data To Write
-    call BIOS_WRTVDP        		; Block transfer to VRAM from memory
+	; ld	c, 2	               		; VDP Register Number (0..27, 32..46)
+	; ld	b, 6	               		; Data To Write
+    ; call BIOS_WRTVDP        		; Block transfer to VRAM from memory
 
 
 ; --------------------------------------------------
@@ -270,28 +274,46 @@ NUMBER_OF_BG_TILES:  equ 16
 
 
 
-;Colors table (top third)
-	ld	de, ColorsTable + (Tile_Land_Bottom_Number * 8)      					; VRAM color table start address
-	ld	hl, Colors_Land        													; RAM start address of color pattern (8 bytes)
-	ld a, NUMBER_OF_BG_TILES													; number of cells in color table to be filled by the pattern 
-	call FillColorTable
-;Colors table (middle third)
-	ld	de, ColorsTable + (256 * 8) + (Tile_Land_Bottom_Number * 8)      		; VRAM color table start address
-	ld	hl, Colors_Land        													; RAM start address of color pattern (8 bytes)
-	ld a, NUMBER_OF_BG_TILES													; number of cells in color table to be filled by the pattern 
-	call FillColorTable
-;Colors table (bottom third)
-	ld	de, ColorsTable + (256 * 8) + (256 * 8) + (Tile_Land_Bottom_Number * 8) ; VRAM color table start address
-	ld	hl, Colors_Land        													; RAM start address of color pattern (8 bytes)
-	ld a, NUMBER_OF_BG_TILES													; number of cells in color table to be filled by the pattern 
-	call FillColorTable
+; Colors Table (top third)
+	ld	bc, NUMBER_OF_BG_TILES * 8               								; Block length
+	ld	de, ColorsTable + (Tile_Land_Bottom_Number*8) 							; VRAM Address
+	ld	hl, Colors_Land          												; RAM Address
+    call BIOS_LDIRVM        													; Block transfer to VRAM from memory
+
+; Colors Table (middle third)
+	ld	bc, NUMBER_OF_BG_TILES * 8               								; Block length
+	ld	de, ColorsTable + (256 * 8) + (Tile_Land_Bottom_Number*8) 				; VRAM Address
+	ld	hl, Colors_Land          												; RAM Address
+    call BIOS_LDIRVM        													; Block transfer to VRAM from memory
+
+; Colors Table (bottom third)
+	ld	bc, NUMBER_OF_BG_TILES * 8               								; Block length
+	ld	de, ColorsTable + (256 * 8) + (256 * 8) + (Tile_Land_Bottom_Number*8) 	; VRAM Address
+	ld	hl, Colors_Land          												; RAM Address
+    call BIOS_LDIRVM        													; Block transfer to VRAM from memory
+
+; ;Colors table (top third)
+; 	ld	de, ColorsTable + (Tile_Land_Bottom_Number * 8)      					; VRAM color table start address
+; 	ld	hl, Colors_Land        													; RAM start address of color pattern (8 bytes)
+; 	ld a, NUMBER_OF_BG_TILES													; number of cells in color table to be filled by the pattern 
+; 	call FillColorTable
+; ;Colors table (middle third)
+; 	ld	de, ColorsTable + (256 * 8) + (Tile_Land_Bottom_Number * 8)      		; VRAM color table start address
+; 	ld	hl, Colors_Land        													; RAM start address of color pattern (8 bytes)
+; 	ld a, NUMBER_OF_BG_TILES													; number of cells in color table to be filled by the pattern 
+; 	call FillColorTable
+; ;Colors table (bottom third)
+; 	ld	de, ColorsTable + (256 * 8) + (256 * 8) + (Tile_Land_Bottom_Number * 8) ; VRAM color table start address
+; 	ld	hl, Colors_Land        													; RAM start address of color pattern (8 bytes)
+; 	ld a, NUMBER_OF_BG_TILES													; number of cells in color table to be filled by the pattern 
+; 	call FillColorTable
 
 
 
 ;-----------------------------------------
 ; Define sprites
 
-NumberOfSprites:	equ 14			;
+NumberOfSprites:	equ 16			;
 
 	ld	bc, 32 * NumberOfSprites	; Block length
 	ld	de, SpritePatternTable		; VRAM address

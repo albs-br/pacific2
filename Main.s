@@ -114,28 +114,29 @@ Finished:
  
 
  ; Routines
-INCLUDE "initvram.s"
-INCLUDE "include/commonroutines.s"
-INCLUDE "specificroutines.s"
+INCLUDE "InitVram.s"
+INCLUDE "Include/CommonRoutines.s"
+INCLUDE "SpecificRoutines.s"
 INCLUDE "BackgroundAnimation.s"
-INCLUDE "constants.s"
-INCLUDE "readinput.s"
-INCLUDE "sound.s"
-INCLUDE "updatescreen/updatescreen.s"
-INCLUDE "gamelogic/gamelogic.s"
-INCLUDE "title.s"
+INCLUDE "Constants.s"
+INCLUDE "ReadInput.s"
+INCLUDE "Sound.s"
+INCLUDE "UpdateScreen/UpdateScreen.s"
+INCLUDE "GameLogic/GameLogic.s"
+INCLUDE "Title.s"
 
 
 
  ; Data
 INCLUDE "Data/Tiles/Tiles.s"
 INCLUDE "Data/Tiles/Background/Land.s"
-INCLUDE "Data/colors.s"
-INCLUDE "Data/names.s"
-INCLUDE "Data/sprites.s"
-INCLUDE "Data/strings.s"
-INCLUDE "Data/spritebufferinit.s"
-INCLUDE "Data/leveldata/leveldata.s"
+INCLUDE "Data/Colors/Colors.s"
+INCLUDE "Data/Colors/Background/Land.s"
+INCLUDE "Data/Names.s"
+INCLUDE "Data/Sprites.s"
+INCLUDE "Data/Strings.s"
+INCLUDE "Data/SpriteBufferInit.s"
+INCLUDE "Data/LevelData/LevelData.s"
 INCLUDE "Data/BackgroundData.s"
 
 

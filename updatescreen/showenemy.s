@@ -130,9 +130,39 @@ Enemy shots
 .explosionCont:
 
 	; hide other 2 sprites of enemy
-    ld a, 63 * 4                       ;   put non existent sprite at layer, to hide the enemy
+    ; ld a, 63 * 4                       ;   put non existent sprite at layer, to hide the enemy
+    ; ld (ix + (8 * 4) + 2), a           ; Addr 1st color pattern
+    ; ld (ix + (21 * 4) + 2), a          ; Addr shadow pattern
+
+
+	; Show "50 points" sprite
+    ; ld a, (ix + (8 * 4) + 0)           ; Addr y coord
+    ; dec a
+    ; ld (ix + (8 * 4) + 0), a           ; Addr y coord
+
+    ; ld a, (ix + (21 * 4) + 0)           ; Addr y coord
+    ; dec a
+    ; ld (ix + (21 * 4) + 0), a           ; Addr y coord
+
+    ld a, (ix + (8 * 4) + 0)            ; Addr y coord
+    ld (ix + (21 * 4) + 0), a           ; Addr y coord
+
+    ld a, (ix + (8 * 4) + 1)            ; Addr x coord
+    ld (ix + (21 * 4) + 1), a           ; Addr x coord
+
+    ld a, 15
+    ld (ix + (8 * 4) + 3), a            ; Addr color
+
+    ld a, 1
+    ld (ix + (21 * 4) + 3), a           ; Addr color
+
+    ld a, Sprite_50points_2ndColor * 4 ;
     ld (ix + (8 * 4) + 2), a           ; Addr 1st color pattern
+
+    ld a, Sprite_50points_1stColor * 4 ;
     ld (ix + (21 * 4) + 2), a          ; Addr shadow pattern
+
+
 
     ld a, (Enemy_Temp_2ndColorPattern)
     ld (ix + 2), a                     ; Addr 2nd color pattern

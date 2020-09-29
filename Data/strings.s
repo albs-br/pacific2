@@ -1,7 +1,7 @@
 Msg_Version:    
     ;db      "0.45.0", 0        ; last version before submission to MSX Dev 20 on july 27th, 2020
     ;db      "1.2.4", 0         ; last version of Pacific 1
-    db      "1.6.0", 0          ; pacific 2 starts at 1.3.0; 2.0.0 will be first production version (hopefully entry to MSX Dev 2021)
+    db      "1.7.0", 0          ; pacific 2 starts at 1.3.0; 2.0.0 will be first production version (hopefully entry to MSX Dev 2021)
 
 Msg_Pause:
 	db		"PAUSE", 0

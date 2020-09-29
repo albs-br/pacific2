@@ -48,7 +48,7 @@ BackgroundAnimation:
 .continue:
 
     call RotateTile3Thirds
-    call UpdateNamesTable
+    ; call UpdateNamesTable
 
 
     ; Search all namestable buffer (except for the first row) looking for tiles != 0
@@ -86,6 +86,8 @@ BackgroundAnimation:
 
     ; and 0000 0111 b
     ld (BgScrollRegister), a
+
+    call UpdateNamesTable
 
     ret
 

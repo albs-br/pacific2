@@ -1,4 +1,4 @@
-INCLUDE "gamelogic/enemylogic.s"
+INCLUDE "GameLogic/EnemyLogic.s"
 
 GameLogic:
 
