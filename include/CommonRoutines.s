@@ -630,7 +630,7 @@ copy_to_VDP:
 copy_to_VDP_lsb_0:
     ld b,c
     ; get the VDP write register:
-    ld a, (0x0007) ;(VDP.DW)
+    ld a, (BIOS_VDP_DW)
     ld c,a
     ld a,e
 copy_to_VDP_loop2:
@@ -640,6 +640,48 @@ copy_to_VDP_loop:
     dec a
     jp nz,copy_to_VDP_loop2
     ret
+
+
+; LDIRVM the NAMTBL buffer
+UpdateNamesTable:
+;FAST_LDIRVM_NAMTBL:
+; Sets the VRAM pointer
+	ld	hl, NamesTable + 32
+	call	BIOS_SETWRT
+; Initializes the OUTI loop
+	ld	hl, VramNamesTableBuffer
+	ld	a, (BIOS_VDP_DW)
+	; ld	b, 0 ; (ensures 256 bytes for the first bank)
+	ld	b, 256-32	; first bank without first line (32 bytes)
+	ld	c, a
+; Uses 3x256 = 768 OUTIs to blit the NAMTBL buffer
+.LOOP0:
+	outi
+	jp	nz, .LOOP0
+.LOOP1:
+	outi
+	jp	nz, .LOOP1
+.LOOP2:
+	outi
+	jp	nz, .LOOP2
+	ret
+
+
+; LDIRVM the SpriteAttrTable buffer
+FAST_LDIRVM_SpriteAttrTable:
+; Sets the VRAM pointer
+	ld	hl, SpriteAttrTable
+	call	BIOS_SETWRT
+; Initializes the OUTI loop
+	ld	hl, VramSpriteAttrBuffer
+	ld	a, (BIOS_VDP_DW)
+	ld	b, 128	        ; size of SpriteAttrTable (4 x 32)
+	ld	c, a
+; Uses 128 OUTIs to blit the SpriteAttrTable buffer
+.LOOP0:
+	outi
+	jp	nz, .LOOP0
+	ret
 
 {
 How to know if is 50 or 60 Hz

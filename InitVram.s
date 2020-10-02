@@ -252,7 +252,7 @@ NUMBER_OF_CHARS:  equ 37
 ;---------------------
 ; Define background patterns
 
-NUMBER_OF_BG_TILES:  equ 16
+NUMBER_OF_BG_TILES:  equ 5 * 8
 
 ; Patterns Table (top third)
 	ld	bc, NUMBER_OF_BG_TILES * 8               								; Block length
@@ -346,6 +346,8 @@ NumberOfSprites:	equ 16			;
 
 LoadNamesTable:
 
+	call BIOS_DISSCR		; 
+
 	; Fill names table
 	; Top strip with lifes, score, etc
 	ld	bc, 32              ; Block length
@@ -355,9 +357,11 @@ LoadNamesTable:
 
 	; FIll the remainder of the 3 names tables
 	ld	hl, NamesTable + 32 ; VRAM start address
-    ld  bc, 768 - 32            ; number of bytes
+    ld  bc, 768 - 32        ; number of bytes
     ld  a, 0                ; value
     call BIOS_FILVRM        ; Fill VRAM
+
+	call BIOS_ENASCR		; 
 
 	ret
 

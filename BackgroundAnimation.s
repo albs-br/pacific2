@@ -17,35 +17,34 @@ BackgroundAnimation:
     ; other than 0 (sea)
 
 
+    ; check if is there background strip to load
+    ; cp 0x00                                                     ; check low byte of counter
+    ; jp nz, .continue
 
-    ; check if there is background strip to load
-    cp 0x00                                                     ; check low byte of counter
-    jp nz, .continue
-
-    ld a, b
-    cp 0x00                                                    ; check hi byte of counter
-    jp nz, .continue
-
-
-    ; ld	bc, 32              ; Block length
-	; ld	de, NamesTable		; VRAM address
-	; ld	hl, TopStripTiles   ; RAM Address
-    ; call BIOS_LDIRVM        ; Block transfer to VRAM from memory
+    ; ld a, b
+    ; cp 0x00                                                    ; check hi byte of counter
+    ; jp nz, .continue
 
 
-    ; load background strip on top screen
-    ;ld h, 0xb0                                                  ; hi byte of address is fixed (table aligned)
-    ;ld l, 0x00                                                  ; lo byte of address
-	ld	hl, (NextBgLineAddr)
-	; ld	hl, TableAlignedDataStart        ; test
-
-	ld	bc, 32                                                  ; Block length
-    ;ld  hl, ???                                                ; Origin
-    ld  de, VramNamesTableBuffer                                ; Destiny
-    ldir                                                        ; Copy BC number of bytes from HL to DE
+    ; ; ld	bc, 32              ; Block length
+	; ; ld	de, NamesTable		; VRAM address
+	; ; ld	hl, TopStripTiles   ; RAM Address
+    ; ; call BIOS_LDIRVM        ; Block transfer to VRAM from memory
 
 
-.continue:
+    ; ; load background strip on top screen
+    ; ;ld h, 0xb0                                                  ; hi byte of address is fixed (table aligned)
+    ; ;ld l, 0x00                                                  ; lo byte of address
+	; ld	hl, (NextBgLineAddr)
+	; ; ld	hl, TableAlignedDataStart        ; test
+
+	; ld	bc, 32                                                  ; Block length
+    ; ;ld  hl, ???                                                ; Origin
+    ; ld  de, VramNamesTableBuffer                                ; Destiny
+    ; ldir                                                        ; Copy BC number of bytes from HL to DE
+
+
+; .continue:
 
     call RotateTile3Thirds
     ; call UpdateNamesTable
@@ -56,15 +55,13 @@ BackgroundAnimation:
     ld bc, 768 - 32
 .loop:
 	ld a, (hl)
-    cp 0
+    or a                            ; same as cp 0 but faster
     jp nz, .animate
 
     jp .next
 
 .animate:
 
-    ; inc a
-	; ld (hl), a
     inc (hl)
 	
 

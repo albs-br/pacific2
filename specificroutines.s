@@ -114,9 +114,6 @@ IncrementCounter:
 
     ld a, l
     and 0000 1111 b
-    ; call z, RotateTile3Thirds   ; background scroll at each 16 cycles
-    ld b, h
-    ld a, l
     call z, BackgroundAnimation           ; background scroll at each 16 cycles
 
 
@@ -130,8 +127,8 @@ IncrementCounter:
     
     ;ld a,d; pop af
 
-    ld a, l
-    ld b, h
+    ; ld a, l
+    ; ld b, h
 
     ; push af
     ; push bc
@@ -154,17 +151,17 @@ IncrementCounter:
 
 
     ; look for action to be done on current counter value
-    ld d, b                         ; hi
-    ld e, a                         ; lo
+    ld d, h                         ; hi
+    ld e, l                         ; lo
     ; ld hl, LevelDataStart
     ld hl, (LevelDataLastAddr)
 
     ; TODO: lots of optimizations are possible here
-    ; 1 - save the address of last action done, next time start there instead of from the beginning
+    ; 1 - save the address of last action done, next time start there instead of from the beginning                         OK
     ; 2 - after read an addr on chunck, tests if is > than current counter, if so, gives up, as the actions are ordered     OK
 
 .loop1:
-; TODO: trade this by a dw
+; TODO: trade this by a dw  OK
     ld a, (hl)
     
     cp 255                     ; value 255 in the high byte of the counter in level data means end of data
@@ -173,7 +170,7 @@ IncrementCounter:
     push hl
 
 
-    ; TODO: make this optimization work
+    ; TODO: make this optimization work         OK
     ; DE: current counter value
     ; HL: value on the current position of level data
     ; if (hl > de) exit
@@ -185,13 +182,14 @@ IncrementCounter:
     push de
     call BIOS_DCOMPR            ; Compare Contents Of HL & DE, Set Z-Flag IF (HL == DE), Set CY-Flag IF (HL < DE)
     pop de
+    pop hl
     jp z, .equal
-    jp nc, .largerThan          ; return if HL > DE
+    ret nc                      ; return if HL > DE
     jp .next                    ; try next if HL < DE
 
-.largerThan:
-    pop hl
-    ret
+; .largerThan:
+    ; pop hl
+    ; ret
 
 
 
@@ -208,7 +206,7 @@ IncrementCounter:
 
 
 .equal:
-    pop hl
+    ; pop hl
 
     ld (LevelDataLastAddr), hl
 
@@ -468,7 +466,7 @@ IncrementCounter:
     jp NewLevel
 
 .next:
-    pop hl
+    ; pop hl
     ld bc, LevelDataChunckSize
     add hl, bc                  ; go to next chunk start
     push de
@@ -726,7 +724,7 @@ LoadLevel:
     push bc                          ; save sea color info
     push de
 
-    ; call LevelTitleScreen [debug]
+    ;call LevelTitleScreen [debug]
 
 
     ; ld hl, Level_Test_DataStart

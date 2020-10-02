@@ -8,6 +8,11 @@
 ; --- system variables ---
 BIOS_HWVER:   equ 0x002d
 
+; from https://github.com/theNestruo/msx-msxlib/blob/master/lib/msx/symbols.asm
+BIOS_CGTABL:  equ 0x0004 ; Two bytes, address of ROM character set
+BIOS_VDP_DR:  equ 0x0006 ; One byte, VDP Data Port number (read)
+BIOS_VDP_DW:  equ 0x0007 ; One byte, VDP Data Port number (write)
+
 ; --- main bios calls ---
 BIOS_CHKRAM:  equ 0x0000
 BIOS_SYNCHR:  equ 0x0008

@@ -73,6 +73,8 @@ Colors_Land:                ;
         db      0xb4
         db      0xb4
 
+; ----------------------------
+
         db      0x74
         db      0xb4
         db      0xb4
@@ -144,3 +146,225 @@ Colors_Land:                ;
         db      0x74
         db      0x74
         db      0x74
+
+; ----------------------------
+
+        db      0xb4
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+
+        db      0xb4
+        db      0xb4
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0x74
+        db      0x74
+        db      0x74
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0x74
+        db      0x74
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0x74
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+; ----------------------------
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+; ----------------------------
+        db      0x74
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0x74
+        db      0x74
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0xb4
+        db      0xb4
+
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0xb4
+
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+
+; ----------------------------
