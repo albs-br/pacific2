@@ -89,22 +89,10 @@ InitVram:
 	ld	hl, Tile_Sea        ; RAM start address
     call BIOS_LDIRVM        ; Block transfer to VRAM from memory
 
-	; Title
-	ld	bc, EndTitleScreen - StartTitleScreen           	; Block length
-	ld	de, PatternsTable + (Tile_TitleScreen_001_Number * 8)  ; VRAM start address
-	ld	hl, Tile_TitleScreen_001        ; RAM start address
-    call BIOS_LDIRVM        ; Block transfer to VRAM from memory
-
 ; Second third
 	ld	bc, 3 * 8           ; Block length
 	ld	de, PatternsTable + (256 * 8); VRAM start address
 	ld	hl, Tile_Sea        ; RAM start address
-    call BIOS_LDIRVM        ; Block transfer to VRAM from memory
-
-	; Title
-	ld	bc, EndTitleScreen - StartTitleScreen           	; Block length
-	ld	de, PatternsTable + (256 * 8) + (Tile_TitleScreen_001_Number * 8)  ; VRAM start address
-	ld	hl, Tile_TitleScreen_001        ; RAM start address
     call BIOS_LDIRVM        ; Block transfer to VRAM from memory
 
 ; Last third
@@ -240,19 +228,19 @@ NUMBER_OF_CHARS:  equ 37
 	call FillColorTable
 
 
-    IFDEF DEBUG
-        ; Show tile set on screen (debug mode)
-		ld	bc, NUMBER_OF_CHARS    	; Block length
-		ld	de, NamesTable + 64		; VRAM Address
-		ld	hl, TestChars        	; RAM Address
-		call BIOS_LDIRVM        	; Block transfer to VRAM from memory
-	ENDIF
+    ; IFDEF DEBUG
+    ;     ; Show tile set on screen (debug mode)
+	; 	ld	bc, NUMBER_OF_CHARS    	; Block length
+	; 	ld	de, NamesTable + 64		; VRAM Address
+	; 	ld	hl, TestChars        	; RAM Address
+	; 	call BIOS_LDIRVM        	; Block transfer to VRAM from memory
+	; ENDIF
 
 
 ;---------------------
 ; Define background patterns
 
-NUMBER_OF_BG_TILES:  equ 5 * 8
+NUMBER_OF_BG_TILES:  equ (2 + 3 + 5) * 8
 
 ; Patterns Table (top third)
 	ld	bc, NUMBER_OF_BG_TILES * 8               								; Block length

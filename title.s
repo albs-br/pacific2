@@ -1,88 +1,88 @@
 
-TitleScreen:
+; TitleScreen:
 
-    ; Clear screen (fill screen with all black patterns)
-	; Fill all 3 names tables
-    ld	hl, NamesTable                                  ; VRAM start address
-    ld  bc, 256 * 3                                     ; number of bytes
-    ld  a, 1                                            ; value
-    call BIOS_FILVRM                                    ; Fill VRAM
+;     ; Clear screen (fill screen with all black patterns)
+; 	; Fill all 3 names tables
+;     ld	hl, NamesTable                                  ; VRAM start address
+;     ld  bc, 256 * 3                                     ; number of bytes
+;     ld  a, 1                                            ; value
+;     call BIOS_FILVRM                                    ; Fill VRAM
 
-    ; Title 'PACIFIC'
-	ld	bc, 32 * 5                                      ; Block length
-	ld	de, NamesTable + 128                            ; VRAM start address
-	ld	hl, TitleTiles                                  ; RAM start address
-    call BIOS_LDIRVM                                    ; Block transfer to VRAM from memory
-
-
-    ; Write 'PUSH TRIGGER TO START' on midscreen
-	ld	de, NamesTable + 256 + (32 * 4) + 16 - 10       ; VRAM Address
-	ld	hl, Msg_Start                                   ;
-    call PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
-
-    ; Write '2020' on midscreen
-	ld	de, NamesTable + 256 + (32 * 6) + 16 - 2        ; VRAM Address
-	ld	hl, Msg_2020                                    ;
-    call PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
-
-    ; Write '            ANDREBAPTISTA.COM.BR' on screen bottom
-	ld	de, NamesTable + 256 + 256 + (32 * 7)           ; VRAM Address
-	ld	hl, Msg_TitleBottomLine                         ;
-    call PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
-
-    ; Write version number on screen bottom
-	ld	de, NamesTable + 256 + 256 + (32 * 7)           ; VRAM Address
-	ld	hl, Msg_Version                                 ;
-    call PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
+;     ; Title 'PACIFIC'
+; 	ld	bc, 32 * 5                                      ; Block length
+; 	ld	de, NamesTable + 128                            ; VRAM start address
+; 	ld	hl, TitleTiles                                  ; RAM start address
+;     call BIOS_LDIRVM                                    ; Block transfer to VRAM from memory
 
 
+;     ; Write 'PUSH TRIGGER TO START' on midscreen
+; 	ld	de, NamesTable + 256 + (32 * 4) + 16 - 10       ; VRAM Address
+; 	ld	hl, Msg_Start                                   ;
+;     call PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
 
-.titleloop:
+;     ; Write '2020' on midscreen
+; 	ld	de, NamesTable + 256 + (32 * 6) + 16 - 2        ; VRAM Address
+; 	ld	hl, Msg_2020                                    ;
+;     call PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
 
-    ld a, 0x51                                          ; a: color pattern for upper  
-    ld d, 0x71                                          ; d: color pattern for bottom
-    call ChangeColorTitle
-    call .delay
-    ret nz
+;     ; Write '            ANDREBAPTISTA.COM.BR' on screen bottom
+; 	ld	de, NamesTable + 256 + 256 + (32 * 7)           ; VRAM Address
+; 	ld	hl, Msg_TitleBottomLine                         ;
+;     call PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
 
-    ld a, 0x41                                          ; a: color pattern for upper  
-    ld d, 0x71                                          ; d: color pattern for bottom
-    call ChangeColorTitle
-    call .delay
-    ret nz
-
-    jp .titleloop
-
-
-.delay:
-    ;ld c, 0x04                  ; 3 nested loops
-    ld d, 0x60                  
-    ld e, 0xff              
-.loop:                          ; 
-    ; check if spacebar is pressed
-    ld a, 8                 ; 8th line
-    call BIOS_SNSMAT        ; Read Data Of Specified Line From Keyboard Matrix
-    bit 0, a                ; 0th bit (space bar)
-    jp z, .triggerPressed
-
-    ld a, 1                 ; 1=JOY 1, TRIGGER A
-    call BIOS_GTTRIG        ; Output: A=255 button pressed, A=0 button released
-    jp nz, .triggerPressed
+;     ; Write version number on screen bottom
+; 	ld	de, NamesTable + 256 + 256 + (32 * 7)           ; VRAM Address
+; 	ld	hl, Msg_Version                                 ;
+;     call PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
 
 
-    dec e
-    jp nz, .loop                ; inner loop
-    dec d
-    jp nz, .loop                ; 
-    ; dec c
-    ; jp nz, .loop                ; outer loop
+
+; .titleloop:
+
+;     ld a, 0x51                                          ; a: color pattern for upper  
+;     ld d, 0x71                                          ; d: color pattern for bottom
+;     call ChangeColorTitle
+;     call .delay
+;     ret nz
+
+;     ld a, 0x41                                          ; a: color pattern for upper  
+;     ld d, 0x71                                          ; d: color pattern for bottom
+;     call ChangeColorTitle
+;     call .delay
+;     ret nz
+
+;     jp .titleloop
+
+
+; .delay:
+;     ;ld c, 0x04                  ; 3 nested loops
+;     ld d, 0x60                  
+;     ld e, 0xff              
+; .loop:                          ; 
+;     ; check if spacebar is pressed
+;     ld a, 8                 ; 8th line
+;     call BIOS_SNSMAT        ; Read Data Of Specified Line From Keyboard Matrix
+;     bit 0, a                ; 0th bit (space bar)
+;     jp z, .triggerPressed
+
+;     ld a, 1                 ; 1=JOY 1, TRIGGER A
+;     call BIOS_GTTRIG        ; Output: A=255 button pressed, A=0 button released
+;     jp nz, .triggerPressed
+
+
+;     dec e
+;     jp nz, .loop                ; inner loop
+;     dec d
+;     jp nz, .loop                ; 
+;     ; dec c
+;     ; jp nz, .loop                ; outer loop
     
-    xor a                       ; same as ld a, 0, but faster
-    ret
+;     xor a                       ; same as ld a, 0, but faster
+;     ret
 
-.triggerPressed:
-    or 1                        ; same as ld a, 1, but faster
-    ret
+; .triggerPressed:
+;     or 1                        ; same as ld a, 1, but faster
+;     ret
 
 
 

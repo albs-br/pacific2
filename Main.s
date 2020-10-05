@@ -30,7 +30,7 @@ INCLUDE "include/vram.s"
 RomSize:	equ 0x8000	            ; For 32kB Rom size.
 
 
-DEBUG:      equ 255                 ; defines debug mode, value is irrelevant (comment out for production version)
+; DEBUG:      equ 255                 ; defines debug mode, value is irrelevant (comment out for production version)
 
 ; Compilation address
 	org 0x4000	                    ; 0x8000 can be also used here if Rom size is 16kB or less.

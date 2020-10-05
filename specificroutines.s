@@ -499,7 +499,7 @@ PrintNumber:
 ; .loop:
 	push af
     and 0000 1111 b             ; masking to get the low nibble
-    add a, 48                   ; convert it to hex char (0-9/A-Z)
+    add a, Tile_Char_0_Number   ; convert it to hex char (0-9/A-Z)
 	call BIOS_WRTVRM		    ; Writes data in VRAM, as VPOKE (HL: address, A: value)
 
     pop af
@@ -509,7 +509,7 @@ PrintNumber:
     srl a
     srl a
     srl a
-    add a, 48                   ; convert it to hex char (0-9/A-Z)
+    add a, Tile_Char_0_Number   ; convert it to hex char (0-9/A-Z)
 	call BIOS_WRTVRM		    ; Writes data in VRAM, as VPOKE (HL: address, A: value)
 
     pop hl
@@ -536,7 +536,7 @@ PrintNumber_LittleEndian:
 ; .loop:
 	push af
     and 0000 1111 b             ; masking to get the low nibble
-    add a, 48                   ; convert it to ASCII char (0-9)
+    add a, Tile_Char_0_Number   ; convert it to ASCII char (0-9)
 	call BIOS_WRTVRM		    ; Writes data in VRAM, as VPOKE (HL: address, A: value)
 
     pop af
@@ -546,7 +546,7 @@ PrintNumber_LittleEndian:
     srl a
     srl a
     srl a
-    add a, 48                   ; convert it to ASCII char (0-9)
+    add a, Tile_Char_0_Number   ; convert it to ASCII char (0-9)
 	call BIOS_WRTVRM		    ; Writes data in VRAM, as VPOKE (HL: address, A: value)
 
     pop hl
@@ -608,7 +608,7 @@ ShowLifes:
 	; show current number of lifes on top of screen
     ld hl, NamesTable + 1	    ; VRAM address
     ld a, (Player_Lifes)
-    add a, 48	                ; convert number to chars
+    add a, Tile_Char_0_Number   ; convert number to chars
     call BIOS_WRTVRM	        ; write to VRAM
 
     ret 
@@ -624,7 +624,7 @@ ShowScore:
 
     ; add 0 to number at right (score is shown on screen multiplied by ten)
     ld hl, NamesTable + 18	    ; VRAM address
-    ld a, 48	                ; char '0'
+    ld a, Tile_Char_0_Number    ; char '0'
     call BIOS_WRTVRM	        ; write to VRAM
 
     ret
@@ -724,7 +724,7 @@ LoadLevel:
     push bc                          ; save sea color info
     push de
 
-    ;call LevelTitleScreen [debug]
+    ;call LevelTitleScreen ;[debug]
 
 
     ; ld hl, Level_Test_DataStart
