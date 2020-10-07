@@ -400,10 +400,10 @@ PrintString:
     push de
 
     cp 65
-    jp nc, .alpha                   ; if(a >= 65)
+    jp nc, .alpha                   ; if(a >= 65) alpha
 
     cp 48
-    jp nc, .print                   ; if(a >= 48) code is the same as ASCII
+    jp nc, .number                  ; if(a >= 48) number
 
     cp 46
     jp z, .dot
@@ -414,15 +414,19 @@ PrintString:
     jp .alpha
 
 .dot:
-    ld a, 84
+    ld a, Tile_Char_Dot_Number
     jp .print
 
 .space:
-    ld a, 1
+    ld a, Tile_Black_Number
     jp .print
 
 .alpha:
-    sub 7                           ; convert ASCII code to game's pattern table. eg. A = 65 to 58
+    sub 65 - Tile_Char_A_Number     ; convert ASCII code to game's pattern table. eg. A = 65 to 58
+    jp .print
+
+.number:
+    sub 48 - Tile_Char_0_Number     ; convert ASCII code to game's pattern table. eg. 0 = 65 to 58
 
 .print:
     ld h, d

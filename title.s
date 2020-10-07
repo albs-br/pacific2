@@ -106,7 +106,7 @@ LevelTitleScreen:
     
     ; Write level number
     pop af
-    add 48
+    add Tile_Char_0_Number
     ld h, d
     ld l, e
 	call BIOS_WRTVRM		                            ; Writes data in VRAM (HL: address, A: value)

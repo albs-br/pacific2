@@ -197,7 +197,7 @@ NUMBER_OF_CHARS:  equ 37
 	ld	hl, Colors_Char        													; RAM start address of color pattern (8 bytes)
 	ld a, 10																	; number of cells in color table to be filled by the pattern 
 	call FillColorTable
-; color green gradiend (A-E):
+; color green gradiend (A-Z):
 	ld	de, ColorsTable + (Tile_Char_A_Number*8)     							; VRAM color table start address
 	ld	hl, Colors_Char_1        												; RAM start address of color pattern (8 bytes)
 	ld a, NUMBER_OF_CHARS - 10													; number of cells in color table to be filled by the pattern 
@@ -209,7 +209,7 @@ NUMBER_OF_CHARS:  equ 37
 	ld	hl, Colors_Char        													; RAM start address of color pattern (8 bytes)
 	ld a, 10																	; number of cells in color table to be filled by the pattern 
 	call FillColorTable
-; color green gradiend  (A-E):
+; color green gradiend  (A-Z):
 	ld	de, ColorsTable + (256 * 8) + (Tile_Char_A_Number*8)     				; VRAM color table start address
 	ld	hl, Colors_Char_1        												; RAM start address of color pattern (8 bytes)
 	ld a, NUMBER_OF_CHARS - 10													; number of cells in color table to be filled by the pattern 
@@ -221,7 +221,7 @@ NUMBER_OF_CHARS:  equ 37
 	ld	hl, Colors_Char        													; RAM start address of color pattern (8 bytes)
 	ld a, 10																	; number of cells in color table to be filled by the pattern 
 	call FillColorTable
-; color green gradiend  (A-E):
+; color green gradiend  (A-Z):
 	ld	de, ColorsTable + (256 * 8) + (256 * 8) + (Tile_Char_A_Number*8)     	; VRAM color table start address
 	ld	hl, Colors_Char_1        												; RAM start address of color pattern (8 bytes)
 	ld a, NUMBER_OF_CHARS - 10													; number of cells in color table to be filled by the pattern 
@@ -279,22 +279,6 @@ NUMBER_OF_BG_TILES:  equ (2 + 3 + 5) * 8
 	ld	de, ColorsTable + (256 * 8) + (256 * 8) + (Tile_Land_Bottom_Number*8) 	; VRAM Address
 	ld	hl, Colors_Land          												; RAM Address
     call BIOS_LDIRVM        													; Block transfer to VRAM from memory
-
-; ;Colors table (top third)
-; 	ld	de, ColorsTable + (Tile_Land_Bottom_Number * 8)      					; VRAM color table start address
-; 	ld	hl, Colors_Land        													; RAM start address of color pattern (8 bytes)
-; 	ld a, NUMBER_OF_BG_TILES													; number of cells in color table to be filled by the pattern 
-; 	call FillColorTable
-; ;Colors table (middle third)
-; 	ld	de, ColorsTable + (256 * 8) + (Tile_Land_Bottom_Number * 8)      		; VRAM color table start address
-; 	ld	hl, Colors_Land        													; RAM start address of color pattern (8 bytes)
-; 	ld a, NUMBER_OF_BG_TILES													; number of cells in color table to be filled by the pattern 
-; 	call FillColorTable
-; ;Colors table (bottom third)
-; 	ld	de, ColorsTable + (256 * 8) + (256 * 8) + (Tile_Land_Bottom_Number * 8) ; VRAM color table start address
-; 	ld	hl, Colors_Land        													; RAM start address of color pattern (8 bytes)
-; 	ld a, NUMBER_OF_BG_TILES													; number of cells in color table to be filled by the pattern 
-; 	call FillColorTable
 
 
 
@@ -354,21 +338,21 @@ LoadNamesTable:
 	ret
 
 
-; Inputs:
-; a: color pattern for upper 
-; d: color pattern for bottom 
-ChangeColorTitle:
-;Colors table - Title screen (first third)
-	ld	hl, ColorsTable + (Tile_TitleScreen_001_Number * 8)      				; VRAM color table start address
-    ld  bc, 0 + (EndTitleScreen - StartTitleScreen)		            			; number of bytes
-    call BIOS_FILVRM        													; Fill VRAM
-;Colors table - Title screen (second third)
-	ld	hl, ColorsTable + (256 * 8) + (Tile_TitleScreen_001_Number * 8)      	; VRAM color table start address
-    ld  bc, 0 + (EndTitleScreen - StartTitleScreen)		            			; number of bytes
-	ld a, d
-    call BIOS_FILVRM        													; Fill VRAM
+; ; Inputs:
+; ; a: color pattern for upper 
+; ; d: color pattern for bottom 
+; ChangeColorTitle:
+; ;Colors table - Title screen (first third)
+; 	ld	hl, ColorsTable + (Tile_TitleScreen_001_Number * 8)      				; VRAM color table start address
+;     ld  bc, 0 + (EndTitleScreen - StartTitleScreen)		            			; number of bytes
+;     call BIOS_FILVRM        													; Fill VRAM
+; ;Colors table - Title screen (second third)
+; 	ld	hl, ColorsTable + (256 * 8) + (Tile_TitleScreen_001_Number * 8)      	; VRAM color table start address
+;     ld  bc, 0 + (EndTitleScreen - StartTitleScreen)		            			; number of bytes
+; 	ld a, d
+;     call BIOS_FILVRM        													; Fill VRAM
 
-	ret
+; 	ret
 
 
 ; Input: HL: RAM addr of color pattern (8 bytes). It may be: Colors_Sea_Daylight or Colors_Sea_Nighttime
