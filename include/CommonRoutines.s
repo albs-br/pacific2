@@ -392,7 +392,7 @@ FillColorTable:
 ;   none
 PrintString:
     ld a, (hl)
-    cp 0
+    and a                           ; same as cp 0 but faster
     ret z                           ; end of string
 
 

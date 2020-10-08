@@ -240,7 +240,7 @@ NUMBER_OF_CHARS:  equ 37
 ;---------------------
 ; Define background patterns
 
-NUMBER_OF_BG_TILES:  equ (2 + 3 + 5) * 8
+NUMBER_OF_BG_TILES:  equ (2 + 3 + 5 + 5) * 8
 
 ; Patterns Table (top third)
 	ld	bc, NUMBER_OF_BG_TILES * 8               								; Block length

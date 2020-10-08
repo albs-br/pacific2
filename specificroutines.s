@@ -487,7 +487,7 @@ IncrementCounter:
 
 
 ; Print Hex number on screen
-;   hl: address of LSB (definde as word - DW - little endian)
+;   hl: address of LSB (defined as word - DW - little endian)
 ;   d: size of number in bytes
 ;   bc: names table offset (0-767)
 PrintNumber:
