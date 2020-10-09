@@ -735,7 +735,7 @@ Colors_Land:                ;
 
 ; ----------------------------
 ; sequence of 4 tiles (middle)
-        db      0xf4
+        db      0xb4
         db      0x74
         db      0x74
         db      0x74
@@ -744,8 +744,8 @@ Colors_Land:                ;
         db      0x74
         db      0x74
 
-        db      0xf4
-        db      0xf4
+        db      0xb4
+        db      0xb4
         db      0x74
         db      0x74
         db      0x74
@@ -753,203 +753,130 @@ Colors_Land:                ;
         db      0x74
         db      0x74
 
-        db      0xbf
-        db      0xf4
-        db      0xf4
+        db      0xb4
+        db      0xb4
+        db      0xb4
         db      0x74
         db      0x74
         db      0x74
         db      0x74
         db      0x74
 
-        db      0xbf
-        db      0xbf
-        db      0xf4
-        db      0xf4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
         db      0x74
         db      0x74
         db      0x74
         db      0x74
 
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xf4
-        db      0xf4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
         db      0x74
         db      0x74
         db      0x74
 
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xf4
-        db      0xf4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
         db      0x74
         db      0x74
 
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xf4
-        db      0xf4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
         db      0x74
 
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xf4
-        db      0xf4
-
-; ----------------------------
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xf4
-
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
 
 ; ----------------------------
         db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
 
         db      0xbf
         db      0xbf
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0xbe
         db      0xbf
         db      0xbf
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0xbf
+        db      0xbe
         db      0xbf
         db      0xbf
-        db      0xbf
-        db      0xbf
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
 
         db      0xbf
         db      0xbf
+        db      0xbe
         db      0xbf
         db      0xbf
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+        db      0xbe
         db      0xbf
         db      0xbf
+        db      0xbe
         db      0xbf
         db      0xbf
+        db      0xb4
+        db      0xb4
+
+        db      0xbf
+        db      0xbe
+        db      0xbf
+        db      0xbf
+        db      0xbe
+        db      0xbf
+        db      0xbf
+        db      0xb4
 
         db      0xbf
         db      0xbf
+        db      0xbe
         db      0xbf
         db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
+        db      0xbe
         db      0xbf
         db      0xbf
 
@@ -957,129 +884,193 @@ Colors_Land:                ;
         db      0xbf
         db      0xbf
         db      0xbf
+        db      0xbe
         db      0xbf
         db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
+        db      0xbe
         db      0xbf
 
         db      0xbf
         db      0xbf
         db      0xbf
         db      0xbf
+        db      0xbe
+        db      0xbf
+        db      0xbf
+        db      0xbe
+
+        db      0xbe
+        db      0xbf
+        db      0xbf
+        db      0xbf
+        db      0xbf
+        db      0xbe
+        db      0xbf
+        db      0xbf
+
+        db      0xbf
+        db      0xbe
+        db      0xbf
+        db      0xbf
+        db      0xbf
+        db      0xbf
+        db      0xbe
+        db      0xbf
+
+        db      0xbf
+        db      0xbf
+        db      0xbe
+        db      0xbf
+        db      0xbf
+        db      0xbf
+        db      0xbf
+        db      0xbe
+
+        db      0xbe
+        db      0xbf
+        db      0xbf
+        db      0xbe
         db      0xbf
         db      0xbf
         db      0xbf
         db      0xbf
 
         db      0xbf
+        db      0xbe
         db      0xbf
         db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
+        db      0xbe
         db      0xbf
         db      0xbf
         db      0xbf
 
         db      0xbf
         db      0xbf
+        db      0xbe
         db      0xbf
         db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-
-        db      0xf4
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
-
-        db      0xf4
-        db      0xf4
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
+        db      0xbe
         db      0xbf
         db      0xbf
 
 ; ----------------------------
-        db      0x74
-        db      0xf4
-        db      0xf4
+        db      0xb4
         db      0xbf
         db      0xbf
+        db      0xbe
         db      0xbf
+        db      0xbf
+        db      0xbe
+        db      0xbf
+
+        db      0xb4
+        db      0xb4
+        db      0xbf
+        db      0xbf
+        db      0xbe
+        db      0xbf
+        db      0xbf
+        db      0xbe
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xbf
+        db      0xbf
+        db      0xbe
         db      0xbf
         db      0xbf
 
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xbf
+        db      0xbf
+        db      0xbe
+        db      0xbf
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xbf
+        db      0xbf
+        db      0xbe
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xbf
+        db      0xbf
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xbf
+
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
+; ----------------------------
+        db      0x74
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+
         db      0x74
         db      0x74
-        db      0xf4
-        db      0xf4
-        db      0xbf
-        db      0xbf
-        db      0xbf
-        db      0xbf
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
 
         db      0x74
         db      0x74
         db      0x74
-        db      0xf4
-        db      0xf4
-        db      0xbf
-        db      0xbf
-        db      0xbf
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
 
         db      0x74
         db      0x74
         db      0x74
         db      0x74
-        db      0xf4
-        db      0xf4
-        db      0xbf
-        db      0xbf
-
-        db      0x74
-        db      0x74
-        db      0x74
-        db      0x74
-        db      0x74
-        db      0xf4
-        db      0xf4
-        db      0xbf
+        db      0xb4
+        db      0xb4
+        db      0xb4
+        db      0xb4
 
         db      0x74
         db      0x74
         db      0x74
         db      0x74
         db      0x74
-        db      0x74
-        db      0xf4
-        db      0xf4
+        db      0xb4
+        db      0xb4
+        db      0xb4
 
         db      0x74
         db      0x74
@@ -1087,8 +1078,17 @@ Colors_Land:                ;
         db      0x74
         db      0x74
         db      0x74
+        db      0xb4
+        db      0xb4
+
         db      0x74
-        db      0xf4
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0x74
+        db      0xb4
 
         db      0x74
         db      0x74

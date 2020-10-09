@@ -10,7 +10,7 @@
 ; 6-15:		chars (0-9)
 ; 16-42:	chars (A-Z, .)
 ; 43-47:	-
-; 48-255:	background (208 avaliable)
+; 48-255:	background tiles for scrolling (208 avaliable)
 ; bosses will use the same range as bg (no bg when facing bosses)
 Tile_Sea_Number:	equ 0
 Tile_Sea:                     ; Sea
