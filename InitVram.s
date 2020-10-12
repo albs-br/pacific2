@@ -240,15 +240,18 @@ NUMBER_OF_CHARS:  equ 37
 ;---------------------
 ; Define background patterns
 
-; 2		small island
-; 3		trees
-; 5		--left (unused)
-; 5		mid-left
-; 5		mid-right
-; 3		leftmost
-; 3		rightmost
-; 6		--free
-NUMBER_OF_BG_TILES:  equ (2 + 3 + 5 + 5 + 5 + 3 + 3) * 8
+; 208 tiles avaliable for bg
+; 208 / 8 = 26
+
+; 2		small island			48,56
+; 3		trees (dark green)		64,72,80
+; 3		trees (light green)		88,96,104
+; 2		rocks					112,120
+; 5		island mid-left			128,136,144,152,160
+; 5		island mid-right		168,176,184,192,200
+; 3		island leftmost			208,216,224
+; 3		island rightmost		232,240,248
+NUMBER_OF_BG_TILES:  equ (2 + 3 + 3 + 2 + 5 + 5 + 3 + 3) * 8
 
 ; Patterns Table (top third)
 	ld	bc, NUMBER_OF_BG_TILES * 8               								; Block length

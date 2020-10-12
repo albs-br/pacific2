@@ -4,10 +4,6 @@ BackgroundAnimation:
     ; other than 0 (sea)
 
 
-    call RotateTile3Thirds
-    ; call UpdateNamesTable
-
-
     ; Search all namestable buffer (except for the first row) looking for tiles != 0
     ld hl, VramNamesTableBuffer
     ld bc, 768 - 32
@@ -42,6 +38,7 @@ BackgroundAnimation:
     ; and 0000 0111 b
     ld (BgScrollRegister), a
 
+    call RotateTile3Thirds
     call UpdateNamesTable
 
     ret
@@ -64,7 +61,7 @@ ScrollTiles:
     ld  de, VramNamesTableBuffer                                ; Destiny
     ldir                                                        ; Copy BC number of bytes from HL to DE
 
-.ret:
+    ; clear BgScrollRegister when exit subroutine
     xor a                                                       ; same as ld a, 0 but faster
 
     ret
