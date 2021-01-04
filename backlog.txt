@@ -10,3 +10,12 @@ Minimum for MSX DEV 21 (Deadline to submit your entry: August 31st, 2021):
 - improve collision detection (look at GB Paranoid)
 - new title screen with animation
 - BG music
+- some animation for plane (roll wings, spining propeller, etc)
+- more behaviours for the enemy planes
+- 5x hit bonus (1000 points) for shoting entire 5 enemies formation
+- make something new (never seen before on a shot'em up)
+    - arrows indicating from where will come next enemies
+    - power bar over enemies which requires more than one hit to die (should only appear briefly after hit)
+- text file with intructions (maybe in-game instructions too)
+- sound on pause
+- autofire option

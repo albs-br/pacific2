@@ -520,11 +520,14 @@ Sprite_13:           ; Item (extra life)
 Sprite_50points_1stColor:		equ	14
 Sprite_14:           ; 50 points 1st color
 	db 00000000b
-	db 10101010b
-	db 10001010b
-	db 11101010b
+	db 00001010b
 	db 00001000b
-	db 11101110b
+	db 00001110b
+	db 00000000b
+	db 00001110b
+	db 00000000b
+	db 00000000b
+	
 	db 00000000b
 	db 00000000b
 	db 00000000b
@@ -533,16 +536,16 @@ Sprite_14:           ; 50 points 1st color
 	db 00000000b
 	db 00000000b
 	db 00000000b
+	
+	db 00000000b
+	db 10100000b
+	db 10100000b
+	db 10100000b
+	db 10000000b
+	db 11100000b
 	db 00000000b
 	db 00000000b
-	db 00000000b
-	db 00000000b
-	db 00000000b
-	db 00000000b
-	db 00000000b
-	db 00000000b
-	db 00000000b
-	db 00000000b
+	
 	db 00000000b
 	db 00000000b
 	db 00000000b
@@ -554,11 +557,15 @@ Sprite_14:           ; 50 points 1st color
 
 Sprite_50points_2ndColor:		equ	15
 Sprite_15:           ; 50 points 2nd color
-	db 01110111b
-	db 01000101b
-	db 01110101b
-	db 00010101b
-	db 01110111b
+	db 00000111b
+	db 00000100b
+	db 00000111b
+	db 00000001b
+	db 00000111b
+	db 00000000b
+	db 00000000b
+	db 00000000b
+
 	db 00000000b
 	db 00000000b
 	db 00000000b
@@ -567,17 +574,16 @@ Sprite_15:           ; 50 points 2nd color
 	db 00000000b
 	db 00000000b
 	db 00000000b
+
+	db 01110000b
+	db 01010000b
+	db 01010000b
+	db 01010000b
+	db 01110000b
 	db 00000000b
 	db 00000000b
 	db 00000000b
-	db 00000000b
-	db 00000000b
-	db 00000000b
-	db 00000000b
-	db 00000000b
-	db 00000000b
-	db 00000000b
-	db 00000000b
+
 	db 00000000b
 	db 00000000b
 	db 00000000b
