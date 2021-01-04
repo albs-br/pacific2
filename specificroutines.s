@@ -724,7 +724,7 @@ LoadLevel:
     push bc                          ; save sea color info
     push de
 
-    ; call LevelTitleScreen ;[debug]
+    call LevelTitleScreen ;[debug]
 
 
     ; ld hl, Level_Test_DataStart
@@ -906,4 +906,26 @@ UpdateShotSpritesAttrs:
     ld a, (iy + Struct_PlayerShot.Pattern)
     ld (ix + 2), a
 
+    ret
+
+
+; Input: HL: RAM address
+ShiftRight8Pixels:
+    ;call ShiftRight8Pixels
+	;call BIOS_RDVRM		        ; Reads data from VRAM, as VPEEK (HL: address, output in A)
+    ld a, (hl)
+    and 0000 0001 b         ; save bit 0
+    sra (hl)
+    ;ld a, 0101 0101 b
+    ;call BIOS_WRTVRM		; Writes data in VRAM, as VPOKE (HL: address, A: value)
+
+    ld de, 8
+    add hl, de
+    or a                    ; cp 0
+    jp z, .resBit7
+;.setBit7:
+    set 7, (hl)
+    ret
+.resBit7:
+    res 7, (hl)
     ret

@@ -140,7 +140,7 @@
     Enemy_4_2ndColor:           rb 1            ;
     Enemy_4_X:                  rb 1            ;
     Enemy_4_Y:                  rb 1            ;
-    Enemy_4_2ndColorPattern:    rb 1            ;3
+    Enemy_4_2ndColorPattern:    rb 1            ;
 
 ; Enemy shot 4
     Enemy_Shot_4_Show:          rb 1            ;
@@ -151,3 +151,9 @@
 
 ; Item
     Item_Show:                  rb 1            ;
+
+
+; Buffer for level title effect
+    ; LevelTitleBuffer_Line0:     rb 64 * 8
+    ; RamAddrSource:              rw 1
+    ; VramAddrDestiny:            rw 1

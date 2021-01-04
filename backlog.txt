@@ -1,0 +1,12 @@
+03-jan-2021
+
+Minimum for MSX DEV 21 (Deadline to submit your entry: August 31st, 2021):
+
+- implement enemy: boats
+- implement enemy: tanks
+- implement enemy: big plane (32x32) may be a level boss
+- implement enemy: warship (boss)
+- 3 or 4 kinds of shot (power ups)
+- improve collision detection (look at GB Paranoid)
+- new title screen with animation
+- BG music
