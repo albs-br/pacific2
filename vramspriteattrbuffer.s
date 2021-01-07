@@ -85,31 +85,31 @@ Sprite layers:
     SpriteLayer_18_Y:                                     rb 1            ;
     SpriteLayer_18_X:                                     rb 1            ;
     SpriteLayer_18_Pattern:                               rb 1            ;
-    SpriteLayer_18_Color:                                 rb 1            ;
+    SpriteLayer_18_Color:       Enemy_Shot_0_Color:       rb 1            ;
 
     ; Enemy shot 1
     SpriteLayer_19_Y:                                     rb 1            ;
     SpriteLayer_19_X:                                     rb 1            ;
     SpriteLayer_19_Pattern:                               rb 1            ;
-    SpriteLayer_19_Color:                                 rb 1            ;
+    SpriteLayer_19_Color:       Enemy_Shot_1_Color:       rb 1            ;
 
     ; Enemy shot 2
     SpriteLayer_20_Y:                                     rb 1            ;
     SpriteLayer_20_X:                                     rb 1            ;
     SpriteLayer_20_Pattern:                               rb 1            ;
-    SpriteLayer_20_Color:                                 rb 1            ;
+    SpriteLayer_20_Color:       Enemy_Shot_2_Color:       rb 1            ;
 
     ; Enemy shot 3
     SpriteLayer_21_Y:                                     rb 1            ;
     SpriteLayer_21_X:                                     rb 1            ;
     SpriteLayer_21_Pattern:                               rb 1            ;
-    SpriteLayer_21_Color:                                 rb 1            ;
+    SpriteLayer_21_Color:       Enemy_Shot_3_Color:       rb 1            ;
 
     ; Enemy shot 4
     SpriteLayer_22_Y:                                     rb 1            ;
     SpriteLayer_22_X:                                     rb 1            ;
     SpriteLayer_22_Pattern:                               rb 1            ;
-    SpriteLayer_22_Color:                                 rb 1            ;
+    SpriteLayer_22_Color:       Enemy_Shot_4_Color:       rb 1            ;
 
     ; Item (power up, extra life)
     SpriteLayer_23_Y:        Item_Y:                      rb 1            ;

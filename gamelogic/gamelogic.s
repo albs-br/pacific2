@@ -30,38 +30,42 @@ GameLogic:
    ; ld (ix + Struct_CollisionBox.X), a      ; update X of collision box
 
 .nextShot:
-   ld bc, Struct_PlayerShot_Size
-   add iy, bc
-   pop bc
-   djnz .loop
+   ld    bc, Struct_PlayerShot_Size
+   add   iy, bc
+   pop   bc
+   djnz  .loop
 
 
+	ld    a, (Counter)	    	                  ;
+   bit   0, a
+   jp    nz, .oddFrame                           ;   alternate colors of shots at each frame
 
-   ld a, 14						                  ;   color gray
-	ld (Player_Shot_Color), a
-	ld (Player_Shot_1_Color), a
-	ld (Player_Shot_2_Color), a
+   ; even frame
+   ld    a, 14						                  ;   color gray
+   jp    .continue
 
-	ld a, (Counter)	    	                  ;
-   bit 0, a
-   jp z, .continue                           ;   alternate colors of shots at each frame
-
-   ld a, 8						                  ;   color red
-	ld (Player_Shot_Color), a
-	ld (Player_Shot_1_Color), a
-	ld (Player_Shot_2_Color), a
-
-   jp .continue
+.oddFrame:
+   ld    a, 8						                  ;   color red
+   jp    .continue
 
 
 
 .ShotReachesTop:
-   call DisableShot
+   call  DisableShot
    ret
 
 
 
 .continue:
+   ; set the shots color
+	ld    (Player_Shot_Color), a
+	ld    (Player_Shot_1_Color), a
+	ld    (Player_Shot_2_Color), a
+	ld    (Enemy_Shot_0_Color), a
+	ld    (Enemy_Shot_1_Color), a
+	ld    (Enemy_Shot_2_Color), a
+	ld    (Enemy_Shot_3_Color), a
+	ld    (Enemy_Shot_4_Color), a
 
 ; check item
 	ld a, (Item_Show)				               ;   

@@ -170,7 +170,6 @@ IncrementCounter:
     push hl
 
 
-    ; TODO: make this optimization work         OK
     ; DE: current counter value
     ; HL: value on the current position of level data
     ; if (hl > de) exit
@@ -234,10 +233,10 @@ IncrementCounter:
 
 ;TODO check enemy number and update correct variables
 ; if (Enemy_N_Type == 0) ix = Enemy_1_Base_Address
-    push hl
+    push    hl
 
-    ld bc, 6
-    add hl, bc
+    ld      bc, 6
+    add     hl, bc
 
     ; inc hl
     ; inc hl
@@ -245,81 +244,81 @@ IncrementCounter:
     ; inc hl
     ; inc hl
     ; inc hl
-    ld a, (hl)                  ; get enemy number
+    ld      a, (hl)                  ; get enemy number
 
-    cp 0
-    jp z, .enemyNumber_0
+    or      a ; same as cp 0
+    jp      z, .enemyNumber_0
 
-    cp 1
-    jp z, .enemyNumber_1
+    dec     a ; cp  1
+    jp      z, .enemyNumber_1
 
-    cp 2
-    jp z, .enemyNumber_2
+    dec     a ; cp 2
+    jp      z, .enemyNumber_2
 
-    cp 3
-    jp z, .enemyNumber_3
+    dec     a ; cp 3
+    jp      z, .enemyNumber_3
 
-    cp 4
-    jp z, .enemyNumber_4
+    dec     a ; cp 4
+    jp      z, .enemyNumber_4
 
-    pop hl
+    pop     hl
 
-    jp .contEnemyNumber
+    jp      .contEnemyNumber
 
 .enemyNumber_0:
-    pop hl
-    ld ix, Enemy_0_Base_Address
-    jp .contEnemyNumber
+    pop     hl
+    ld      ix, Enemy_0_Base_Address
+    jp      .contEnemyNumber
 .enemyNumber_1:
-    pop hl
-    ld ix, Enemy_1_Base_Address
-    jp .contEnemyNumber
+    pop     hl
+    ld      ix, Enemy_1_Base_Address
+    jp      .contEnemyNumber
 .enemyNumber_2:
-    pop hl
-    ld ix, Enemy_2_Base_Address
-    jp .contEnemyNumber
+    pop     hl
+    ld      ix, Enemy_2_Base_Address
+    jp      .contEnemyNumber
 .enemyNumber_3:
-    pop hl
-    ld ix, Enemy_3_Base_Address
-    jp .contEnemyNumber
+    pop     hl
+    ld      ix, Enemy_3_Base_Address
+    jp      .contEnemyNumber
 .enemyNumber_4:
-    pop hl
-    ld ix, Enemy_4_Base_Address
-    jp .contEnemyNumber
+    pop     hl
+    ld      ix, Enemy_4_Base_Address
+    jp      .contEnemyNumber
 
 .contEnemyNumber:
-    ld a, 1
-    ; ld (Enemy_1_Show), a        ; show enemy
-    ld (ix), a                  ; show enemy
+    ld      a, 1
+    ; ld    (Enemy_1_Show), a        ; show enemy
+    ld      (ix), a                  ; show enemy
 
-	ld a, 0
-	; ld (Enemy_1_State), a	    ; disable explosion animation
-	ld (ix + 1), a	            ; disable explosion animation
+	xor     a ; same as ld a, 0
+	; ld    (Enemy_1_State), a	    ; disable explosion animation
+	ld      (ix + 1), a	            ; disable explosion animation
 
-    inc hl
-    ld a, (hl)                  ; get enemy type
-    ; ld (Enemy_1_Type), a        ; save value
-    ld (ix + 2), a              ; save value
+    inc     hl
+    ld      a, (hl)                  ; get enemy type
+    ; ld    (Enemy_1_Type), a        ; save value
+    ld      (ix + 2), a              ; save value
 
-    inc hl
-    ld a, (hl)                  ; get 1st color
-    ; ld (Enemy_1_1stColor), a    ; save value
-    ld (ix + 3), a              ; save value
+    inc     hl
+    ld      a, (hl)                  ; get 1st color
+    ; ld    (Enemy_1_1stColor), a    ; save value
+    ld      (ix + 3), a              ; save value
     
-    inc hl
-    ld a, (hl)                  ; get 2nd color
-    ; ld (Enemy_1_2ndColor), a    ; save value
-    ld (ix + 4), a              ; save value
+    inc     hl
+    ld      a, (hl)                  ; get 2nd color
+    ; ld    (Enemy_1_2ndColor), a    ; save value
+    ld      (ix + 4), a              ; save value
     
-    inc hl
-    ld a, (hl)                  ; get x coord
-    ; ld (Enemy_1_X), a           ; save value
-    ld (ix + 5), a              ; save value
+    inc     hl
+    ld      a, (hl)                  ; get x coord
+    ; ld    (Enemy_1_X), a           ; save value
+    ld      (ix + 5), a              ; save value
     
-    inc hl
-    ld a, (hl)                  ; get y coord
-    ; ld (Enemy_1_Y), a           ; save value
-    ld (ix + 6), a              ; save value
+    inc     hl
+    ld      a, (hl)                  ; get y coord
+    ; ld    (Enemy_1_Y), a           ; save value
+    ld      (ix + 6), a              ; save value
 
     ret
 
@@ -724,7 +723,7 @@ LoadLevel:
     push bc                          ; save sea color info
     push de
 
-    call LevelTitleScreen ;[debug]
+    ;call LevelTitleScreen ;[debug]
 
 
     ; ld hl, Level_Test_DataStart
@@ -781,67 +780,67 @@ ResetCounter:
     ld (Counter), hl                     ;
     ret
 
-ShowDebugInfo:
-    IFDEF DEBUG
-		; test sprite (plane type 2 1st color)
-		ld d, 128
-		ld e, 80
-		ld c, 15						;   c: color (0-15)
-		ld a, 6							;   a: pattern number (0-63)
-		ld b, 20						;   b: layer (0-31)
-		call PutSprite16x16				;
-		; test sprite (plane type 2 2nd color)
-		ld d, 128
-		ld e, 80
-		ld c, 14						;   c: color (0-15)
-		ld a, 7							;   a: pattern number (0-63)
-		ld b, 19						;   b: layer (0-31)
-		call PutSprite16x16				;
-		; test sprite (plane type 2 shadow)
-		ld d, 128+8
-		ld e, 80+8
-		ld c, 1							;   c: color (0-15)
-		ld a, 6							;   a: pattern number (0-63)
-		ld b, 21						;   b: layer (0-31)
-		call PutSprite16x16				;
-		; test sprite (explosion frame 1)
-		ld d, 160
-		ld e, 100
-		ld c, 15						;   c: color (0-15)
-		ld a, 8							;   a: pattern number (0-63)
-		ld b, 22						;   b: layer (0-31)
-		call PutSprite16x16				;
-		; test sprite (explosion frame 2)
-		ld d, 160+16
-		ld e, 100
-		ld c, 15						;   c: color (0-15)
-		ld a, 9							;   a: pattern number (0-63)
-		ld b, 23						;   b: layer (0-31)
-		call PutSprite16x16				;
-		; test sprite (explosion frame 3)
-		ld d, 160+32
-		ld e, 100
-		ld c, 15						;   c: color (0-15)
-		ld a, 10						;   a: pattern number (0-63)
-		ld b, 24						;   b: layer (0-31)
-		call PutSprite16x16				;
-		; test sprite (plane type 3 1st color)
-		ld d, 128
-		ld e, 128
-		ld c, 15						;   c: color (0-15)
-		ld a, 11						;   a: pattern number (0-63)
-		ld b, 15						;   b: layer (0-31)
-		call PutSprite16x16				;
-		; test sprite (plane type 3 2nd color)
-		ld d, 128
-		ld e, 128
-		ld c, 14						;   c: color (0-15)
-		ld a, 12						;   a: pattern number (0-63)
-		ld b, 14						;   b: layer (0-31)
-		call PutSprite16x16				;
-    ENDIF
+; ShowDebugInfo:
+;     IFDEF DEBUG
+; 		; test sprite (plane type 2 1st color)
+; 		ld d, 128
+; 		ld e, 80
+; 		ld c, 15						;   c: color (0-15)
+; 		ld a, 6							;   a: pattern number (0-63)
+; 		ld b, 20						;   b: layer (0-31)
+; 		call PutSprite16x16				;
+; 		; test sprite (plane type 2 2nd color)
+; 		ld d, 128
+; 		ld e, 80
+; 		ld c, 14						;   c: color (0-15)
+; 		ld a, 7							;   a: pattern number (0-63)
+; 		ld b, 19						;   b: layer (0-31)
+; 		call PutSprite16x16				;
+; 		; test sprite (plane type 2 shadow)
+; 		ld d, 128+8
+; 		ld e, 80+8
+; 		ld c, 1							;   c: color (0-15)
+; 		ld a, 6							;   a: pattern number (0-63)
+; 		ld b, 21						;   b: layer (0-31)
+; 		call PutSprite16x16				;
+; 		; test sprite (explosion frame 1)
+; 		ld d, 160
+; 		ld e, 100
+; 		ld c, 15						;   c: color (0-15)
+; 		ld a, 8							;   a: pattern number (0-63)
+; 		ld b, 22						;   b: layer (0-31)
+; 		call PutSprite16x16				;
+; 		; test sprite (explosion frame 2)
+; 		ld d, 160+16
+; 		ld e, 100
+; 		ld c, 15						;   c: color (0-15)
+; 		ld a, 9							;   a: pattern number (0-63)
+; 		ld b, 23						;   b: layer (0-31)
+; 		call PutSprite16x16				;
+; 		; test sprite (explosion frame 3)
+; 		ld d, 160+32
+; 		ld e, 100
+; 		ld c, 15						;   c: color (0-15)
+; 		ld a, 10						;   a: pattern number (0-63)
+; 		ld b, 24						;   b: layer (0-31)
+; 		call PutSprite16x16				;
+; 		; test sprite (plane type 3 1st color)
+; 		ld d, 128
+; 		ld e, 128
+; 		ld c, 15						;   c: color (0-15)
+; 		ld a, 11						;   a: pattern number (0-63)
+; 		ld b, 15						;   b: layer (0-31)
+; 		call PutSprite16x16				;
+; 		; test sprite (plane type 3 2nd color)
+; 		ld d, 128
+; 		ld e, 128
+; 		ld c, 14						;   c: color (0-15)
+; 		ld a, 12						;   a: pattern number (0-63)
+; 		ld b, 14						;   b: layer (0-31)
+; 		call PutSprite16x16				;
+;     ENDIF
 
-    ret
+;     ret
 
 
 

@@ -42,7 +42,7 @@ Enemy shots
     ld de, Enemy_Temp_Base_Address      ; addr destiny
     ; ld bc, 7                            ; number of bytes
     ; ldir                                ; copy BC bytes from HL to DE
-    ldi                                 ; ldi 8 times is faster the ldir
+    ldi                                 ; ldi 8 times is faster than ldir
     ldi
     ldi
     ldi
@@ -53,34 +53,41 @@ Enemy shots
 
 
 	; Enemy plane
-	ld a, (Enemy_Temp_Show)			;   get indicator of enemy show/hide
-    cp 0
-    jp z, .enemyHide                 
+	ld      a, (Enemy_Temp_Show)			;   get indicator of enemy show/hide
+    or      a ; same as cp 0
+    jp      z, .enemyHide                 
 
-	ld a, (Enemy_Temp_Type)			;
+	ld      a, (Enemy_Temp_Type)			;
 
-    cp 0
-    jp z, .enemyType_0                 
-    cp 1
-    jp z, .enemyType_1
-    cp 2
-    jp z, .enemyType_2
-	jp .next
+    or      a ; same as cp 0
+    jp      z, .enemyType_0                 
+    dec     a ; cp 1
+    jp      z, .enemyType_1
+    dec     a ; cp 2
+    jp      z, .enemyType_2
+    dec     a ; cp 3
+    jp      z, .enemyType_3
+	jp      .next
 
 .enemyType_0:
-	ld a, 4	* 4						; pattern number (2nd color)
-    ld (Enemy_Temp_2ndColorPattern), a
-	jp .enemyTypeCont
+	ld      a, Sprite_EnemyPlaneFromTop_2ndColor * 4	    ; pattern number (2nd color)
+    ld      (Enemy_Temp_2ndColorPattern), a
+	jp      .enemyTypeCont
 
 .enemyType_1:
-	ld a, 7	* 4						; pattern number (2nd color)
-    ld (Enemy_Temp_2ndColorPattern), a
-	jp .enemyTypeCont
+	ld      a, Sprite_EnemyPlaneFromRight_2ndColor * 4      ; pattern number (2nd color)
+    ld      (Enemy_Temp_2ndColorPattern), a
+	jp      .enemyTypeCont
 
 .enemyType_2:
-	ld a, 12 * 4					; pattern number (2nd color)
-    ld (Enemy_Temp_2ndColorPattern), a
-	jp .enemyTypeCont
+	ld      a, Sprite_EnemyPlaneFromLeft_2ndColor * 4       ; pattern number (2nd color)
+    ld      (Enemy_Temp_2ndColorPattern), a
+	jp      .enemyTypeCont
+
+.enemyType_3:
+	ld      a, Sprite_Boat_2ndColor * 4	                    ; pattern number (2nd color)
+    ld      (Enemy_Temp_2ndColorPattern), a
+	;jp     .enemyTypeCont
 
 .enemyTypeCont:
 

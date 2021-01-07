@@ -4,27 +4,24 @@ Level_1:
 .seaColor:
     db  0                       ; 0: daylight, 1: nighttime
 
-    ; enemy types available:
-    ; from top:     db  0                   ; enemy type
-    ; from right:   db  1                   ; enemy type
-    ; from left:    db  2                   ; enemy type
-
-    ; color schemes available:
-    ; white/gray:   db  15, 14              ; enemy 1st, 2nd color
-    ; yellow:       db  11, 10              ; enemy 1st, 2nd color
-    ; red:          db  9, 6                ; enemy 1st, 2nd color
-    ; blue:         db  7, 5                ; enemy 1st, 2nd color
-    ; green:        db  3, 12               ; enemy 1st, 2nd color
-
-
 .levelDataStart:
+
+    ; Boat
+    db  0x00, 0x10          ; counter value (HSB, LSB)
+    db  SHOW_ENEMY          ; action type (0: show enemy, 1: enemy shoots)
+    db  BOAT                ; enemy type
+    db  1, 14               ; enemy 1st, 2nd color
+    db  128, TOP_SCREEN+16  ; enemy position (x, y)
+    db  4                   ; enemy number
+    db  0                   ; reserved
+    db  0, 0, 0, 0, 0, 0    ; reserved
 
 ;------ 4 planes from left/right, one/two per turn, no shooting
 
     ; Enemy plane (type 1)
     db  0x02, 0x00          ; counter value (HSB, LSB)
-    db  0                   ; action type (0: show enemy, 1: enemy shoots)
-    db  1                   ; enemy type
+    db  SHOW_ENEMY          ; action type (0: show enemy, 1: enemy shoots)
+    db  PLANE_FROM_RIGHT    ; enemy type
     db  15, 14              ; enemy 1st, 2nd color
     db  255, TOP_SCREEN+16  ; enemy position (x, y)
     db  0                   ; enemy number
@@ -33,8 +30,8 @@ Level_1:
 
     ; Enemy plane (type 2)
     db  0x04, 0x00          ; counter value (HSB, LSB)
-    db  0                   ; action type (0: show enemy, 1: enemy shoots)
-    db  2                   ; enemy type
+    db  SHOW_ENEMY          ; action type (0: show enemy, 1: enemy shoots)
+    db  PLANE_FROM_LEFT     ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
     db  0, TOP_SCREEN + 32  ; enemy position (x, y)
     db  0                   ; enemy number

@@ -358,11 +358,11 @@ Pause:
 
 
     ; Unpause
-    ; remove 'PAUSE' string from screen
-	ld	hl, NamesTable + 256 + (32 * 4) + 16 - 2 ; VRAM start address
-    ld  bc, 5                                           ; number of bytes
-    ld  a, Tile_Sea_Number                              ; value
-    call BIOS_FILVRM                                    ; Fill VRAM
+    ; remove 'PAUSE' string from screen (unnecessary with new bg scrooling)
+	; ld	hl, NamesTable + 256 + (32 * 4) + 16 - 2        ; VRAM start address
+    ; ld  bc, 5                                           ; number of bytes
+    ; ld  a, Tile_Sea_Number                              ; value
+    ; call BIOS_FILVRM                                    ; Fill VRAM
 
     ret
 

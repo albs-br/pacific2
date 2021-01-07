@@ -2,28 +2,32 @@
 GameLogicEnemy:
 
 	; ld a, (Enemy_1_Show)			; if enemy 1 is hidden, skip enemy logic/check collision
-	ld a, (ix)			; if enemy 1 is hidden, skip enemy logic/check collision
-	cp 0
-	jp z, .skipCheckEnemy_1
+	ld 		a, (ix)			; if enemy 1 is hidden, skip enemy logic/check collision
+	cp 		0
+	jp 		z, .skipCheckEnemy_1
 
 	; update enemy position
 	;if(enemytype == 0)
 	; ld a, (Enemy_1_Type)			;
-	ld a, (ix + 2)			;
+	ld 		a, (ix + 2)			;
 
-	cp 0
-	jp z, .enemyType_0
+	or 		a ; same as cp 0
+	jp 		z, .enemyType_0
 
 	;elseif(enemytype == 1)
-	cp 1
-	jp z, .enemyType_1
+	dec 	a ; c	p 1
+	jp 		z, .enemyType_1
 
 	;elseif(enemytype == 2)
-	cp 2
-	jp z, .enemyType_2
+	dec 	a ; cp 2
+	jp 		z, .enemyType_2
+
+	;elseif(enemytype == 3)
+	dec 	a ; cp 3
+	jp 		z, .enemyType_3			; Boat
 
 	;else
-	jp .contGameLogic
+	jp 		.contGameLogic
 
 
 .enemyType_0:
@@ -76,6 +80,23 @@ GameLogicEnemy:
 	pop ix
 
 	jp .contGameLogic
+
+.enemyType_3:
+	; ld a, (Enemy_1_X)				;
+	ld 		a, (ix + 6)				;
+	;inc 	a
+	cp 		192
+	call 	z, .hideEnemy
+
+	; ld (Enemy_1_X), a				; save updated value
+	ld 		(ix + 6), a				; save updated value
+
+	push 	ix
+    ld 		ix, EnemyTemp_CollisionBox		; update coord of collision box
+    ld 		(ix + Struct_CollisionBox.X), a
+	pop 	ix
+
+	jp 		.contGameLogic
 
 .hideEnemy:
 	ld a, 0

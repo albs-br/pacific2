@@ -1,10 +1,3 @@
-; OLD:
-; 0-2: 		general
-; 48-84:	chars (0-9, A-Z, .)
-; 95-107:	title screen (unnecessary)
-; 128-:		background tiles for scrolling
-
-; NEW:
 ; 0-2:		general
 ; 3-5:		-
 ; 6-15:		chars (0-9)

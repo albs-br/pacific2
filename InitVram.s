@@ -296,12 +296,12 @@ NUMBER_OF_BG_TILES:  equ (2 + 3 + 3 + 2 + 5 + 5 + 3 + 3) * 8
 ;-----------------------------------------
 ; Define sprites
 
-NumberOfSprites:	equ 16			;
+;NumberOfSprites:	equ 16			;
 
-	ld	bc, 32 * NumberOfSprites	; Block length
-	ld	de, SpritePatternTable		; VRAM address
-	ld	hl, Sprite_0        		; RAM address
-    call BIOS_LDIRVM        		; Block transfer to VRAM from memory
+	ld		bc, EndSpritePatterns - StartSpritePatterns		; Block length
+	ld		de, SpritePatternTable							; VRAM address
+	ld		hl, StartSpritePatterns        					; RAM address
+    call 	BIOS_LDIRVM        							; Block transfer to VRAM from memory
 
 ; Put sprite on screen (test)
 {

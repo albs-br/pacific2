@@ -19,9 +19,10 @@ ShowEnemyShot:
 	; ld (SpriteLayer_18_Y), a
 	ld (iy), a
 	
-    ld a, 15						;   color white
+    ; not using anymore (color is alternating)
+	;ld a, 15						;   color white
 	; ld (SpriteLayer_18_Color), a
-	ld (iy + 3), a
+	;ld (iy + 3), a
 	
 	ld a, 5	* 4						;   a: pattern number (0-63)
 	; ld (SpriteLayer_18_Pattern), a

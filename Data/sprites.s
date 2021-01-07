@@ -1,3 +1,4 @@
+StartSpritePatterns:
 Sprite_0:           ; Player plane 1st color
 	db  0000 0000 b 		; 
 	db  0000 0001 b 		; 
@@ -109,7 +110,8 @@ Sprite_2:           ; Player shot
 	db  0000 0000 b 		; 
 	db  0000 0000 b 		; 
 
-Sprite_3:           ; Enemy plane type 1 1st color
+; Enemy plane type 0 (from top) 1st color
+Sprite_3:
 	db  0000 0001 b 		; 
 	db  0000 1111 b 		; 
 	db  0000 1111 b 		; 
@@ -146,7 +148,9 @@ Sprite_3:           ; Enemy plane type 1 1st color
 	db  0000 0000 b 		; 
 	db  0000 0000 b 		; 
 
-Sprite_4:           ; Enemy plane type 2nd color
+
+; Enemy plane type 0 (from top) 2nd color
+Sprite_EnemyPlaneFromTop_2ndColor: 		equ	4
 	db  0000 0000 b 		; 
 	db  0000 0001 b 		; 
 	db  0000 1111 b 		; 
@@ -184,10 +188,10 @@ Sprite_4:           ; Enemy plane type 2nd color
 	db  0000 0000 b 		; 
 
 Sprite_5:           ; Enemy shot
-	db  0100 0000 b 		; 
-	db  1110 0000 b 		; 
-	db  0100 0000 b 		; 
-	db  0000 0000 b 		; 
+	db  0110 0000 b 		; 
+	db  1111 0000 b 		; 
+	db  1111 0000 b 		; 
+	db  0110 0000 b 		; 
 	db  0000 0000 b 		; 
 	db  0000 0000 b 		; 
 	db  0000 0000 b 		; 
@@ -257,7 +261,8 @@ Sprite_6:           ; Enemy plane type 2 1st color
 	db  0000 0000 b 		; 
 	db  0000 0000 b 		; 
 
-Sprite_7:           ; Enemy plane type 2 2nd color
+; Enemy plane type 2 2nd color
+Sprite_EnemyPlaneFromRight_2ndColor:		equ	7
 	db  0000 0010 b 		; 
 	db  0000 0010 b 		; 
 	db  0000 0001 b 		; 
@@ -442,7 +447,9 @@ Sprite_11:           ; Enemy plane type 3 1st color
 	db  1100 0000 b 		; 
 	db  0100 0000 b 		; 
 
-Sprite_12:           ; Enemy plane type 3 2nd color
+
+; Enemy plane type 3 2nd color
+Sprite_EnemyPlaneFromLeft_2ndColor:		equ	12
 	db  0000 0000 b 		; 
 	db  0000 0000 b 		; 
 	db  0000 0000 b 		; 
@@ -517,8 +524,8 @@ Sprite_13:           ; Item (extra life)
 	db  1000 0000 b 		; 
 
 
+; 50 points 1st color
 Sprite_50points_1stColor:		equ	14
-Sprite_14:           ; 50 points 1st color
 	db 00000000b
 	db 00001010b
 	db 00001000b
@@ -555,8 +562,8 @@ Sprite_14:           ; 50 points 1st color
 	db 00000000b
 	db 00000000b
 
+; 50 points 2nd color
 Sprite_50points_2ndColor:		equ	15
-Sprite_15:           ; 50 points 2nd color
 	db 00000111b
 	db 00000100b
 	db 00000111b
@@ -593,6 +600,84 @@ Sprite_15:           ; 50 points 2nd color
 	db 00000000b
 	db 00000000b
 
+; --- Boat
+; color 1
+Sprite_Boat_1stColor:		equ	16
+	DB 00000000b
+	DB 00000011b
+	DB 00001100b
+	DB 00110111b
+	DB 11000011b
+	DB 01110000b
+	DB 00111111b
+	DB 00001111b
+
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+
+	DB 00000000b
+	DB 11100000b
+	DB 00111110b
+	DB 11110011b
+	DB 11110011b
+	DB 00000011b
+	DB 11111111b
+	DB 11111110b
+
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+
+Sprite_Boat_2ndColor:		equ	17
+	; color 14
+	DB 00000000b
+	DB 00000000b
+	DB 00000011b
+	DB 00001000b
+	DB 00111100b
+	DB 00001111b
+	DB 00000000b
+	DB 00000000b
+
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+
+	DB 00000000b
+	DB 00000000b
+	DB 11000000b
+	DB 00001100b
+	DB 00001100b
+	DB 11111100b
+	DB 00000000b
+	DB 00000000b
+
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+
+EndSpritePatterns:
 {
 ; Sprite attributes: y, x, number, color    
 SpriteAttr_0:

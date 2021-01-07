@@ -39,6 +39,7 @@
     Player_Shot_CollisionBox:   rb 4            ;
     EnemyTemp_CollisionBox:     rb 4            ;
 
+
 ; Enemy temp memory space
     Enemy_Temp_Base_Address:
     Enemy_Temp_Show:               rb 1            ;
