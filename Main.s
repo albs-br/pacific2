@@ -124,6 +124,9 @@ INCLUDE "Sound.s"
 INCLUDE "UpdateScreen/UpdateScreen.s"
 INCLUDE "GameLogic/GameLogic.s"
 INCLUDE "Title.s"
+INCLUDE "Structs/Struct_CollisionBox.s"
+INCLUDE "Structs/Struct_PlayerShot.s"
+INCLUDE "Structs/Struct_Enemy.s"
 
 
 

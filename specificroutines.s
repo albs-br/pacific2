@@ -288,37 +288,37 @@ IncrementCounter:
 
 .contEnemyNumber:
     ld      a, 1
-    ; ld    (Enemy_1_Show), a        ; show enemy
-    ld      (ix), a                  ; show enemy
+    ; ld    (Enemy_1_Show), a                            ; show enemy
+    ld      (ix + Struct_Enemy.Show), a                  ; show enemy
 
 	xor     a ; same as ld a, 0
-	; ld    (Enemy_1_State), a	    ; disable explosion animation
-	ld      (ix + 1), a	            ; disable explosion animation
+	; ld    (Enemy_1_State), a	                         ; disable explosion animation
+	ld      (ix + Struct_Enemy.State), a	             ; disable explosion animation
 
     inc     hl
-    ld      a, (hl)                  ; get enemy type
-    ; ld    (Enemy_1_Type), a        ; save value
-    ld      (ix + 2), a              ; save value
+    ld      a, (hl)                                      ; get enemy type
+    ; ld    (Enemy_1_Type), a                            ; save value
+    ld      (ix + Struct_Enemy.Type), a                  ; save value
 
     inc     hl
-    ld      a, (hl)                  ; get 1st color
-    ; ld    (Enemy_1_1stColor), a    ; save value
-    ld      (ix + 3), a              ; save value
+    ld      a, (hl)                                      ; get 1st color
+    ; ld    (Enemy_1_1stColor), a                        ; save value
+    ld      (ix + Struct_Enemy.1stColor), a              ; save value
     
     inc     hl
-    ld      a, (hl)                  ; get 2nd color
-    ; ld    (Enemy_1_2ndColor), a    ; save value
-    ld      (ix + 4), a              ; save value
+    ld      a, (hl)                                      ; get 2nd color
+    ; ld    (Enemy_1_2ndColor), a                        ; save value
+    ld      (ix + Struct_Enemy.2ndColor), a              ; save value
     
     inc     hl
-    ld      a, (hl)                  ; get x coord
-    ; ld    (Enemy_1_X), a           ; save value
-    ld      (ix + 5), a              ; save value
+    ld      a, (hl)                                      ; get x coord
+    ; ld    (Enemy_1_X), a                               ; save value
+    ld      (ix + Struct_Enemy.X), a                     ; save value
     
     inc     hl
-    ld      a, (hl)                  ; get y coord
-    ; ld    (Enemy_1_Y), a           ; save value
-    ld      (ix + 6), a              ; save value
+    ld      a, (hl)                                      ; get y coord
+    ; ld    (Enemy_1_Y), a                               ; save value
+    ld      (ix + Struct_Enemy.Y), a                     ; save value
 
     ret
 
@@ -395,30 +395,30 @@ IncrementCounter:
 
 .checkIfEnemy_IsAlive:
     ; ld a, (Enemy_1_Show)
-    ld a, (ix)
-    cp 0
-    ret z
+    ld      a, (ix)
+    or      a ; same as cp 0
+    ret     z
 
     ld a, 1
     ; ld (Enemy_Shot_1_Show), a
-    ld (ix + 8), a
+    ld (ix + Struct_Enemy.Shot_Show), a
 
     inc hl
-    ld a, (hl)                  ; get delta x (-1 to +1)
-    ; ld (Enemy_Shot_1_DeltaX), a ; save
-    ld (ix + 11), a ; save
+    ld a, (hl)                                      ; get delta x (-1 to +1)
+    ; ld (Enemy_Shot_1_DeltaX), a                   ; save
+    ld (ix + Struct_Enemy.Shot_DeltaX), a           ; save
     
-    ; ld a, (Enemy_1_X)           ; get x coord of enemy
-    ld a, (ix + 5)              ; get x coord of enemy
-    add a, 6                    ; add 6
-    ; ld (Enemy_Shot_1_X), a      ; save as x coord of shot
-    ld (ix + 9), a      ; save as x coord of shot
+    ; ld a, (Enemy_1_X)                             ; get x coord of enemy
+    ld a, (ix + Struct_Enemy.X)                     ; get x coord of enemy
+    add a, 6                                        ; add 6
+    ; ld (Enemy_Shot_1_X), a                        ; save as x coord of shot
+    ld (ix + Struct_Enemy.Shot_X), a                ; save as x coord of shot
     
-    ; ld a, (Enemy_1_Y)           ; get y coord of enemy
-    ld a, (ix + 6)              ; get y coord of enemy
-    add a, 16                   ; add 16
-    ; ld (Enemy_Shot_1_Y), a      ; save as y coord of shot
-    ld (ix + 10), a      ; save as y coord of shot
+    ; ld a, (Enemy_1_Y)                             ; get y coord of enemy
+    ld a, (ix + Struct_Enemy.Y)                     ; get y coord of enemy
+    add a, 16                                       ; add 16
+    ; ld (Enemy_Shot_1_Y), a                        ; save as y coord of shot
+    ld (ix + Struct_Enemy.Shot_Y), a                ; save as y coord of shot
     
     ret
 
@@ -844,13 +844,6 @@ ResetCounter:
 
 
 
-; Struct object:
-Struct_PlayerShot_Size:     equ 4
-Struct_PlayerShot:
-.Enabled:   equ     0
-.X:         equ     1
-.Y:         equ     2
-.Pattern:   equ     3
 
 
 
