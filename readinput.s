@@ -325,36 +325,33 @@ planeTriggerReleased:
 Pause:
 
     ; write 'PAUSE' on midscreen
-	ld	de, NamesTable + 256 + (32 * 4) + 16 - 2        ; VRAM Address
-	ld	hl, Msg_Pause                                   ;
-    call PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
+	ld	    de, NamesTable + 256 + (32 * 4) + 16 - 2        ; VRAM Address
+	ld	    hl, Msg_Pause                                   ;
+    call    PrintString                                     ; Write string in screen 2 (hl: string addr, de: vram addr)
 
-    ; hide all sprites (208 on Y value hides the sprite and all following)
-    ld hl, SpriteAttrTable
-    ld a, 208
-    call BIOS_WRTVRM		                            ; Writes data in VRAM (HL: address, A: value)
-
-    ;call SoundPause
+    call    HideAllSprites
 
     ; wait for ESC to be released
-    ld a, 7                                             ; 7th line
-    call BIOS_SNSMAT                                    ; Read Data Of Specified Line From Keyboard Matrix
-    bit 2, a                                            ; 6th bit (esc key)
-    jp z, Pause
+    ld      a, 7                                            ; 7th line
+    call    BIOS_SNSMAT                                     ; Read Data Of Specified Line From Keyboard Matrix
+    bit     2, a                                            ; 6th bit (esc key)
+    jp      z, Pause
+
+    call    SoundPause
 
 .isPaused:
     ; wait for ESC to be pressed again
-    ld a, 7                                             ; 7th line
-    call BIOS_SNSMAT                                    ; Read Data Of Specified Line From Keyboard Matrix
-    bit 2, a                                            ; 6th bit (esc key)
-    jp nz, .isPaused
+    ld      a, 7                                            ; 7th line
+    call    BIOS_SNSMAT                                     ; Read Data Of Specified Line From Keyboard Matrix
+    bit     2, a                                            ; 6th bit (esc key)
+    jp      nz, .isPaused
 
 .wait:
     ; wait for ESC to be released to unpause
-    ld a, 7                                             ; 7th line
-    call BIOS_SNSMAT                                    ; Read Data Of Specified Line From Keyboard Matrix
-    bit 2, a                                            ; 6th bit (esc key)
-    jp z, .wait
+    ld      a, 7                                            ; 7th line
+    call    BIOS_SNSMAT                                     ; Read Data Of Specified Line From Keyboard Matrix
+    bit     2, a                                            ; 6th bit (esc key)
+    jp      z, .wait
 
 
     ; Unpause

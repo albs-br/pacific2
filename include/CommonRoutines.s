@@ -273,11 +273,11 @@ CheckCollision:
 
 
 .collisionTrue:
-    or 1                    ; same as ld a, 1, but faster
+    ld      a, 1
     ret
 
 .collisionfalse:
-    xor a                   ; same as ld a, 0, but faster
+    xor     a                   ; same as ld a, 0, but faster
     ret
 
 
@@ -695,3 +695,10 @@ So the best way to know the current refresh frequency is:
 }
 
 
+; hide all sprites (208 on Y value hides the sprite and all following)
+HideAllSprites:
+    ld      hl, SpriteAttrTable
+    ld      a, 208
+    call    BIOS_WRTVRM		                            ; Writes data in VRAM (HL: address, A: value)
+
+    ret

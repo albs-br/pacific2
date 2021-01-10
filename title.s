@@ -81,7 +81,7 @@
 ;     ret
 
 ; .triggerPressed:
-;     or 1                        ; same as ld a, 1, but faster
+;     ld a, 1
 ;     ret
 
 

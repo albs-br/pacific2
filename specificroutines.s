@@ -288,36 +288,29 @@ IncrementCounter:
 
 .contEnemyNumber:
     ld      a, 1
-    ; ld    (Enemy_1_Show), a                            ; show enemy
     ld      (ix + Struct_Enemy.Show), a                  ; show enemy
 
 	xor     a ; same as ld a, 0
-	; ld    (Enemy_1_State), a	                         ; disable explosion animation
 	ld      (ix + Struct_Enemy.State), a	             ; disable explosion animation
 
     inc     hl
     ld      a, (hl)                                      ; get enemy type
-    ; ld    (Enemy_1_Type), a                            ; save value
     ld      (ix + Struct_Enemy.Type), a                  ; save value
 
     inc     hl
     ld      a, (hl)                                      ; get 1st color
-    ; ld    (Enemy_1_1stColor), a                        ; save value
     ld      (ix + Struct_Enemy.1stColor), a              ; save value
     
     inc     hl
     ld      a, (hl)                                      ; get 2nd color
-    ; ld    (Enemy_1_2ndColor), a                        ; save value
     ld      (ix + Struct_Enemy.2ndColor), a              ; save value
     
     inc     hl
     ld      a, (hl)                                      ; get x coord
-    ; ld    (Enemy_1_X), a                               ; save value
     ld      (ix + Struct_Enemy.X), a                     ; save value
     
     inc     hl
     ld      a, (hl)                                      ; get y coord
-    ; ld    (Enemy_1_Y), a                               ; save value
     ld      (ix + Struct_Enemy.Y), a                     ; save value
 
     ret
@@ -326,23 +319,23 @@ IncrementCounter:
 
     ;push hl
 
-    ld bc, 4
-    add hl, bc
+    ld      bc, 4
+    add     hl, bc
 
-    ld a, (hl)
-    ld (Item_X), a
+    ld      a, (hl)
+    ld      (Item_X), a
 
-    ld a, TOP_SCREEN
-    ld (Item_Y), a
+    ld      a, TOP_SCREEN
+    ld      (Item_Y), a
 
-    ld a, 13 * 4
-    ld (Item_Pattern), a
+    ld      a, 13 * 4
+    ld      (Item_Pattern), a
 
-    ld a, 7
-    ld (Item_Color), a
+    ld      a, 7
+    ld      (Item_Color), a
 
-    ld a, 1
-    ld (Item_Show), a
+    ld      a, 1
+    ld      (Item_Show), a
 
     ; pop hl
     ret
@@ -352,46 +345,46 @@ IncrementCounter:
 ;TODO check enemy number and update correct variables
     ; ld ix, Enemy_1_Base_Address
 
-    ld bc, 7
-    add hl, bc
-    ld a, (hl)                  ; get number of related enemy
+    ld      bc, 7
+    add     hl, bc
+    ld      a, (hl)                  ; get number of related enemy
     
-    cp 0                        ; TODO: optimize
-    jp z, .enemy_0_shots
+    or      a ; same as cp 0
+    jp      z, .enemy_0_shots
 
-    cp 1
-    jp z, .enemy_1_shots
+    dec     a ; cp 1
+    jp      z, .enemy_1_shots
 
-    cp 2
-    jp z, .enemy_2_shots
+    dec     a ; cp 2
+    jp      z, .enemy_2_shots
 
-    cp 3
-    jp z, .enemy_3_shots
+    dec     a ; cp 3
+    jp      z, .enemy_3_shots
 
-    cp 4
-    jp z, .enemy_4_shots
+    dec     a ; cp 4
+    jp      z, .enemy_4_shots
 
     ret
 
 .enemy_0_shots:
-    ld ix, Enemy_0_Base_Address
-    jp .checkIfEnemy_IsAlive
+    ld      ix, Enemy_0_Base_Address
+    jp      .checkIfEnemy_IsAlive
 
 .enemy_1_shots:
-    ld ix, Enemy_1_Base_Address
-    jp .checkIfEnemy_IsAlive
+    ld      ix, Enemy_1_Base_Address
+    jp      .checkIfEnemy_IsAlive
 
 .enemy_2_shots:
-    ld ix, Enemy_2_Base_Address
-    jp .checkIfEnemy_IsAlive
+    ld      ix, Enemy_2_Base_Address
+    jp      .checkIfEnemy_IsAlive
 
 .enemy_3_shots:
-    ld ix, Enemy_3_Base_Address
-    jp .checkIfEnemy_IsAlive
+    ld      ix, Enemy_3_Base_Address
+    jp      .checkIfEnemy_IsAlive
 
 .enemy_4_shots:
-    ld ix, Enemy_4_Base_Address
-    jp .checkIfEnemy_IsAlive
+    ld      ix, Enemy_4_Base_Address
+    jp      .checkIfEnemy_IsAlive
 
 .checkIfEnemy_IsAlive:
     ; ld a, (Enemy_1_Show)
@@ -399,26 +392,20 @@ IncrementCounter:
     or      a ; same as cp 0
     ret     z
 
-    ld a, 1
-    ; ld (Enemy_Shot_1_Show), a
-    ld (ix + Struct_Enemy.Shot_Show), a
+    ld      a, 1
+    ld      (ix + Struct_Enemy.Shot_Show), a
 
-    inc hl
-    ld a, (hl)                                      ; get delta x (-1 to +1)
-    ; ld (Enemy_Shot_1_DeltaX), a                   ; save
-    ld (ix + Struct_Enemy.Shot_DeltaX), a           ; save
+    inc     hl
+    ld      a, (hl)                                      ; get delta x (-1 to +1)
+    ld      (ix + Struct_Enemy.Shot_DeltaX), a           ; save
     
-    ; ld a, (Enemy_1_X)                             ; get x coord of enemy
-    ld a, (ix + Struct_Enemy.X)                     ; get x coord of enemy
-    add a, 6                                        ; add 6
-    ; ld (Enemy_Shot_1_X), a                        ; save as x coord of shot
-    ld (ix + Struct_Enemy.Shot_X), a                ; save as x coord of shot
+    ld      a, (ix + Struct_Enemy.X)                     ; get x coord of enemy
+    add     a, 6                                         ; add 6
+    ld      (ix + Struct_Enemy.Shot_X), a                ; save as x coord of shot
     
-    ; ld a, (Enemy_1_Y)                             ; get y coord of enemy
-    ld a, (ix + Struct_Enemy.Y)                     ; get y coord of enemy
-    add a, 16                                       ; add 16
-    ; ld (Enemy_Shot_1_Y), a                        ; save as y coord of shot
-    ld (ix + Struct_Enemy.Shot_Y), a                ; save as y coord of shot
+    ld      a, (ix + Struct_Enemy.Y)                     ; get y coord of enemy
+    add     a, 16                                        ; add 16
+    ld      (ix + Struct_Enemy.Shot_Y), a                ; save as y coord of shot
     
     ret
 
@@ -426,43 +413,36 @@ IncrementCounter:
 
     ; check if the player is dead and with no extra lifes (explosion animation still running)
 	; this fixes the bug when you die in your last life just before level end and gives you 255 lifes
-    ld a, (Player_Lifes)
-	cp 0
-	jp z, .continue1
+    ld      a, (Player_Lifes)
+	or      a ; same as cp 0
+	jp      z, .continue1
 
     ; check if is the last level
-    ld a, (Level)
-    cp 6
-    jp z, GameFinished
+    ld      a, (Level)
+    cp      6
+    jp      z, GameFinished
 
 
-    ; hide player/shot sprites
-    ld a, 63 * 4                                        ; invalid pattern
-    ld (SpriteLayer_0_Pattern), a                       ; player 2nd color
-    ld (SpriteLayer_1_Pattern), a                       ; player 1st color
-    ld (SpriteLayer_2_Pattern), a                       ; player shot 0
-    ld (SpriteLayer_3_Pattern), a                       ; player shot 1
-    ld (SpriteLayer_4_Pattern), a                       ; player shot 2
-    ld (SpriteLayer_31_Pattern), a                      ; player plane shadow
+    call    HideAllSprites
 
 
     ; write 'LEVEL  FINISHED' on midscreen
-	ld	de, NamesTable + 256 + (32 * 4) + 16 - 7        ; VRAM Address
-	ld	hl, Msg_LevelFinished                           ;
-    call PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
+	ld	    de, NamesTable + 256 + (32 * 4) + 16 - 7        ; VRAM Address
+	ld	    hl, Msg_LevelFinished                           ;
+    call    PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
     ; write 'CONGRATULATIONS' on midscreen
-	ld	de, NamesTable + 256 + (32 * 5) + 16 - 7        ; VRAM Address
-	ld	hl, Msg_LevelFinished_1                         ;
-    call PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
+	ld	    de, NamesTable + 256 + (32 * 5) + 16 - 7        ; VRAM Address
+	ld	    hl, Msg_LevelFinished_1                         ;
+    call    PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
 
     
-    call WaitSomeSeconds
+    call    WaitSomeSeconds
     
-    ld hl, Level
-    inc (hl)
+    ld      hl, Level
+    inc     (hl)
 
-    pop bc              ; release SP
-    jp NewLevel
+    pop     bc              ; release SP
+    jp      NewLevel
 
 .next:
     ; pop hl
@@ -566,49 +546,39 @@ PrintNumber_LittleEndian:
 DisableShot:
 
 
-    ; ld a, (Player_Shot)
-	; dec a                       	; reset flag of shot fired
-    ; ;ld a, 0
-    ; ld (Player_Shot), a         	; 
-    ld a, 0
-    ld (iy + Struct_PlayerShot.Enabled), a
+    xor     a ; same as ld a, 0
+    ld      (iy + Struct_PlayerShot.Enabled), a
 
-    ; ld a, 0
-    ; ld (Player_Shot_X), a
-    ld (iy + Struct_PlayerShot.X), a
+    ld      (iy + Struct_PlayerShot.X), a
 
-    ld a, 256 - 16
-    ; ld (Player_Shot_Y), a
-    ld (iy + Struct_PlayerShot.Y), a
+    ld      a, 256 - 16
+    ld      (iy + Struct_PlayerShot.Y), a
 
-    ld a, 63 * 4
-    ; ld (Player_Shot_Pattern), a
-    ld (iy + Struct_PlayerShot.Pattern), a
-
-
+    ld      a, 63 * 4
+    ld      (iy + Struct_PlayerShot.Pattern), a
 
     ret
 
 
 
 DisableItem:
-    ld a, 0
-    ld (Item_Show), a         	; 
-    ld (Item_X), a
-    ld a, 256 - 16
-    ld (Item_Y), a
-    ld a, 63 * 4
-    ld (Item_Pattern), a
+    xor     a ; same as ld a, 0
+    ld      (Item_Show), a         	; 
+    ld      (Item_X), a
+    ld      a, 256 - 16
+    ld      (Item_Y), a
+    ld      a, 63 * 4
+    ld      (Item_Pattern), a
 
     ret
 
 
 ShowLifes:
 	; show current number of lifes on top of screen
-    ld hl, NamesTable + 1	    ; VRAM address
-    ld a, (Player_Lifes)
-    add a, Tile_Char_0_Number   ; convert number to chars
-    call BIOS_WRTVRM	        ; write to VRAM
+    ld      hl, NamesTable + 1	        ; VRAM address
+    ld      a, (Player_Lifes)
+    add     a, Tile_Char_0_Number       ; convert number to chars
+    call    BIOS_WRTVRM	                ; write to VRAM
 
     ret 
 
@@ -616,15 +586,15 @@ ShowLifes:
 
 ShowScore:
 	; show current score on top of screen
-	ld hl, Player_Score       	; LSB
-    ld d, 2                     ; size in bytes
-    ld bc, 17                   ; names table offset (0-255); position of least significant digit
-    call PrintNumber_LittleEndian
+	ld      hl, Player_Score       	    ; LSB
+    ld      d, 2                        ; size in bytes
+    ld      bc, 17                      ; names table offset (0-255); position of least significant digit
+    call    PrintNumber_LittleEndian
 
     ; add 0 to number at right (score is shown on screen multiplied by ten)
-    ld hl, NamesTable + 18	    ; VRAM address
-    ld a, Tile_Char_0_Number    ; char '0'
-    call BIOS_WRTVRM	        ; write to VRAM
+    ld      hl, NamesTable + 18	        ; VRAM address
+    ld      a, Tile_Char_0_Number       ; char '0'
+    call    BIOS_WRTVRM	                ; write to VRAM
 
     ret
 
@@ -632,13 +602,13 @@ ShowScore:
 
 GameOver:
     ; write 'GAME OVER' on midscreen
-	ld	de, NamesTable + 256 + (32 * 4) + 16 - 4        ; VRAM Address
-	ld	hl, Msg_GameOver                                ;
-    call PrintString                                    ; Write string in screen 2 (hl: string addr, de: vram addr)
+	ld	    de, NamesTable + 256 + (32 * 4) + 16 - 4        ; VRAM Address
+	ld	    hl, Msg_GameOver                                ;
+    call    PrintString                                     ; Write string in screen 2 (hl: string addr, de: vram addr)
 
-    call WaitSomeSeconds
+    call    WaitSomeSeconds
 
-    jp Execute                                          ; restart game
+    jp      Execute                                         ; restart game
 
 
 
