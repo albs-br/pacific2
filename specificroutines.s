@@ -690,33 +690,30 @@ LoadLevel:
     ; jp .showLevelTitle
 
 .showLevelTitle:
-    push bc                          ; save sea color info
-    push de
+    push    bc                          ; save sea color info
+    push    de
 
-    ;call LevelTitleScreen ;[debug]
+    call    LevelTitleScreen ;[debug]
 
 
-    ; ld hl, Level_Test_DataStart
-    pop hl                          ; from DE to HL
-    call LoadLevelData
+    pop     hl                          ; from DE to HL
+    call    LoadLevelData
 
-    call LoadNamesTable
+    call    LoadNamesTable
 
-    pop bc                          ; retrieve sea color info
+    pop     bc                          ; retrieve sea color info
 
     ; set type of sea (Daylight or Nighttime)
-    ld a, b
-    cp 0
-    jp z, .setSeaDaylight
-    ;else
-    jp .setSeaNighttime
+    ld      a, b
+    or      a ; same as cp 0
+    jp      z, .setSeaDaylight
+;.setSeaNighttime:
+    ld      hl, Colors_Sea_Nighttime
+    jp      .cont2
 .setSeaDaylight:
-    ld hl, Colors_Sea_Daylight
-    jp .cont2
-.setSeaNighttime:
-    ld hl, Colors_Sea_Nighttime
+    ld      hl, Colors_Sea_Daylight
 .cont2:
-    call SetSeaTileColor
+    call    SetSeaTileColor
 
     ret
 

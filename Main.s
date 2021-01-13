@@ -41,16 +41,16 @@ INCLUDE "include/romheader.s"
 Execute:
 
 ; init interrupt mode and stack pointer (in case the ROM isn't the first thing to be loaded)
-	di                      ; disable interrupts
-	im	1                   ; interrupt mode 1
-    ld sp, (BIOS_HIMEM)     ; init SP
+	di                          ; disable interrupts
+	im      1                   ; interrupt mode 1
+    ld      sp, (BIOS_HIMEM)    ; init SP
 
-    call ClearRam
+    call    ClearRam
 
-    call InitVram
+    call    InitVram
 
 
-    call EnableRomPage2
+    call    EnableRomPage2
 
 IFDEF DEBUG
     ;call ShowDebugInfo     ; not working anymore
@@ -58,59 +58,59 @@ ENDIF
 
 
 ;NewGame:
-    ; ld a, 0                             ; test level
-    ld a, 1                             ;
-    ld (Level), a                       ;
+    ; ld    a, 0                             ; test level
+    ld      a, 1                             ;
+    ld      (Level), a                       ;
 
-    ld bc, 0
-    ld (Player_Score), bc               ;
-    ld a, 3                             ;
-    ;ld a, 1                             ; debug (min number of lifes is 1)
-    ld (Player_Lifes), a                ;
+    ld      bc, 0
+    ld      (Player_Score), bc               ;
+    ld      a, 3                             ;
+    ;ld     a, 1                             ; debug (min number of lifes is 1)
+    ld      (Player_Lifes), a                ;
 
 
-    ;call TitleScreen ;[debug]
+    ;call   TitleScreen ; [debug]
 
 
 NewLevel:
-    call InitVram
+    call    InitVram
 
 
-    call InitVariables
+    call    InitVariables
  
 
 
-    ld a, (Level)
-    call LoadLevel
+    ld      a, (Level)
+    call    LoadLevel
 
 
 
 ; Show initial values of lifes and score
-    call ShowScore
-    call ShowLifes
+    call    ShowScore
+    call    ShowLifes
 
 
 
 MainLoop:
 
-    call ReadInput
+    call    ReadInput
 
-    call UpdateScreen
+    call    UpdateScreen
 
-    call GameLogic
+    call    GameLogic
 
-    ;call Delay
+    ;call   Delay
 
-    call IncrementCounter
+    call    IncrementCounter
 
-    jp MainLoop
+    jp      MainLoop
 
-    ;jp Finished
+    ;jp     Finished
 
 ; Halt program execution. Change to "ret" to return to MSX-BASIC.
  
 Finished:
-	jr	Finished	; Jump to itself endlessly.
+	jr	    Finished	; Jump to itself endlessly.
  
 
  ; Routines

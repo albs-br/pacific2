@@ -90,11 +90,11 @@
 ;    a: Level Number (1-6)
 LevelTitleScreen:
 
-    ;call LevelTitleAnimation_1
-    ;call LevelTitleAnimation_2
+;     call LevelTitleAnimation_1
+;     call LevelTitleAnimation_2
 
-;.loopEternal:
-;    jp .loopEternal
+; .loopEternal:
+;     jp .loopEternal
 
     push hl
     push af
