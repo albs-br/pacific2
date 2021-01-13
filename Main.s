@@ -123,7 +123,8 @@ INCLUDE "ReadInput.s"
 INCLUDE "Sound.s"
 INCLUDE "UpdateScreen/UpdateScreen.s"
 INCLUDE "GameLogic/GameLogic.s"
-INCLUDE "Title.s"
+INCLUDE "Title/Title.s"
+INCLUDE "Title/LevelTitle.s"
 INCLUDE "Structs/Struct_CollisionBox.s"
 INCLUDE "Structs/Struct_PlayerShot.s"
 INCLUDE "Structs/Struct_Enemy.s"
@@ -141,6 +142,7 @@ INCLUDE "Data/Strings.s"
 INCLUDE "Data/SpriteBufferInit.s"
 INCLUDE "Data/LevelData/LevelData.s"
 INCLUDE "Data/BackgroundData.s"
+INCLUDE "Data/LevelCurtain.s"
 
 
 

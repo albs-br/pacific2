@@ -11,7 +11,7 @@
 Delay:
     ; ld c, 0x04                  ; 3 nested loops
     ; ld d, 0xff                  
-    ld e, 0x80              
+    ld e, 0xff
 .loop:                          ; 
     dec e
     jp nz, .loop                ; inner loop

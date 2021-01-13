@@ -85,7 +85,7 @@ Enemy shots
 	jp      .enemyTypeCont
 
 .enemyType_3:
-	ld      a, Sprite_Boat_2ndColor * 4	                    ; pattern number (2nd color)
+	ld      a, Sprite_Boat_2ndColor	                        ; pattern number (2nd color)
     ld      (Enemy_Temp_2ndColorPattern), a
 	;jp     .enemyTypeCont
 
