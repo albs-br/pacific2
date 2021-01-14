@@ -116,6 +116,7 @@ Finished:
  ; Routines
 INCLUDE "InitVram.s"
 INCLUDE "Include/CommonRoutines.s"
+INCLUDE "Include/MsxConstants.s"
 INCLUDE "SpecificRoutines.s"
 INCLUDE "BackgroundAnimation.s"
 INCLUDE "Constants.s"

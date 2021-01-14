@@ -60,15 +60,15 @@ LevelTitleScreen:
     ld      de, SpriteAttrTable
     call    BIOS_LDIRVM                                                                 ; Copy BC number of bytes from HL (RAM) to DE (VRAM)
 
-    ld      a, CURTAIN_INITIAL_X                    ; current left x positions
-    ld      [LeftCurtain_X], a
-    add     a, 8
-    ld      [RightCurtain_X], a
+    ld      a, CURTAIN_LEFT_INITIAL_X                    
+    ld      [LeftCurtain_X], a                          ; current left x position
+    ld      a, CURTAIN_RIGHT_INITIAL_X
+    ld      [RightCurtain_X], a                         ; current right x position
 .loopCurtainMovement_X:
 	ld	    hl, SpriteAttrTable + 1     ; VRAM Address (x attribute of sprite)
 
+    ld      b, 12       ; number of sprites to be updated (each side)
                 ; left side
-                    ld      b, 12       ; number of sprites to be updated
                 .loopCurtainMovement_Left:
                     ld      a, [LeftCurtain_X]
                     call    BIOS_WRTVRM		        ; Writes data in VRAM, as VPOKE (HL: address, A: value)
@@ -82,20 +82,56 @@ LevelTitleScreen:
                     dec     a
                     ld      [LeftCurtain_X], a
 
-                ; show scenery behind left curtain
+                ; show scenary behind left curtain
                     push    hl
                     ld      hl, NamesTable
                     ld      de, 32
                     add     hl, de  ; go to second line
                     ld      a, [LeftCurtain_X]
                     add     a, 8
-                    sra     a     
-                    sra     a     
-                    sra     a       ; divide LeftCurtain_X by 8
+                    srl     a     
+                    srl     a     
+                    srl     a       ; divide LeftCurtain_X by 8
                     ld      e, a
                     add     hl, de  ; go to current column
-                    ld      a, Tile_Sea_Number
-                    call    BIOS_WRTVRM		        ; Writes data in VRAM, as VPOKE (HL: address, A: value)
+
+                    push    bc
+                    ld      b, 23
+                .loopShowScenaryBehindLeftCurtain:
+                                ld      a, Tile_Sea_Number      ; TODO: get real background
+                                call    BIOS_WRTVRM		        ; Writes data in VRAM, as VPOKE (HL: address, A: value)
+                                ld      de, 32
+                                add     hl, de                  ; go to next line
+                                djnz    .loopShowScenaryBehindLeftCurtain
+                    pop     bc
+
+                    pop     hl
+
+
+
+                ; show scenary behind right curtain
+                    push    hl
+                    ld      hl, NamesTable
+                    ld      de, 32
+                    add     hl, de  ; go to second line
+                    ld      a, [RightCurtain_X]
+                    add     a, 7
+                    srl     a     
+                    srl     a     
+                    srl     a       ; divide RightCurtain_X by 8
+                    ld      e, a
+                    add     hl, de  ; go to current column
+
+                    push    bc
+                    ld      b, 23
+                .loopShowScenaryBehindRightCurtain:
+                                ld      a, Tile_Sea_Number      ; TODO: get real background
+                                call    BIOS_WRTVRM		        ; Writes data in VRAM, as VPOKE (HL: address, A: value)
+                                ld      de, 32
+                                add     hl, de                  ; go to next line
+                                djnz    .loopShowScenaryBehindRightCurtain
+                    pop     bc
+
                     pop     hl
 
 
@@ -121,9 +157,9 @@ LevelTitleScreen:
 
 
 .skipRightCurtain:
-    ; jp .loopEternal
+                    ; jp .loopEternal
 
-    call    Delay
+                    call    Delay
 
     jp      .loopCurtainMovement_X
 
