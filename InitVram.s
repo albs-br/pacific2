@@ -327,9 +327,7 @@ NUMBER_OF_BG_TILES:  equ (2 + 3 + 3 + 2 + 5 + 5 + 3 + 3) * 8
 
 	ret
 
-LoadNamesTable:
-
-	call BIOS_DISSCR		; 
+LoadTopStripTiles:
 
 	; Fill names table
 	; Top strip with lifes, score, etc
@@ -337,14 +335,6 @@ LoadNamesTable:
 	ld	de, NamesTable		; VRAM address
 	ld	hl, TopStripTiles   ; RAM Address
     call BIOS_LDIRVM        ; Block transfer to VRAM from memory
-
-	; FIll the remainder of the 3 names tables
-	ld	hl, NamesTable + 32 ; VRAM start address
-    ld  bc, 768 - 32        ; number of bytes
-    ld  a, 0                ; value
-    call BIOS_FILVRM        ; Fill VRAM
-
-	call BIOS_ENASCR		; 
 
 	ret
 

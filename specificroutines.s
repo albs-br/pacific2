@@ -699,7 +699,7 @@ LoadLevel:
     pop     hl                          ; from DE to HL
     call    LoadLevelData
 
-    call    LoadNamesTable
+    call    LoadTopStripTiles
 
     pop     bc                          ; retrieve sea color info
 
