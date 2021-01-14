@@ -158,3 +158,8 @@
     ; LevelTitleBuffer_Line0:     rb 64 * 8
     ; RamAddrSource:              rw 1
     ; VramAddrDestiny:            rw 1
+
+
+; Level title curtain
+    LeftCurtain_X:              rb 1
+    RightCurtain_X:             rb 1

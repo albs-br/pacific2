@@ -60,37 +60,77 @@ LevelTitleScreen:
     ld      de, SpriteAttrTable
     call    BIOS_LDIRVM                                                                 ; Copy BC number of bytes from HL (RAM) to DE (VRAM)
 
-    ld      c, 128 - 8                  ; current left x position
+    ld      a, CURTAIN_INITIAL_X                    ; current left x positions
+    ld      [LeftCurtain_X], a
+    add     a, 8
+    ld      [RightCurtain_X], a
 .loopCurtainMovement_X:
 	ld	    hl, SpriteAttrTable + 1     ; VRAM Address (x attribute of sprite)
 
                 ; left side
                     ld      b, 12       ; number of sprites to be updated
                 .loopCurtainMovement_Left:
-                    ld      a, c
+                    ld      a, [LeftCurtain_X]
                     call    BIOS_WRTVRM		        ; Writes data in VRAM, as VPOKE (HL: address, A: value)
                     ld      de, 4
                     add     hl, de
                     djnz    .loopCurtainMovement_Left
 
+                    ld      a, [LeftCurtain_X]
+                    cp      0
+                    jp      z, .endLoopCurtainMovement_X
+                    dec     a
+                    ld      [LeftCurtain_X], a
+
+                ; show scenery behind left curtain
+                    push    hl
+                    ld      hl, NamesTable
+                    ld      de, 32
+                    add     hl, de  ; go to second line
+                    ld      a, [LeftCurtain_X]
+                    add     a, 8
+                    sra     a     
+                    sra     a     
+                    sra     a       ; divide LeftCurtain_X by 8
+                    ld      e, a
+                    add     hl, de  ; go to current column
+                    ld      a, Tile_Sea_Number
+                    call    BIOS_WRTVRM		        ; Writes data in VRAM, as VPOKE (HL: address, A: value)
+                    pop     hl
+
+
+
                 ; right side
                     ld      b, 12       ; number of sprites to be updated
                 .loopCurtainMovement_Right:
-                    ld      a, c
-                    neg                             ; negating the X left position we obtain the X right position (is symetric)
+                    ld      a, [RightCurtain_X]
+                    ;or      a ; same as cp 0
+                    ;jp      z, .skipRightCurtain
+                    ;neg                             ; negating the X left position we obtain the X right position (is symetric)
+                    ;jp      z, .endLoopCurtainMovement_X
                     call    BIOS_WRTVRM		        ; Writes data in VRAM, as VPOKE (HL: address, A: value)
                     ld      de, 4
                     add     hl, de
                     djnz    .loopCurtainMovement_Right
 
-    call    Delay
-    call    Delay
-    dec     c
-    jp      nz, .loopCurtainMovement_X
+                    ld      a, [RightCurtain_X]
+                    inc     a
+                    ld      [RightCurtain_X], a
 
 
-; .loopEternal:
-;     jp      .loopEternal
+
+
+.skipRightCurtain:
+    ; jp .loopEternal
+
+    call    Delay
+
+    jp      .loopCurtainMovement_X
+
+.endLoopCurtainMovement_X:
+
+.loopEternal:
+    jp      .loopEternal
 
     ret
 
