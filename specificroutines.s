@@ -693,7 +693,7 @@ LoadLevel:
     push    bc                          ; save sea color info
     push    de
 
-    call    LevelTitleScreen ;[debug]
+    call    LevelTitleScreen
 
 
     pop     hl                          ; from DE to HL

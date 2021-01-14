@@ -95,13 +95,30 @@ LevelTitleScreen:
                     ld      e, a
                     add     hl, de  ; go to current column
 
+                    
+                    ;BgSourceTileAddr = StartBackgroundData + de
+                    push    hl
+                    ld      hl, StartBackgroundData
+                    add     hl, de  ; go to current column
+                    ld      (BgSourceTileAddr), hl
+                    pop     hl
+
                     push    bc
                     ld      b, 23
                 .loopShowScenaryBehindLeftCurtain:
-                                ld      a, Tile_Sea_Number      ; TODO: get real background
+                                ld      de, (BgSourceTileAddr)
+                                ld      a, (de)                 ; get background
                                 call    BIOS_WRTVRM		        ; Writes data in VRAM, as VPOKE (HL: address, A: value)
                                 ld      de, 32
                                 add     hl, de                  ; go to next line
+                                
+                                ;BgSourceTileAddr += 32
+                                push    hl
+                                ld      hl, (BgSourceTileAddr)
+                                add     hl, de                  ; go to next line
+                                ld      (BgSourceTileAddr), hl
+                                pop     hl
+                                
                                 djnz    .loopShowScenaryBehindLeftCurtain
                     pop     bc
 
@@ -165,8 +182,8 @@ LevelTitleScreen:
 
 .endLoopCurtainMovement_X:
 
-.loopEternal:
-    jp      .loopEternal
+; .loopEternal:
+;     jp      .loopEternal
 
     ret
 

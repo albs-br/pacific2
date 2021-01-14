@@ -163,3 +163,4 @@
 ; Level title curtain
     LeftCurtain_X:              rb 1
     RightCurtain_X:             rb 1
+    BgSourceTileAddr:           rw 1

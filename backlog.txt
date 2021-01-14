@@ -6,13 +6,16 @@ Minimum for MSX DEV 21 (Deadline to submit your entry: August 31st, 2021):
 - implement enemy: tanks
 - implement enemy: big plane (32x32) may be a level boss
 - implement enemy: warship (boss)
-- 3 or 4 kinds of shot (power ups)
+- new backgrounds (both using the existent animated tiles and 
+  creating new tiles)
+- items: 3 or 4 kinds of shot (power ups), invencibility
 - improve collision detection (look at GB Paranoid)
 - new title screen with animation
 - BG music
 - some animation for plane (roll wings, spining propeller, etc)
 - more behaviours for the enemy planes
-- 5x hit bonus (1000 points) for shoting entire 5 enemies formation
+- 5x hit bonus (1000 points or even better, item) for shoting entire 
+  5 enemies formation
 - make something new (never seen before on a shot'em up)
     - arrows indicating from where will come next enemies
     - power bar over enemies which requires more than one hit to die 
@@ -22,3 +25,6 @@ Minimum for MSX DEV 21 (Deadline to submit your entry: August 31st, 2021):
 - autofire option
 - more and bigger levels
 - enemy shots bigger, alternating colors and slower (?)                       OK (1, 2, not 3)
+
+optional:
+- animation on transition from level title screen to gameplay
