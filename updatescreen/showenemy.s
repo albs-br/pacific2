@@ -162,10 +162,10 @@ Enemy shots
     ld a, 1
     ld (ix + (21 * 4) + 3), a           ; Addr color
 
-    ld a, Sprite_50points_2ndColor * 4 ;
+    ld a, Sprite_50points_2ndColor
     ld (ix + (8 * 4) + 2), a           ; Addr 1st color pattern
 
-    ld a, Sprite_50points_1stColor * 4 ;
+    ld a, Sprite_50points_1stColor
     ld (ix + (21 * 4) + 2), a          ; Addr shadow pattern
 
 
@@ -247,7 +247,7 @@ Enemy shots
     ld (Enemy_Temp_X), a
 	ld a, 256 - 16					;   e: y coord		; place sprite off screen
     ld (Enemy_Temp_Y), a
-    ld a, 63                        ;   put non existent sprite at layer, to hide the enemy
+    ld a, Sprite_Transparent        ;   put non existent sprite at layer, to hide the enemy
     ld (Enemy_Temp_2ndColorPattern), a
 
     ret

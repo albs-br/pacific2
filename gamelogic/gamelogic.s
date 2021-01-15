@@ -118,13 +118,13 @@ GameLogic:
    ; ld ix, Player_Shot_CollisionBox
    ; ld (ix + Struct_CollisionBox.Y), a
 
-   ld a, 7						      ;   color 1
+   ld a, COLOR_LIGHT_BLUE        ;   color 1
 	ld (Item_Color), a
 
    bit 0, l
    jp z, .enemies                ;   alternate colors of item at each frame
 
-   ld a, 8						      ;   color 2
+   ld a, COLOR_RED			      ;   color 2
 	ld (Item_Color), a
 
    jp .enemies

@@ -94,12 +94,12 @@ UpdateScreen:
 
 .endExplosionPlayer:
 	; hide player first sprite
-    ld a, 63 * 4                       		; put non existent sprite at layer, to hide the enemy
+    ld a, Sprite_Transparent           		; put non existent sprite at layer, to hide the enemy
     ld (Player_Pattern), a           		; Addr 2nd color pattern
 
 .explosionCont:
 	; hide other 2 sprites of player
-    ld a, 63 * 4                       		; put non existent sprite at layer, to hide the enemy
+    ld a, Sprite_Transparent           		; put non existent sprite at layer, to hide the enemy
     ld (SpriteLayer_1_Pattern), a           ; Addr 1st color pattern
     ld (SpriteLayer_31_Pattern), a          ; Addr shadow pattern
 

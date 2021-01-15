@@ -7,9 +7,10 @@ Minimum for MSX DEV 21 (Deadline to submit your entry: August 31st, 2021):
 - implement enemy: big plane (32x32) may be a level boss
 - implement enemy: warship (boss)
 - new backgrounds (both using the existent animated tiles and 
-  creating new tiles)
+  creating new tiles - city, jungle, bridge)
 - items: 3 or 4 kinds of shot (power ups), invencibility
 - improve collision detection (look at GB Paranoid)
+- invencibility for some seconds after die
 - new title screen with animation
 - BG music
 - some animation for plane (roll wings, spining propeller, etc)
@@ -27,4 +28,4 @@ Minimum for MSX DEV 21 (Deadline to submit your entry: August 31st, 2021):
 - enemy shots bigger, alternating colors and slower (?)                       OK (1, 2, not 3)
 
 optional:
-- animation on transition from level title screen to gameplay
+- animation on transition from level title screen to gameplay                 almost OK (lacks top strip / EC bit)

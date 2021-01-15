@@ -41,7 +41,7 @@ ShowEnemyShot:
 	; ld (SpriteLayer_18_Y), a
 	ld (iy), a
 
-	ld a, 63 * 4				    ;   a: pattern number (0-63)
+	ld a, Sprite_Transparent	    ;   a: pattern number (0-63)
 	; ld (SpriteLayer_18_Pattern), a
 	ld (iy + 2), a
 

@@ -486,7 +486,8 @@ Sprite_EnemyPlaneFromLeft_2ndColor:		equ	12
 	db  0000 0000 b 		; 
 	db  0000 0000 b 		; 
 
-Sprite_13:           ; Item (extra life)
+; Item (extra life)
+Sprite_Item_ExtraLife:		equ	13 * 4
 	db  0000 0001 b 		; 
 	db  0000 0010 b 		; 
 	db  0000 0100 b 		; 
@@ -525,7 +526,7 @@ Sprite_13:           ; Item (extra life)
 
 
 ; 50 points 1st color
-Sprite_50points_1stColor:		equ	14
+Sprite_50points_1stColor:		equ	14 * 4
 	db 00000000b
 	db 00001010b
 	db 00001000b
@@ -563,7 +564,7 @@ Sprite_50points_1stColor:		equ	14
 	db 00000000b
 
 ; 50 points 2nd color
-Sprite_50points_2ndColor:		equ	15
+Sprite_50points_2ndColor:		equ	15 * 4
 	db 00000111b
 	db 00000100b
 	db 00000111b
@@ -750,6 +751,43 @@ Sprite_LevelCurtain_Right:		equ	19 * 4
 	DB 11111111b
 	DB 11111111b
 	DB 11111111b
+
+Sprite_Transparent:		equ	63 * 4
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
+	DB 00000000b
 
 EndSpritePatterns:
 {

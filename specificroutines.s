@@ -328,10 +328,10 @@ IncrementCounter:
     ld      a, TOP_SCREEN
     ld      (Item_Y), a
 
-    ld      a, 13 * 4
+    ld      a, Sprite_Item_ExtraLife
     ld      (Item_Pattern), a
 
-    ld      a, 7
+    ld      a, COLOR_LIGHT_BLUE
     ld      (Item_Color), a
 
     ld      a, 1
@@ -554,7 +554,7 @@ DisableShot:
     ld      a, 256 - 16
     ld      (iy + Struct_PlayerShot.Y), a
 
-    ld      a, 63 * 4
+    ld      a, Sprite_Transparent
     ld      (iy + Struct_PlayerShot.Pattern), a
 
     ret
@@ -567,7 +567,7 @@ DisableItem:
     ld      (Item_X), a
     ld      a, 256 - 16
     ld      (Item_Y), a
-    ld      a, 63 * 4
+    ld      a, Sprite_Transparent
     ld      (Item_Pattern), a
 
     ret
@@ -746,71 +746,6 @@ ResetCounter:
     ld hl, 0
     ld (Counter), hl                     ;
     ret
-
-; ShowDebugInfo:
-;     IFDEF DEBUG
-; 		; test sprite (plane type 2 1st color)
-; 		ld d, 128
-; 		ld e, 80
-; 		ld c, 15						;   c: color (0-15)
-; 		ld a, 6							;   a: pattern number (0-63)
-; 		ld b, 20						;   b: layer (0-31)
-; 		call PutSprite16x16				;
-; 		; test sprite (plane type 2 2nd color)
-; 		ld d, 128
-; 		ld e, 80
-; 		ld c, 14						;   c: color (0-15)
-; 		ld a, 7							;   a: pattern number (0-63)
-; 		ld b, 19						;   b: layer (0-31)
-; 		call PutSprite16x16				;
-; 		; test sprite (plane type 2 shadow)
-; 		ld d, 128+8
-; 		ld e, 80+8
-; 		ld c, 1							;   c: color (0-15)
-; 		ld a, 6							;   a: pattern number (0-63)
-; 		ld b, 21						;   b: layer (0-31)
-; 		call PutSprite16x16				;
-; 		; test sprite (explosion frame 1)
-; 		ld d, 160
-; 		ld e, 100
-; 		ld c, 15						;   c: color (0-15)
-; 		ld a, 8							;   a: pattern number (0-63)
-; 		ld b, 22						;   b: layer (0-31)
-; 		call PutSprite16x16				;
-; 		; test sprite (explosion frame 2)
-; 		ld d, 160+16
-; 		ld e, 100
-; 		ld c, 15						;   c: color (0-15)
-; 		ld a, 9							;   a: pattern number (0-63)
-; 		ld b, 23						;   b: layer (0-31)
-; 		call PutSprite16x16				;
-; 		; test sprite (explosion frame 3)
-; 		ld d, 160+32
-; 		ld e, 100
-; 		ld c, 15						;   c: color (0-15)
-; 		ld a, 10						;   a: pattern number (0-63)
-; 		ld b, 24						;   b: layer (0-31)
-; 		call PutSprite16x16				;
-; 		; test sprite (plane type 3 1st color)
-; 		ld d, 128
-; 		ld e, 128
-; 		ld c, 15						;   c: color (0-15)
-; 		ld a, 11						;   a: pattern number (0-63)
-; 		ld b, 15						;   b: layer (0-31)
-; 		call PutSprite16x16				;
-; 		; test sprite (plane type 3 2nd color)
-; 		ld d, 128
-; 		ld e, 128
-; 		ld c, 14						;   c: color (0-15)
-; 		ld a, 12						;   a: pattern number (0-63)
-; 		ld b, 14						;   b: layer (0-31)
-; 		call PutSprite16x16				;
-;     ENDIF
-
-;     ret
-
-
-
 
 
 

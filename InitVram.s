@@ -176,16 +176,16 @@ NUMBER_OF_CHARS:  equ 37
 
 
 
-;Colors table - Title screen - (first third)
-	ld	de, ColorsTable + (Tile_TitleScreen_001_Number * 8)      				; VRAM color table start address
-	ld	hl, Colors_Title        												; RAM start address of color pattern (8 bytes)
-	ld a, 0 + (EndTitleScreen - StartTitleScreen) / 8							; number of cells in color table to be filled by the pattern 
-	call FillColorTable
-;Colors table - Title screen - (second third)
-	ld	de, ColorsTable + (256 * 8) + (Tile_TitleScreen_001_Number * 8)      	; VRAM color table start address
-	ld	hl, Colors_Title        												; RAM start address of color pattern (8 bytes)
-	ld a, 0 + (EndTitleScreen - StartTitleScreen) / 8							; number of cells in color table to be filled by the pattern 
-	call FillColorTable
+; ;Colors table - Title screen - (first third)
+; 	ld	de, ColorsTable + (Tile_TitleScreen_001_Number * 8)      				; VRAM color table start address
+; 	ld	hl, Colors_Title        												; RAM start address of color pattern (8 bytes)
+; 	ld a, 0 + (EndTitleScreen - StartTitleScreen) / 8							; number of cells in color table to be filled by the pattern 
+; 	call FillColorTable
+; ;Colors table - Title screen - (second third)
+; 	ld	de, ColorsTable + (256 * 8) + (Tile_TitleScreen_001_Number * 8)      	; VRAM color table start address
+; 	ld	hl, Colors_Title        												; RAM start address of color pattern (8 bytes)
+; 	ld a, 0 + (EndTitleScreen - StartTitleScreen) / 8							; number of cells in color table to be filled by the pattern 
+; 	call FillColorTable
 
 
 
