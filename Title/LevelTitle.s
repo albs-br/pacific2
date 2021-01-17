@@ -50,9 +50,10 @@ LevelTitleScreen:
     call    LoadPatternTable_Chars_2ndThird                ; restore chars
 
 
-
-
-    ; --------------------- test curtain sprites
+; TODO:
+; - change VramNamesTableBuffer to include TopStrip
+; - copy StartBackgroundData to VramNamesTableBuffer
+; - change curtain routine to use VramNamesTableBuffer, and all 24 lines
 
     ; Curtain initial position
 	ld	    bc, LevelCurtainInitialPosition_End - LevelCurtainInitialPosition_Start     ; BC: Block length
