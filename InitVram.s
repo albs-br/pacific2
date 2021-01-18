@@ -331,10 +331,16 @@ LoadTopStripTiles:
 
 	; Fill names table
 	; Top strip with lifes, score, etc
-	ld	bc, 32              ; Block length
-	ld	de, NamesTable		; VRAM address
-	ld	hl, TopStripTiles   ; RAM Address
-    call BIOS_LDIRVM        ; Block transfer to VRAM from memory
+	; ld	bc, 32              ; Block length
+	; ld	de, NamesTable		; VRAM address
+	; ld	hl, TopStripTiles   ; RAM Address
+    ; call BIOS_LDIRVM        ; Block transfer to VRAM from memory
+
+	; Update names table buffer in RAM
+	ld		bc, SCREEN_WIDTH_IN_TILES                   		; Block length
+	ld		hl, TopStripTiles									; Source
+    ld  	de, NamesTableBuffer      							; Destiny
+    ldir                                                        ; Copy BC number of bytes from HL to DE
 
 	ret
 

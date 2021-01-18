@@ -24,7 +24,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  180, TOP_SCREEN     ; enemy position (x, y)
+    db  180, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  0                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -34,7 +34,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  156, TOP_SCREEN     ; enemy position (x, y)
+    db  156, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  1                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -44,7 +44,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  132, TOP_SCREEN     ; enemy position (x, y)
+    db  132, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  2                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -54,7 +54,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  108, TOP_SCREEN     ; enemy position (x, y)
+    db  108, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  3                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -64,7 +64,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  84, TOP_SCREEN      ; enemy position (x, y)
+    db  84, TOP_SCREEN_IN_PIXELS      ; enemy position (x, y)
     db  4                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -110,7 +110,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  232, TOP_SCREEN     ; enemy position (x, y)
+    db  232, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  0                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -120,7 +120,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  208, TOP_SCREEN     ; enemy position (x, y)
+    db  208, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  1                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -130,7 +130,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  184, TOP_SCREEN     ; enemy position (x, y)
+    db  184, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  2                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -140,7 +140,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  160, TOP_SCREEN     ; enemy position (x, y)
+    db  160, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  3                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -150,7 +150,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  136, TOP_SCREEN      ; enemy position (x, y)
+    db  136, TOP_SCREEN_IN_PIXELS      ; enemy position (x, y)
     db  4                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -196,7 +196,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  0, TOP_SCREEN     ; enemy position (x, y)
+    db  0, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  0                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -206,7 +206,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  24, TOP_SCREEN     ; enemy position (x, y)
+    db  24, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  1                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -216,7 +216,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  48, TOP_SCREEN     ; enemy position (x, y)
+    db  48, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  2                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -226,7 +226,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  72, TOP_SCREEN     ; enemy position (x, y)
+    db  72, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  3                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -236,7 +236,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  96, TOP_SCREEN      ; enemy position (x, y)
+    db  96, TOP_SCREEN_IN_PIXELS      ; enemy position (x, y)
     db  4                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -281,7 +281,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  2                   ; enemy type
     db  9, 6              ; enemy 1st, 2nd color
-    db  0, TOP_SCREEN+40    ; enemy position (x, y)
+    db  0, TOP_SCREEN_IN_PIXELS+40    ; enemy position (x, y)
     db  0                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -291,7 +291,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  1                   ; enemy type
     db  9, 6              ; enemy 1st, 2nd color
-    db  255, TOP_SCREEN+64  ; enemy position (x, y)
+    db  255, TOP_SCREEN_IN_PIXELS+64  ; enemy position (x, y)
     db  1                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -301,7 +301,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  2                   ; enemy type
     db  9, 6              ; enemy 1st, 2nd color
-    db  0, TOP_SCREEN+88    ; enemy position (x, y)
+    db  0, TOP_SCREEN_IN_PIXELS+88    ; enemy position (x, y)
     db  2                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -311,7 +311,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  1                   ; enemy type
     db  9, 6              ; enemy 1st, 2nd color
-    db  255, TOP_SCREEN+112 ; enemy position (x, y)
+    db  255, TOP_SCREEN_IN_PIXELS+112 ; enemy position (x, y)
     db  3                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -355,7 +355,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  2                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  0, TOP_SCREEN       ; enemy position (x, y)
+    db  0, TOP_SCREEN_IN_PIXELS       ; enemy position (x, y)
     db  0                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -365,7 +365,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  1                   ; enemy type
     db  9, 6                 ; enemy 1st, 2nd color
-    db  255, TOP_SCREEN+24  ; enemy position (x, y)
+    db  255, TOP_SCREEN_IN_PIXELS+24  ; enemy position (x, y)
     db  1                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -375,7 +375,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  2                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  0, TOP_SCREEN+48    ; enemy position (x, y)
+    db  0, TOP_SCREEN_IN_PIXELS+48    ; enemy position (x, y)
     db  2                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -385,7 +385,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  1                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  255, TOP_SCREEN+72  ; enemy position (x, y)
+    db  255, TOP_SCREEN_IN_PIXELS+72  ; enemy position (x, y)
     db  3                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -430,7 +430,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  180, TOP_SCREEN     ; enemy position (x, y)
+    db  180, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  0                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -440,7 +440,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  84, TOP_SCREEN     ; enemy position (x, y)
+    db  84, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  1                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -450,7 +450,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  156, TOP_SCREEN     ; enemy position (x, y)
+    db  156, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  2                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -460,7 +460,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  108, TOP_SCREEN     ; enemy position (x, y)
+    db  108, TOP_SCREEN_IN_PIXELS     ; enemy position (x, y)
     db  3                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -470,7 +470,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  0                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  132, TOP_SCREEN      ; enemy position (x, y)
+    db  132, TOP_SCREEN_IN_PIXELS      ; enemy position (x, y)
     db  4                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -514,7 +514,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  2                   ; enemy type
     db  9, 6              ; enemy 1st, 2nd color
-    db  0, TOP_SCREEN+24    ; enemy position (x, y)
+    db  0, TOP_SCREEN_IN_PIXELS+24    ; enemy position (x, y)
     db  0                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -524,7 +524,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  2                   ; enemy type
     db  9, 6              ; enemy 1st, 2nd color
-    db  0, TOP_SCREEN+48    ; enemy position (x, y)
+    db  0, TOP_SCREEN_IN_PIXELS+48    ; enemy position (x, y)
     db  1                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -534,7 +534,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  2                   ; enemy type
     db  9, 6              ; enemy 1st, 2nd color
-    db  0, TOP_SCREEN+72    ; enemy position (x, y)
+    db  0, TOP_SCREEN_IN_PIXELS+72    ; enemy position (x, y)
     db  2                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -544,7 +544,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  2                   ; enemy type
     db  9, 6              ; enemy 1st, 2nd color
-    db  0, TOP_SCREEN+96    ; enemy position (x, y)
+    db  0, TOP_SCREEN_IN_PIXELS+96    ; enemy position (x, y)
     db  3                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -554,7 +554,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  2                   ; enemy type
     db  9, 6              ; enemy 1st, 2nd color
-    db  0, TOP_SCREEN+120   ; enemy position (x, y)
+    db  0, TOP_SCREEN_IN_PIXELS+120   ; enemy position (x, y)
     db  4                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -598,7 +598,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  1                   ; enemy type
     db  9, 6              ; enemy 1st, 2nd color
-    db  255, TOP_SCREEN+24  ; enemy position (x, y)
+    db  255, TOP_SCREEN_IN_PIXELS+24  ; enemy position (x, y)
     db  0                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -608,7 +608,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  1                   ; enemy type
     db  9, 6              ; enemy 1st, 2nd color
-    db  255, TOP_SCREEN+48  ; enemy position (x, y)
+    db  255, TOP_SCREEN_IN_PIXELS+48  ; enemy position (x, y)
     db  1                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -618,7 +618,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  1                   ; enemy type
     db  9, 6              ; enemy 1st, 2nd color
-    db  255, TOP_SCREEN+72  ; enemy position (x, y)
+    db  255, TOP_SCREEN_IN_PIXELS+72  ; enemy position (x, y)
     db  2                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -628,7 +628,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  1                   ; enemy type
     db  9, 6              ; enemy 1st, 2nd color
-    db  255, TOP_SCREEN+96  ; enemy position (x, y)
+    db  255, TOP_SCREEN_IN_PIXELS+96  ; enemy position (x, y)
     db  3                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -638,7 +638,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  1                   ; enemy type
     db  9, 6              ; enemy 1st, 2nd color
-    db  255, TOP_SCREEN+120 ; enemy position (x, y)
+    db  255, TOP_SCREEN_IN_PIXELS+120 ; enemy position (x, y)
     db  4                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -682,7 +682,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  2                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  0, TOP_SCREEN+64    ; enemy position (x, y)
+    db  0, TOP_SCREEN_IN_PIXELS+64    ; enemy position (x, y)
     db  0                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -692,7 +692,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  1                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  255, TOP_SCREEN+88  ; enemy position (x, y)
+    db  255, TOP_SCREEN_IN_PIXELS+88  ; enemy position (x, y)
     db  1                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved
@@ -702,7 +702,7 @@ Level_6:
     db  0                   ; action type (0: show enemy, 1: enemy shoots)
     db  2                   ; enemy type
     db  9, 6                ; enemy 1st, 2nd color
-    db  0, TOP_SCREEN+112   ; enemy position (x, y)
+    db  0, TOP_SCREEN_IN_PIXELS+112   ; enemy position (x, y)
     db  2                   ; enemy number
     db  0                   ; reserved
     db  0, 0, 0, 0, 0, 0    ; reserved

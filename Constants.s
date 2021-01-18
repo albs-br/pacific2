@@ -1,4 +1,6 @@
-TOP_SCREEN:         equ     8        ; top of playing field, excluding the top strip with lifes and score
+TOP_SCREEN_IN_PIXELS:           equ     8        ; top of playing field, excluding the top strip with lifes and score
+SCREEN_WIDTH_IN_TILES:          equ     32
+
 
 ; enemy types available:
 PLANE_FROM_TOP:     equ     0

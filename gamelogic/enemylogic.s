@@ -342,7 +342,8 @@ GameLogicEnemy:
 	ld l, a
 	ld (Player_Score), hl			; save updated score
 
-	call ShowScore
+	call 	ShowScore
+	; call	UpdateNamesTable_TopStrip
 
     ret
 

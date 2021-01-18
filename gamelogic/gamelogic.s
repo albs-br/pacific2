@@ -16,7 +16,7 @@ GameLogic:
 	; ld a, (Player_Shot_Y)			            ;   get Y position of shot
 	ld a, (iy + Struct_PlayerShot.Y)          ;   get Y position of shot
    dec a
-   cp TOP_SCREEN - 1
+   cp TOP_SCREEN_IN_PIXELS - 1
    call z, .ShotReachesTop                   ;   if y=TOP_SCREEN disable shot
 
 	; ld (Player_Shot_Y), a			            ;   saves updated Y position of shot

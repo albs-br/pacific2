@@ -325,7 +325,7 @@ IncrementCounter:
     ld      a, (hl)
     ld      (Item_X), a
 
-    ld      a, TOP_SCREEN
+    ld      a, TOP_SCREEN_IN_PIXELS
     ld      (Item_Y), a
 
     ld      a, Sprite_Item_ExtraLife
@@ -470,6 +470,7 @@ IncrementCounter:
 ;   d: size of number in bytes
 ;   bc: names table offset (0-767)
 PrintNumber:
+.start:
     ld a, (hl)	    			; get value
     push hl
     ld	hl, NamesTable          ; VRAM Address
@@ -498,7 +499,7 @@ PrintNumber:
     dec bc
 
     dec d
-    jp nz, PrintNumber
+    jp nz, .start
 
     ret
 
@@ -506,36 +507,77 @@ PrintNumber:
 ;   hl: address of LSB (defined as bytes - DB - little endian)
 ;   d: size of number in bytes
 ;   bc: names table offset (0-767)
-PrintNumber_LittleEndian:
-    ld a, (hl)	    			; get value
-    push hl
-    ld	hl, NamesTable          ; VRAM Address
-    add hl, bc                  ;
+; PrintNumber_LittleEndian:
+;     ld a, (hl)	    			; get value
+;     push hl
+;     ld	hl, NamesTable          ; VRAM Address
+;     add hl, bc                  ;
+
+; ; .loop:
+; 	push af
+;     and 0000 1111 b             ; masking to get the low nibble
+;     add a, Tile_Char_0_Number   ; convert it to ASCII char (0-9)
+; 	call BIOS_WRTVRM		    ; Writes data in VRAM, as VPOKE (HL: address, A: value)
+
+;     pop af
+;     dec hl                      ; go to previous char position on screen
+;     and 1111 0000 b             ; masking to get the high nibble
+;     srl a                       ; shift right 4 times
+;     srl a
+;     srl a
+;     srl a
+;     add a, Tile_Char_0_Number   ; convert it to ASCII char (0-9)
+; 	call BIOS_WRTVRM		    ; Writes data in VRAM, as VPOKE (HL: address, A: value)
+
+;     pop hl
+;     inc hl                      ; go to next byte on value
+    
+;     dec bc                      ; go to previous char position on screen (it's necessary 2x)
+;     dec bc
+
+;     dec d
+;     jp nz, PrintNumber_LittleEndian
+
+;     ret
+
+
+
+; Prints a number on names table buffer
+;   hl: address of LSB (defined as bytes - DB - little endian)
+;   d: size of number in bytes
+;   bc: names table offset (0-767)
+; trashes: a, b, c, d, e, h, l
+PrintNumber_LittleEndian_NamesTableBuffer:
+.start:
+    ld      a, (hl)	    			; get value
+    push    hl
+    ld	    hl, NamesTableBuffer    ;
+    add     hl, bc                  ;
 
 ; .loop:
-	push af
-    and 0000 1111 b             ; masking to get the low nibble
-    add a, Tile_Char_0_Number   ; convert it to ASCII char (0-9)
-	call BIOS_WRTVRM		    ; Writes data in VRAM, as VPOKE (HL: address, A: value)
+    ld      e, a
+    and     0000 1111 b             ; masking to get the low nibble
+    add     a, Tile_Char_0_Number   ; convert it to ASCII char (0-9)
+    ld      (hl), a             
 
-    pop af
-    dec hl                      ; go to previous char position on screen
-    and 1111 0000 b             ; masking to get the high nibble
-    srl a                       ; shift right 4 times
-    srl a
-    srl a
-    srl a
-    add a, Tile_Char_0_Number   ; convert it to ASCII char (0-9)
-	call BIOS_WRTVRM		    ; Writes data in VRAM, as VPOKE (HL: address, A: value)
+    ld      a, e                    ; restore original value
+    dec     hl                      ; go to previous char position on screen
+    and     1111 0000 b             ; masking to get the high nibble
+    srl     a                       ; shift right 4 times
+    srl     a
+    srl     a
+    srl     a
+    add     a, Tile_Char_0_Number   ; convert it to ASCII char (0-9)
+    ld      (hl), a             
 
-    pop hl
-    inc hl                      ; go to next byte on value
+    pop     hl
+    inc     hl                      ; go to next byte on value
     
-    dec bc                      ; go to previous char position on screen (it's necessary 2x)
-    dec bc
+    dec     bc                      ; go to previous char position on screen (it's necessary 2x)
+    dec     bc
 
-    dec d
-    jp nz, PrintNumber_LittleEndian
+    dec     d
+    jp      nz, .start
 
     ret
 
@@ -575,10 +617,10 @@ DisableItem:
 
 ShowLifes:
 	; show current number of lifes on top of screen
-    ld      hl, NamesTable + 1	        ; VRAM address
+    ld      hl, NamesTableBuffer + 1    ; names table buffer address
     ld      a, (Player_Lifes)
     add     a, Tile_Char_0_Number       ; convert number to chars
-    call    BIOS_WRTVRM	                ; write to VRAM
+    ld      (hl), a
 
     ret 
 
@@ -589,12 +631,12 @@ ShowScore:
 	ld      hl, Player_Score       	    ; LSB
     ld      d, 2                        ; size in bytes
     ld      bc, 17                      ; names table offset (0-255); position of least significant digit
-    call    PrintNumber_LittleEndian
+    call    PrintNumber_LittleEndian_NamesTableBuffer
 
     ; add 0 to number at right (score is shown on screen multiplied by ten)
-    ld      hl, NamesTable + 18	        ; VRAM address
+    ;ld      hl, NamesTableBuffer + 18   ; names table buffer on RAM address
     ld      a, Tile_Char_0_Number       ; char '0'
-    call    BIOS_WRTVRM	                ; write to VRAM
+    ld      (NamesTableBuffer + 18), a  ; names table buffer on RAM address
 
     ret
 
@@ -722,21 +764,21 @@ LoadLevel:
 ; LoadLevelData
 ; Input: HL addr of level data to be loaded
 LoadLevelData:
-    ;ld hl, addr                            ; addr origin
-    ld de, LevelDataStart                   ; addr destiny
-    ld bc, LevelDataEnd - LevelDataStart    ; number of bytes
-    ldir                                    ; copy BC bytes from HL to DE
+    ;ld hl, addr                                    ; addr origin
+    ld      de, LevelDataStart                      ; addr destiny
+    ld      bc, LevelDataEnd - LevelDataStart       ; number of bytes
+    ldir                                            ; copy BC bytes from HL to DE
     
     call ResetCounter
 
-    ld hl, StartBackgroundData
-    ld (NextBgLineAddr), hl
+    ld      hl, StartBackgroundData
+    ld      (NextBgLineAddr), hl
 
 	; load first background frame
-    ld	bc, 23 * 32                                             ; Block length
-	ld	hl, (NextBgLineAddr)
-    ld  de, VramNamesTableBuffer                                ; Destiny
-    ldir                                                        ; Copy BC number of bytes from HL to DE
+    ld	    bc, 23 * SCREEN_WIDTH_IN_TILES                          ; Block length
+	ld	    hl, (NextBgLineAddr)
+    ld      de, NamesTableBuffer + SCREEN_WIDTH_IN_TILES            ; Destiny
+    ldir                                                            ; Copy BC number of bytes from HL to DE
 
 
     ret

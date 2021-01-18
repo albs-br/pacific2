@@ -234,7 +234,7 @@ DoPlaneRight:
 DoPlaneUp:
     ld a, (Player_Y)            ; player up
     dec a
-    cp TOP_SCREEN - 1
+    cp TOP_SCREEN_IN_PIXELS - 1
     ret z                       ; cancel if y=TOP_SCREEN
 
     ld (Player_Y), a            ; save value

@@ -51,9 +51,9 @@ LevelTitleScreen:
 
 
 ; TODO:
-; - change VramNamesTableBuffer to include TopStrip
-; - copy StartBackgroundData to VramNamesTableBuffer
-; - change curtain routine to use VramNamesTableBuffer, and all 24 lines
+; - change NamesTableBuffer to include TopStrip                         OK
+; - copy StartBackgroundData to NamesTableBuffer
+; - change curtain routine to use NamesTableBuffer, and all 24 lines
 
     ; Curtain initial position
 	ld	    bc, LevelCurtainInitialPosition_End - LevelCurtainInitialPosition_Start     ; BC: Block length

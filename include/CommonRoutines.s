@@ -48,14 +48,14 @@ DelayWithParameters:
 ; Destroys:
 ;   hl, a, b, c, e
 RotateTile3Thirds:
-    ld bc, PatternsTable                            ; first third
-    call RotateTile
+    ld      bc, PatternsTable                            ; first third
+    call    RotateTile
 
-    ld bc, PatternsTable + (256 * 8)                ; second third
-    call RotateTile
+    ld      bc, PatternsTable + (256 * 8)                ; second third
+    call    RotateTile
 
-    ld bc, PatternsTable + (256 * 8) + (256 * 8)    ; last third
-    call RotateTile
+    ld      bc, PatternsTable + (256 * 8) + (256 * 8)    ; last third
+    call    RotateTile
 
     ret
 
@@ -384,56 +384,57 @@ FillColorTable:
 ; Output:
 ;   none
 PrintString:
-    ld a, (hl)
-    and a                           ; same as cp 0 but faster
-    ret z                           ; end of string
+.start:
+    ld      a, (hl)
+    and     a                           ; same as cp 0 but faster
+    ret     z                           ; end of string
 
 
-    push hl
-    push de
+    push    hl
+    push    de
 
-    cp 65
-    jp nc, .alpha                   ; if(a >= 65) alpha
+    cp      65
+    jp      nc, .alpha                   ; if(a >= 65) alpha
 
-    cp 48
-    jp nc, .number                  ; if(a >= 48) number
+    cp      48
+    jp      nc, .number                  ; if(a >= 48) number
 
-    cp 46
-    jp z, .dot
+    cp      46
+    jp      z, .dot
 
-    cp 32
-    jp z, .space
+    cp      32
+    jp      z, .space
 
-    jp .alpha
+    jp      .alpha
 
 .dot:
-    ld a, Tile_Char_Dot_Number
-    jp .print
+    ld      a, Tile_Char_Dot_Number
+    jp      .print
 
 .space:
-    ld a, Tile_Black_Number
-    jp .print
+    ld      a, Tile_Black_Number
+    jp      .print
 
 .alpha:
-    sub 65 - Tile_Char_A_Number     ; convert ASCII code to game's pattern table. eg. A = 65 to 58
-    jp .print
+    sub     65 - Tile_Char_A_Number     ; convert ASCII code to game's pattern table. eg. A = 65 to 58
+    jp      .print
 
 .number:
-    sub 48 - Tile_Char_0_Number     ; convert ASCII code to game's pattern table. eg. 0 = 65 to 58
+    sub     48 - Tile_Char_0_Number     ; convert ASCII code to game's pattern table. eg. 0 = 65 to 58
 
 .print:
-    ld h, d
-    ld l, e
-	call BIOS_WRTVRM		        ; Writes data in VRAM (HL: address, A: value)
+    ld      h, d
+    ld      l, e
+	call    BIOS_WRTVRM		        ; Writes data in VRAM (HL: address, A: value)
     
-    pop de
-    pop hl
+    pop     de
+    pop     hl
 
 
-    inc hl
-    inc de
+    inc     hl
+    inc     de
     
-    jp PrintString
+    jp      .start
 
 
 
@@ -643,24 +644,64 @@ copy_to_VDP_loop:
 UpdateNamesTable:
 ;FAST_LDIRVM_NAMTBL:
 ; Sets the VRAM pointer
-	ld	hl, NamesTable + 32
-	call	BIOS_SETWRT
+	ld	    hl, NamesTable
+	call    BIOS_SETWRT
 ; Initializes the OUTI loop
-	ld	hl, VramNamesTableBuffer
-	ld	a, (BIOS_VDP_DW)
-	; ld	b, 0 ; (ensures 256 bytes for the first bank)
-	ld	b, 256-32	; first bank without first line (32 bytes)
-	ld	c, a
+	ld	    hl, NamesTableBuffer
+	ld	    a, (BIOS_VDP_DW)
+	ld	    b, 0 ; (ensures 256 bytes for the first bank)
+	ld	    c, a
 ; Uses 3x256 = 768 OUTIs to blit the NAMTBL buffer
 .LOOP0:
 	outi
-	jp	nz, .LOOP0
+	jp	    nz, .LOOP0
 .LOOP1:
 	outi
-	jp	nz, .LOOP1
+	jp	    nz, .LOOP1
 .LOOP2:
 	outi
-	jp	nz, .LOOP2
+	jp	    nz, .LOOP2
+	ret
+
+
+; LDIRVM the NAMTBL buffer
+UpdateNamesTable_TopStrip:
+;FAST_LDIRVM_NAMTBL:
+; Sets the VRAM pointer
+	ld	    hl, NamesTable
+	call    BIOS_SETWRT
+; Initializes the OUTI loop
+	ld	    hl, NamesTableBuffer
+	ld	    a, (BIOS_VDP_DW)
+	ld	    b, SCREEN_WIDTH_IN_TILES
+	ld	    c, a
+.LOOP0:
+	outi
+	jp	    nz, .LOOP0
+	ret
+
+; LDIRVM the NAMTBL buffer
+UpdateNamesTable_BackGround:
+;FAST_LDIRVM_NAMTBL:
+; Sets the VRAM pointer
+	ld	    hl, NamesTable + SCREEN_WIDTH_IN_TILES
+	call    BIOS_SETWRT
+; Initializes the OUTI loop
+	ld	    hl, NamesTableBuffer + SCREEN_WIDTH_IN_TILES
+	ld	    a, (BIOS_VDP_DW)
+	;ld	    b, 0 ; (ensures 256 bytes for the first bank)
+	ld	    b, 256-32	; first bank without first line (32 bytes)
+	ld	    c, a
+; Uses 3x256 = 768 OUTIs to blit the NAMTBL buffer
+.LOOP0:
+	outi
+	jp	    nz, .LOOP0
+.LOOP1:
+	outi
+	jp	    nz, .LOOP1
+.LOOP2:
+	outi
+	jp	    nz, .LOOP2
 	ret
 
 

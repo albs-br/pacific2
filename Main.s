@@ -88,7 +88,7 @@ NewLevel:
 ; Show initial values of lifes and score
     call    ShowScore
     call    ShowLifes
-
+    ; call    UpdateNamesTable_TopStrip
 
 
 MainLoop:
@@ -178,6 +178,6 @@ RamStart:
 
 INCLUDE "Variables.s"
 INCLUDE 'VramSpriteAttrBuffer.s'
-INCLUDE 'VramNamesTableBuffer.s'
+INCLUDE 'NamesTableBuffer.s'
 
 RamEnd:
