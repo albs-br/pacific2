@@ -42,8 +42,8 @@ LevelTitleScreen:
 
 
 
-    ld      hl, PatternsTable + (256 * 8) + (Tile_Char_0_Number*8)           ; VRAM Start Address
-    ld      de, PatternsTable + (256 * 8) + (Tile_Char_Z_Number*8) + 8 + 1   ; VRAM End Address
+    ld      hl, PatternsTable + (256 * 8) + (Tile_Char_0_Number * 8)           ; VRAM Start Address
+    ld      de, PatternsTable + (256 * 8) + (Tile_Char_Z_Number * 8) + 8 + 1   ; VRAM End Address
     call    FadeChars
 
     call    ClearNameTables
@@ -52,8 +52,19 @@ LevelTitleScreen:
 
 ; TODO:
 ; - change NamesTableBuffer to include TopStrip                         OK
-; - copy StartBackgroundData to NamesTableBuffer
-; - change curtain routine to use NamesTableBuffer, and all 24 lines
+; - copy StartBackgroundData to NamesTableBuffer                        OK
+; - change curtain routine to use NamesTableBuffer, and all 24 lines    OK
+
+    ; Copy background data to NamesTableBuffer
+	ld	    bc, 768 - SCREEN_WIDTH_IN_TILES                         ; Block length
+	ld	    hl, StartBackgroundData                                 ; Source
+    ld      de, NamesTableBuffer + SCREEN_WIDTH_IN_TILES            ; Destiny
+    ldir                                                            ; Copy BC number of bytes from HL to DE
+
+    ; Load top strip
+    call    LoadTopStripTiles
+    call    ShowScore
+    call    ShowLifes
 
     ; Curtain initial position
 	ld	    bc, LevelCurtainInitialPosition_End - LevelCurtainInitialPosition_Start     ; BC: Block length
@@ -73,13 +84,13 @@ LevelTitleScreen:
                 ; left side curtain movement
                 .loopCurtainMovement_Left:
                     ld      a, [LeftCurtain_X]
-                    call    BIOS_WRTVRM		        ; Writes data in VRAM, as VPOKE (HL: address, A: value)
-                    ld      de, 4
+                    call    BIOS_WRTVRM		            ; Writes data in VRAM, as VPOKE (HL: address, A: value)
+                    ld      de, 4                       ; next sprite on sprite attributes table
                     add     hl, de
                     djnz    .loopCurtainMovement_Left
 
                     ld      a, [LeftCurtain_X]
-                    cp      0
+                    or      a ; same as cp 0
                     jp      z, .endLoopCurtainMovement_X
                     dec     a
                     ld      [LeftCurtain_X], a
@@ -87,8 +98,9 @@ LevelTitleScreen:
                 ; show scenary behind left curtain
                     push    hl
                     ld      hl, NamesTable
-                    ld      de, 32
-                    add     hl, de  ; go to second line
+                    ld      de, 0
+                    ; ld      de, 32
+                    ; add     hl, de  ; go to second line
                     ld      a, [LeftCurtain_X]
                     add     a, 8
                     srl     a     
@@ -96,17 +108,16 @@ LevelTitleScreen:
                     srl     a       ; divide LeftCurtain_X by 8
                     ld      e, a
                     add     hl, de  ; go to current column
-
                     
-                    ;BgSourceTileAddr = StartBackgroundData + de
+                    ;BgSourceTileAddr = NamesTableBuffer + de
                     push    hl
-                    ld      hl, StartBackgroundData
+                    ld      hl, NamesTableBuffer
                     add     hl, de  ; go to current column
                     ld      (BgSourceTileAddr), hl
                     pop     hl
 
                     push    bc
-                    ld      b, 23
+                    ld      b, SCREEN_HEIGHT_IN_TILES
                 .loopShowScenaryBehindCurtain_Left:
                                 ld      de, (BgSourceTileAddr)
                                 ld      a, (de)                 ; get background
@@ -131,8 +142,9 @@ LevelTitleScreen:
                 ; show scenary behind right curtain
                     push    hl
                     ld      hl, NamesTable
-                    ld      de, 32
-                    add     hl, de  ; go to second line
+                    ld      de, 0
+                    ; ld      de, 32
+                    ; add     hl, de  ; go to second line
                     ld      a, [RightCurtain_X]
                     add     a, 7
                     srl     a     
@@ -141,16 +153,15 @@ LevelTitleScreen:
                     ld      e, a
                     add     hl, de  ; go to current column
 
-
-                    ;BgSourceTileAddr = StartBackgroundData + de
+                    ;BgSourceTileAddr = NamesTableBuffer + de
                     push    hl
-                    ld      hl, StartBackgroundData
+                    ld      hl, NamesTableBuffer
                     add     hl, de  ; go to current column
                     ld      (BgSourceTileAddr), hl
                     pop     hl
 
                     push    bc
-                    ld      b, 23
+                    ld      b, SCREEN_HEIGHT_IN_TILES
                 .loopShowScenaryBehindCurtain_Right:
                                 ld      de, (BgSourceTileAddr)
                                 ld      a, (de)                 ; get background

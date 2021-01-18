@@ -1,5 +1,6 @@
 TOP_SCREEN_IN_PIXELS:           equ     8        ; top of playing field, excluding the top strip with lifes and score
 SCREEN_WIDTH_IN_TILES:          equ     32
+SCREEN_HEIGHT_IN_TILES:         equ     24
 
 
 ; enemy types available:

@@ -652,15 +652,15 @@ UpdateNamesTable:
 	ld	    b, 0 ; (ensures 256 bytes for the first bank)
 	ld	    c, a
 ; Uses 3x256 = 768 OUTIs to blit the NAMTBL buffer
-.LOOP0:
+.loop_0:
 	outi
-	jp	    nz, .LOOP0
-.LOOP1:
+	jp	    nz, .loop_0
+.loop_1:
 	outi
-	jp	    nz, .LOOP1
-.LOOP2:
+	jp	    nz, .loop_1
+.loop_2:
 	outi
-	jp	    nz, .LOOP2
+	jp	    nz, .loop_2
 	ret
 
 
@@ -675,13 +675,13 @@ UpdateNamesTable_TopStrip:
 	ld	    a, (BIOS_VDP_DW)
 	ld	    b, SCREEN_WIDTH_IN_TILES
 	ld	    c, a
-.LOOP0:
+.loop_0:
 	outi
-	jp	    nz, .LOOP0
+	jp	    nz, .loop_0
 	ret
 
 ; LDIRVM the NAMTBL buffer
-UpdateNamesTable_BackGround:
+UpdateNamesTable_Background:
 ;FAST_LDIRVM_NAMTBL:
 ; Sets the VRAM pointer
 	ld	    hl, NamesTable + SCREEN_WIDTH_IN_TILES
@@ -693,15 +693,15 @@ UpdateNamesTable_BackGround:
 	ld	    b, 256-32	; first bank without first line (32 bytes)
 	ld	    c, a
 ; Uses 3x256 = 768 OUTIs to blit the NAMTBL buffer
-.LOOP0:
+.loop_0:
 	outi
-	jp	    nz, .LOOP0
-.LOOP1:
+	jp	    nz, .loop_0
+.loop_1:
 	outi
-	jp	    nz, .LOOP1
-.LOOP2:
+	jp	    nz, .loop_1
+.loop_2:
 	outi
-	jp	    nz, .LOOP2
+	jp	    nz, .loop_2
 	ret
 
 
@@ -716,9 +716,9 @@ FAST_LDIRVM_SpriteAttrTable:
 	ld	b, 128	        ; size of SpriteAttrTable (4 x 32)
 	ld	c, a
 ; Uses 128 OUTIs to blit the SpriteAttrTable buffer
-.LOOP0:
+.loop_0:
 	outi
-	jp	nz, .LOOP0
+	jp	nz, .loop_0
 	ret
 
 {
