@@ -142,7 +142,8 @@ INCLUDE "Data/Sprites.s"
 INCLUDE "Data/Strings.s"
 INCLUDE "Data/SpriteBufferInit.s"
 INCLUDE "Data/LevelData/LevelData.s"
-INCLUDE "Data/BackgroundData.s"
+INCLUDE "Data/Background/BackgroundData_1.s"
+INCLUDE "Data/Background/BackgroundData_2.s"
 INCLUDE "Data/LevelCurtain.s"
 
 

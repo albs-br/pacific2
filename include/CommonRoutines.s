@@ -521,43 +521,43 @@ EnableRomPage2:
 FadeChars:
 
     ld b, 24                                                            ; number of iterations through all the table
-.loopAllChars:
-    push hl
-    push de
-    ; ld hl, PatternsTable + (256 * 8) + (Tile_Char_0_Number*8)           ; VRAM Start Address
-    ; ld de, PatternsTable + (256 * 8) + (Tile_Char_Z_Number*8) + 8 + 1   ; VRAM End Address
-.loopLines:
-    call RandomNumber
-    ;ld a, 5
-    and 0000 0111b              ; mask to get a value between 0 and 7
+            .loopAllChars:
+                push hl
+                push de
+                ; ld hl, PatternsTable + (256 * 8) + (Tile_Char_0_Number*8)           ; VRAM Start Address
+                ; ld de, PatternsTable + (256 * 8) + (Tile_Char_Z_Number*8) + 8 + 1   ; VRAM End Address
+                        .loopLines:
+                            call RandomNumber
+                            ;ld a, 5
+                            and 0000 0111b              ; mask to get a value between 0 and 7
 
-; adjust the mask to have the 0 on the bit position specified by A
-    ld c, 1111 1110b            ; initial mask
-.loopMask:
-    cp 0
-    jp z, .endLoopMask
+                        ; adjust the mask to have the 0 on the bit position specified by A
+                            ld c, 1111 1110b            ; initial mask
+                                    .loopMask:
+                                        cp 0
+                                        jp z, .endLoopMask
 
-    rlc c                       ; rotate left register
-    dec a
-    jp .loopMask
+                                        rlc c                       ; rotate left register (8-bit rotation to the left. The bit leaving on the left is copied into the carry, and to bit 0.)
+                                        dec a
+                                        jp .loopMask
 
-.endLoopMask:
+                        .endLoopMask:
 
-	call BIOS_RDVRM		        ; Reads data from VRAM, as VPEEK (HL: address, output in A)
+                            call BIOS_RDVRM		        ; Reads data from VRAM, as VPEEK (HL: address, output in A)
 
-    and c                       ; reset only the bit specified by the mask
+                            and c                       ; reset only the bit specified by the mask
 
-    call BIOS_WRTVRM		    ; Writes data to VRAM, as VPOKE (HL: address, A: value)
-    inc hl
+                            call BIOS_WRTVRM		    ; Writes data to VRAM, as VPOKE (HL: address, A: value)
+                            inc hl
 
-    call BIOS_DCOMPR            ; Compare Contents Of HL & DE, Set Z-Flag IF (HL == DE), Set CY-Flag IF (HL < DE)
-    jp nz, .loopLines
+                            call BIOS_DCOMPR            ; Compare Contents Of HL & DE, Set Z-Flag IF (HL == DE), Set CY-Flag IF (HL < DE)
+                            jp nz, .loopLines
 
-    pop de
-    pop hl
+                pop de
+                pop hl
 
-    dec b
-    jp nz, .loopAllChars
+                dec b
+                jp nz, .loopAllChars
 
     ret
 

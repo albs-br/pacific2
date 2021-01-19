@@ -57,7 +57,7 @@ LevelTitleScreen:
 
     ; Copy background data to NamesTableBuffer
 	ld	    bc, 768 - SCREEN_WIDTH_IN_TILES                         ; Block length
-	ld	    hl, StartBackgroundData                                 ; Source
+    ld      hl, (StartCurrentBackgroundData)                        ; Source
     ld      de, NamesTableBuffer + SCREEN_WIDTH_IN_TILES            ; Destiny
     ldir                                                            ; Copy BC number of bytes from HL to DE
 

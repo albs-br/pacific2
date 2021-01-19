@@ -690,13 +690,19 @@ LoadLevel:
     jp .showLevelTitle
 
 .level1:
-    ld hl, Level_1.seaColor
-    ld b, (hl)                          ; set sea color
-    ld hl, Level_1.msgLevelName
-    ld de, Level_1.levelDataStart
-    jp .showLevelTitle
+    ld      hl, StartBackgroundData_1
+    ld      (StartCurrentBackgroundData), hl
+    
+    ld      hl, Level_1.seaColor
+    ld      b, (hl)                          ; set sea color
+    ld      hl, Level_1.msgLevelName
+    ld      de, Level_1.levelDataStart
+    jp      .showLevelTitle
 
 .level2:
+    ld      hl, StartBackgroundData_2
+    ld      (StartCurrentBackgroundData), hl
+    
     ld hl, Level_2.seaColor
     ld b, (hl)                          ; set sea color
     ld hl, Level_2.msgLevelName
@@ -704,6 +710,9 @@ LoadLevel:
     jp .showLevelTitle
 
 .level3:
+    ld      hl, StartBackgroundData_1
+    ld      (StartCurrentBackgroundData), hl
+    
     ld hl, Level_3.seaColor
     ld b, (hl)                          ; set sea color
     ld hl, Level_3.msgLevelName
@@ -711,6 +720,9 @@ LoadLevel:
     jp .showLevelTitle
 
 .level4:
+    ld      hl, StartBackgroundData_1
+    ld      (StartCurrentBackgroundData), hl
+    
     ld hl, Level_4.seaColor
     ld b, (hl)                          ; set sea color
     ld hl, Level_4.msgLevelName
@@ -718,6 +730,9 @@ LoadLevel:
     jp .showLevelTitle
 
 .level5:
+    ld      hl, StartBackgroundData_1
+    ld      (StartCurrentBackgroundData), hl
+    
     ld hl, Level_5.seaColor
     ld b, (hl)                          ; set sea color
     ld hl, Level_5.msgLevelName
@@ -725,6 +740,9 @@ LoadLevel:
     jp .showLevelTitle
 
 .level6:
+    ld      hl, StartBackgroundData_1
+    ld      (StartCurrentBackgroundData), hl
+    
     ld hl, Level_6.seaColor
     ld b, (hl)                          ; set sea color
     ld hl, Level_6.msgLevelName
@@ -771,7 +789,8 @@ LoadLevelData:
     
     call ResetCounter
 
-    ld      hl, StartBackgroundData
+    ; ld      hl, StartBackgroundData_1
+    ld      hl, (StartCurrentBackgroundData)
     ld      (NextBgLineAddr), hl
 
 	; load first background frame

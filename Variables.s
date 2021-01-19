@@ -6,6 +6,7 @@
     LevelDataLastAddr:          rw 1
 
 
+    StartCurrentBackgroundData: rw 1            ; pointer to address of the background data currently in use
 
     BgScrollRegister:           rb 1            ; 
     NextBgLineAddr:             rw 1

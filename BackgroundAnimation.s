@@ -10,9 +10,8 @@ BackgroundAnimation:
 .loop:
 	ld      a, (hl)
     or      a                            ; same as cp 0 but faster
-    jp      nz, .animate
-
-    jp      .next
+    jp      z, .next
+    ;jp      nz, .animate
 
 .animate:
 
@@ -26,10 +25,10 @@ BackgroundAnimation:
     
     ld      a, c                     ; if (bc <> 0) .loop
     or      b
-    or      a                        ; same as cp 0 but faster
+;    or      a                        ; same as cp 0 but faster
     jp      nz, .loop
-
     
+    ; at each 8 pixel fine scrolls, do a tile scroll
     ld      a, (BgScrollRegister)
     inc     a
     cp      8
