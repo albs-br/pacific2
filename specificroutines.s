@@ -690,7 +690,7 @@ LoadLevel:
     jp .showLevelTitle
 
 .level1:
-    ld      hl, StartBackgroundData_1
+    ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
     ld      (StartCurrentBackgroundData), hl
     
     ld      hl, Level_1.seaColor
@@ -700,7 +700,8 @@ LoadLevel:
     jp      .showLevelTitle
 
 .level2:
-    ld      hl, StartBackgroundData_2
+    ld      hl, StartBackgroundData_2 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
+    ;ld      hl, StartBackgroundData_2 
     ld      (StartCurrentBackgroundData), hl
     
     ld hl, Level_2.seaColor
@@ -710,7 +711,7 @@ LoadLevel:
     jp .showLevelTitle
 
 .level3:
-    ld      hl, StartBackgroundData_1
+    ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
     ld      (StartCurrentBackgroundData), hl
     
     ld hl, Level_3.seaColor
@@ -720,7 +721,7 @@ LoadLevel:
     jp .showLevelTitle
 
 .level4:
-    ld      hl, StartBackgroundData_1
+    ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
     ld      (StartCurrentBackgroundData), hl
     
     ld hl, Level_4.seaColor
@@ -730,7 +731,7 @@ LoadLevel:
     jp .showLevelTitle
 
 .level5:
-    ld      hl, StartBackgroundData_1
+    ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
     ld      (StartCurrentBackgroundData), hl
     
     ld hl, Level_5.seaColor
@@ -740,7 +741,7 @@ LoadLevel:
     jp .showLevelTitle
 
 .level6:
-    ld      hl, StartBackgroundData_1
+    ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
     ld      (StartCurrentBackgroundData), hl
     
     ld hl, Level_6.seaColor

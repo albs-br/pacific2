@@ -13,14 +13,13 @@ InitVram:
 
 
 ; Define screen colors and mode
-    ld a, 15                ; Foregoung color
-    ld (BIOS_FORCLR), a    
-    ld a, 4                 ; Backgroung color
-    ld (BIOS_BAKCLR), a     
-    ld a, 5                 ; Border color
-    ld (BIOS_BDRCLR), a    
-    ld a, 2                 ; Screen mode (0 to 3 for MSX1)
-    call BIOS_CHGCLR        ; Change Screen Color
+    ld 		a, COLOR_WHITE       ; Foregoung color
+    ld 		(BIOS_FORCLR), a    
+    ld 		a, COLOR_DARK_BLUE   ; Backgroung color
+    ld 		(BIOS_BAKCLR), a     
+    ld 		a, COLOR_BLUE        ; Border color
+    ld 		(BIOS_BDRCLR), a    
+    call 	BIOS_CHGCLR        ; Change Screen Color
 
 
 ; Set screen 2
