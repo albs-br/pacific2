@@ -1,0 +1,35 @@
+TESTING_PLETTER
+8-bit multiplications using shifts
+When you shift a register 1 bit to the left, you multiply the value of the register with 2. This shifting can be done using the SLA r instruction. By doing several shifts in sequence you can very easily multiply by any power of 2. For example:
+
+    ld b,3          ; Multiply 3 with 4
+    sla b           ; x4
+    sla b           ; result: b = 12
+If you use register A you can multiply faster by using the ADD A,A instruction, which is 5 T-states per instruction instead of 8. So ADD A,A is exactly the same as SLA A, or a multiplication by two. On a sidenote, instead of using ADD A,A, you can also use RLCA, which effectively behaves the same.
+
+    ld a,15         ; Multiply 15 with 8
+    add a,a         ; x8
+    add a,a
+    add a,a         ; result: a = 120
+When programming multiplications you must always make sure the result will never exeed 255, in other words a carry may not occur. In the case of that happening, RLCA actually acts different from SLA A or ADD A,A (in some cases more usable, in some cases less usable). But generally that isn’t of any concern because when register A overflows the result will generally not be of much use anymore.
+
+If you want to multiply by another value than a power of two, you can almost always achieve the desired result by storing inbetween values during the shifting and adding or subtracting them up afterwards. A few examples:
+
+    ld a,5          ; Multiply 5 with 20 (= A x 16 + A x 4)
+    add a,a         ; x16
+    add a,a
+    ld b,a          ; Store value of A x 4 in B
+    add a,a
+    add a,a
+    add a,b         ; Add A x 4 to A x 16, result: a = 100
+If you would want to multiply with 22, you would also save the value after the first add in a register and add it to the total afterwards.
+
+Sometimes, you can also use substractions to achieve your goals faster. For example, the multiplication of A with 15. This can be done by using the method described above, however, in that case you’ll need 4 temporary registers, and four additional adds afterwards. This could better be done as follows, which requires 1 more multiplication but only uses 1 temporary register and 1 subtraction afterwards:
+
+    ld a,3          ; Multiply 3 with 15 (= A x 16 - A x 1)
+    ld b,a          ; Store value of A x 1 in B
+    add a,a         ; x16
+    add a,a
+    add a,a
+    add a,a
+    sub b           ; result: a = 45

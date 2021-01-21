@@ -693,15 +693,22 @@ LoadLevel:
     push    af  ; save level number
 
     ; Unpack file compressed by Pletter
-    ; ld      hl, EndBackgroundData_1             ; Source (start address of compressed binary data)
+    ld      hl, EndBackgroundData_1             ; Source (start address of compressed binary data)
+    ld      de, CurrentBackgroundData_Unpacked
+    call    Unpack
+    ld      hl, CurrentBackgroundData_Unpacked + BackgroundData_1_UnpackedSize - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
+    ld      (StartCurrentBackgroundDataAddress), hl
+
+    ; Testing pletter
+    ; ld      hl, TESTING_PLETTER             ; Source (start address of compressed binary data)
     ; ld      de, CurrentBackgroundData_Unpacked
     ; call    Unpack
-    ; ld      hl, CurrentBackgroundData_Unpacked - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
-    ; ld      (StartCurrentBackgroundDataAddress), hl
+    
+
 
     ; Old code, before compression
-    ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
-    ld      (StartCurrentBackgroundDataAddress), hl
+    ; ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
+    ; ld      (StartCurrentBackgroundDataAddress), hl
     
     ld      hl, Level_1.seaColor
     ld      b, (hl)                          ; set sea color
