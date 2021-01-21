@@ -117,6 +117,7 @@ Finished:
 INCLUDE "InitVram.s"
 INCLUDE "Include/CommonRoutines.s"
 INCLUDE "Include/MsxConstants.s"
+INCLUDE "Include/Pletter.s"
 INCLUDE "SpecificRoutines.s"
 INCLUDE "BackgroundAnimation.s"
 INCLUDE "Constants.s"
@@ -142,8 +143,7 @@ INCLUDE "Data/Sprites.s"
 INCLUDE "Data/Strings.s"
 INCLUDE "Data/SpriteBufferInit.s"
 INCLUDE "Data/LevelData/LevelData.s"
-INCLUDE "Data/Background/BackgroundData_1.s"
-INCLUDE "Data/Background/BackgroundData_2.s"
+INCLUDE "Data/Background/BackgroundData.s"
 INCLUDE "Data/LevelCurtain.s"
 
 

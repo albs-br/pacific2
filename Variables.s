@@ -6,7 +6,9 @@
     LevelDataLastAddr:          rw 1
 
 
-    StartCurrentBackgroundData: rw 1            ; pointer to address of the background data currently in use
+    StartCurrentBackgroundDataAddress: rw 1            ; pointer to address of the background data currently in use
+
+    CurrentBackgroundData_Unpacked:    rb 32 * 150      ; max 150 lines for bg data
 
     BgScrollRegister:           rb 1            ; 
     NextBgLineAddr:             rw 1

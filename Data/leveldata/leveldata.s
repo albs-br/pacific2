@@ -1,10 +1,10 @@
 ;INCLUDE "data/leveldata/testlevel.s"
-INCLUDE "data/leveldata/level1.s"
-INCLUDE "data/leveldata/level2.s"
-INCLUDE "data/leveldata/level3.s"
-INCLUDE "data/leveldata/level4.s"
-INCLUDE "data/leveldata/level5.s"
-INCLUDE "data/leveldata/level6.s"
+INCLUDE "Data/LevelData/Level1.s"
+INCLUDE "Data/LevelData/Level2.s"
+INCLUDE "Data/LevelData/Level3.s"
+INCLUDE "Data/LevelData/Level4.s"
+INCLUDE "Data/LevelData/Level5.s"
+INCLUDE "Data/LevelData/Level6.s"
 
 
 LevelDataChunckSize: equ    16       ; size in bytes

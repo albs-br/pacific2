@@ -690,19 +690,30 @@ LoadLevel:
     jp .showLevelTitle
 
 .level1:
+    push    af  ; save level number
+
+    ; Unpack file compressed by Pletter
+    ; ld      hl, EndBackgroundData_1             ; Source (start address of compressed binary data)
+    ; ld      de, CurrentBackgroundData_Unpacked
+    ; call    Unpack
+    ; ld      hl, CurrentBackgroundData_Unpacked - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
+    ; ld      (StartCurrentBackgroundDataAddress), hl
+
+    ; Old code, before compression
     ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
-    ld      (StartCurrentBackgroundData), hl
+    ld      (StartCurrentBackgroundDataAddress), hl
     
     ld      hl, Level_1.seaColor
     ld      b, (hl)                          ; set sea color
     ld      hl, Level_1.msgLevelName
     ld      de, Level_1.levelDataStart
+    pop     af  ; get level number
     jp      .showLevelTitle
 
 .level2:
     ld      hl, StartBackgroundData_2 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
     ;ld      hl, StartBackgroundData_2 
-    ld      (StartCurrentBackgroundData), hl
+    ld      (StartCurrentBackgroundDataAddress), hl
     
     ld hl, Level_2.seaColor
     ld b, (hl)                          ; set sea color
@@ -712,7 +723,7 @@ LoadLevel:
 
 .level3:
     ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
-    ld      (StartCurrentBackgroundData), hl
+    ld      (StartCurrentBackgroundDataAddress), hl
     
     ld hl, Level_3.seaColor
     ld b, (hl)                          ; set sea color
@@ -722,7 +733,7 @@ LoadLevel:
 
 .level4:
     ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
-    ld      (StartCurrentBackgroundData), hl
+    ld      (StartCurrentBackgroundDataAddress), hl
     
     ld hl, Level_4.seaColor
     ld b, (hl)                          ; set sea color
@@ -732,7 +743,7 @@ LoadLevel:
 
 .level5:
     ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
-    ld      (StartCurrentBackgroundData), hl
+    ld      (StartCurrentBackgroundDataAddress), hl
     
     ld hl, Level_5.seaColor
     ld b, (hl)                          ; set sea color
@@ -742,7 +753,7 @@ LoadLevel:
 
 .level6:
     ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
-    ld      (StartCurrentBackgroundData), hl
+    ld      (StartCurrentBackgroundDataAddress), hl
     
     ld hl, Level_6.seaColor
     ld b, (hl)                          ; set sea color
@@ -791,7 +802,7 @@ LoadLevelData:
     call ResetCounter
 
     ; ld      hl, StartBackgroundData_1
-    ld      hl, (StartCurrentBackgroundData)
+    ld      hl, (StartCurrentBackgroundDataAddress)
     ld      (NextBgLineAddr), hl
 
 	; load first background frame
