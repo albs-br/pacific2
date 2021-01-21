@@ -93,6 +93,8 @@ NewLevel:
 
 MainLoop:
 
+    ; halt
+
     call    ReadInput
 
     call    UpdateScreen

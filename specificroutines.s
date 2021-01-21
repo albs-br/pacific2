@@ -696,7 +696,7 @@ LoadLevel:
     ld      hl, EndBackgroundData_1             ; Source (start address of compressed binary data)
     ld      de, CurrentBackgroundData_Unpacked
     call    Unpack
-    ld      hl, CurrentBackgroundData_Unpacked + BackgroundData_1_UnpackedSize - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
+    ld      hl, CurrentBackgroundData_Unpacked + BackgroundData_1_UnpackedSize - 1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
     ld      (StartCurrentBackgroundDataAddress), hl
 
     ; Testing pletter
