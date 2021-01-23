@@ -59,7 +59,7 @@ ENDIF
 
 ;NewGame:
     ; ld    a, 0                             ; test level
-    ld      a, 1                             ;
+    ld      a, 2                             ;
     ld      (Level), a                       ;
 
     ld      bc, 0
@@ -90,7 +90,6 @@ NewLevel:
     call    ShowLifes
     ; call    UpdateNamesTable_TopStrip
 
-
 MainLoop:
 
     ; halt
@@ -104,6 +103,10 @@ MainLoop:
     ;call   Delay
 
     call    IncrementCounter
+
+
+.loopEternal:   ;[debug]
+    jp .loopEternal
 
     jp      MainLoop
 

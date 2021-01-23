@@ -5,9 +5,6 @@ LevelTitleScreen:
 ;     call LevelTitleAnimation_1
 ;     call LevelTitleAnimation_2
 
-; .loopEternal:
-;     jp .loopEternal
-
     push    hl
     push    af
 
@@ -204,16 +201,12 @@ LevelTitleScreen:
 
 
 .skipRightCurtain:
-                    ; jp .loopEternal
 
                     ; call    Delay
 
     jp      .loopCurtainMovement_X
 
 .endLoopCurtainMovement_X:
-
-; .loopEternal:
-;     jp      .loopEternal
 
     ret
 
