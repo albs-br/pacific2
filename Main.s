@@ -105,8 +105,8 @@ MainLoop:
     call    IncrementCounter
 
 
-.loopEternal:   ;[debug]
-    jp .loopEternal
+; .loopEternal:   ;[debug]
+;     jp .loopEternal
 
     jp      MainLoop
 
