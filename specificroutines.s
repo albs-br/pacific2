@@ -693,7 +693,7 @@ LoadLevel:
     push    af  ; save level number
 
     ; Unpack file compressed by Pletter
-    ld      hl, EndBackgroundData_1             ; Source (start address of compressed binary data)
+    ld      hl, EndBackgroundData_1_Packed             ; Source (start address of compressed binary data)
     ld      de, CurrentBackgroundData_Unpacked
     call    Unpack
     ld      hl, CurrentBackgroundData_Unpacked + BackgroundData_1_UnpackedSize - 1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
@@ -729,7 +729,7 @@ LoadLevel:
     jp .showLevelTitle
 
 .level3:
-    ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
+    ld      hl, StartBackgroundData_1_Unpacked - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
     ld      (StartCurrentBackgroundDataAddress), hl
     
     ld hl, Level_3.seaColor
@@ -739,7 +739,7 @@ LoadLevel:
     jp .showLevelTitle
 
 .level4:
-    ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
+    ld      hl, StartBackgroundData_1_Unpacked - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
     ld      (StartCurrentBackgroundDataAddress), hl
     
     ld hl, Level_4.seaColor
@@ -749,7 +749,7 @@ LoadLevel:
     jp .showLevelTitle
 
 .level5:
-    ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
+    ld      hl, StartBackgroundData_1_Unpacked - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
     ld      (StartCurrentBackgroundDataAddress), hl
     
     ld hl, Level_5.seaColor
@@ -759,7 +759,7 @@ LoadLevel:
     jp .showLevelTitle
 
 .level6:
-    ld      hl, StartBackgroundData_1 - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
+    ld      hl, StartBackgroundData_1_Unpacked - (23 * SCREEN_WIDTH_IN_TILES)       ; set initial pointer to start of first BG frame
     ld      (StartCurrentBackgroundDataAddress), hl
     
     ld hl, Level_6.seaColor

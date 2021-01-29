@@ -827,6 +827,7 @@ Sprite_1: equ 065DFh ; last def. pass 3
 BIOS_DATPTR: equ 0F6C8h ; last def. pass 3
 VramSpriteAttrBuffer_Init: equ 069D9h ; last def. pass 3
 BIOS_H_DSKI: equ 0FE17h ; last def. pass 3
+StartBackgroundData_1_Packed: equ 0A974h ; last def. pass 3
 BIOS_LPTOUT: equ 0A5h ; last def. pass 3
 Unpack.mode3: equ 04474h ; last def. pass 3
 Enemy_3_Base_Address: equ 0D959h ; last def. pass 3
@@ -878,7 +879,6 @@ BIOS_TRGFLG: equ 0F3E8h ; last def. pass 3
 PatternsTable: equ 00h ; last def. pass 3
 GameLogic.continue: equ 05547h ; last def. pass 3
 BIOS_CHKRAM: equ 00h ; last def. pass 3
-StartBackgroundData_1: equ 0A974h ; last def. pass 3
 LevelTitleScreen: equ 0561Fh ; last def. pass 3
 BIOS_GETYPR: equ 028h ; last def. pass 3
 Tile_Char_9: equ 05787h ; last def. pass 3
@@ -917,6 +917,7 @@ BIOS_MCLLEN: equ 0FB3Bh ; last def. pass 3
 BIOS_CSRSW: equ 0FCA9h ; last def. pass 3
 BIOS_H_PRGE: equ 0FEF8h ; last def. pass 3
 EndSpritePatterns: equ 0685Fh ; last def. pass 3
+EndBackgroundData_1_Packed: equ 0A70Dh ; last def. pass 3
 CheckCollision.checkY: equ 0425Dh ; last def. pass 3
 BIOS_PTRFLG: equ 0F6A9h ; last def. pass 3
 BIOS_CSCLXY: equ 0F941h ; last def. pass 3
@@ -1075,7 +1076,6 @@ Struct_Enemy.Shot_Show: equ 08h ; last def. pass 3
 UpdateScreen.showEnemies: equ 05339h ; last def. pass 3
 ScrollTiles: equ 048B1h ; last def. pass 3
 BIOS_INITIO: equ 03Bh ; last def. pass 3
-EndBackgroundData_1: equ 0A70Dh ; last def. pass 3
 Player_Shot_1_X: equ 0D983h ; last def. pass 3
 COLOR_WHITE: equ 0Fh ; last def. pass 3
 Tile_Char_H: equ 057C7h ; last def. pass 3

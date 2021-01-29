@@ -28,4 +28,4 @@ Minimum for MSX DEV 21 (Deadline to submit your entry: August 31st, 2021):
 - enemy shots bigger, alternating colors and slower (?)                       OK (1, 2, not 3)
 
 optional:
-- animation on transition from level title screen to gameplay                 almost OK (lacks top strip / EC bit)
+- animation on transition from level title screen to gameplay                 almost OK (EC bit)

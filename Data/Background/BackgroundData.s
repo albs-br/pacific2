@@ -12,9 +12,9 @@ BackgroundData_1_UnpackedSize:      equ StartBackgroundData_1_Unpacked - EndBack
 
 
 ; Binary files after compression
-EndBackgroundData_1:
+EndBackgroundData_1_Packed:
     INCBIN "Data/Background/BackgroundData_1_Packed.bin"
-StartBackgroundData_1:
+StartBackgroundData_1_Packed:
 
 
 
