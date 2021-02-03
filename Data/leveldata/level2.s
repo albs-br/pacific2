@@ -484,7 +484,8 @@ Level_2:
 
 
     ; Level finished
-    db  0x0f, 0x00          ; counter value (HSB, LSB)
+    db  0x22, 0x00          ; counter value (HSB, LSB)
+    ;db  0x0f, 0x00          ; counter value (HSB, LSB)
     db  200                 ; action type (200: level finished)
     db  0                   ; not used 
     db  0, 0                ; not used 
